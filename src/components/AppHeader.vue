@@ -24,7 +24,7 @@
         <div>
 
             <div class=" col-md-8 col-sm-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Deliveroo_Logo.svg/2560px-Deliveroo_Logo.svg.png" alt="Logo" class="img-fluid">
+            <img src="" alt="Logo" class="img-fluid">
             </div>
 
         </div>
@@ -34,14 +34,20 @@
         <!-- Pulsante Login -->
         <div class="new-box">
 
+
+            
+            <h6>lavora con noi </h6>
+
+
             <div class="button-login col-md-4 col-sm-4">
                 <button class="btn btn-danger btn-sm">Login</button>
             </div>
 
-            <!-- Pulsante carrello -->
-            <div class="button-carrello col-md-4 col-sm-4">
-                <button type="button" class="btn btn-danger btn-sm">carrello</button>
+            <div class="icon">
+                <div></div>
+                <div></div>
             </div>
+            
 
 
         </div>
