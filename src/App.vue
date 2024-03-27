@@ -2,6 +2,7 @@
     import AppHeader from './components/AppHeader.vue'
     import AppMain from './components/AppMain.vue'
     import AppFooter from './components/AppFooter.vue'
+    import AppFormLogin from './components/pages/AppFormLogin.vue'
     import axios from 'axios'
     
     export default{
@@ -34,6 +35,8 @@
         <AppHeader/>
 
         <AppMain/>
+
+       
 
         <AppFooter/>
 

@@ -2,6 +2,12 @@
     export default{
         data(){
             return{
+                imglogo: [
+                {
+                    title:"img-logo",
+                    img:"https://www.filepicker.io/api/file/PrjQ7ZxTQye3aR2Tzt3N",
+                }
+            ],
 
             };
         },
@@ -11,84 +17,92 @@
         }
     }
 </script>
-
 <template>
 
-       
-<header>
-    <div class="container-fluid nav-bar">
-
-      <div class="box">
-
-        <!-- Logo -->
-        <div>
-
-            <div class=" col-md-8 col-sm-4">
-            <img src="" alt="Logo" class="img-fluid">
-            </div>
-
-        </div>
-        
+    
 
 
-        <!-- Pulsante Login -->
-        <div class="new-box">
+<header class="navbar navbar-expand-lg navbar-light bg-warning">
 
+    <div class="container">
+           <!-- img logo -->
+        <a class="navbar-logo" href="#">
+            <img :src="imglogo[0].img" alt="Logo" height="40">
+        </a>
 
             
-            <h6>lavora con noi </h6>
+        <div class="navbar-collapse justify-content-end">
 
+               
+            <ul class="navbar-nav">
+                <!-- link -->
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Lavora con noi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
 
-            <div class="button-login col-md-4 col-sm-4">
-                <button class="btn btn-danger btn-sm">Login</button>
-            </div>
+                <!-- Aggiungi icone qui -->
 
-            <div class="icon">
-                <div></div>
-                <div></div>
-            </div>
-            
-
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-search"></i> 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="material-icons"></i> 
+                    </a>
+                </li>
+            </ul>
 
         </div>
-       
-      </div>
+
     </div>
-  </header>
+</header>
+
 
 
 </template>
 
 <style lang="scss" scoped>
 
-header{
-    background-color: gray;
+header {
+    font-family: 'Times New Roman', Times, serif;
 }
 
-.nav-bar{
-    height: 50px;
-    border: 1px solid black;
+.navbar-brand img {
+    width: 100%; 
+    height: auto; 
+    max-height: 40px; 
 }
 
-img{
-    width: 100%;
-   
-}
-
-.box{
-
+.navbar-nav {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.button-carrello{
-    margin: 10px;
-    
+    justify-content: flex-end; 
 }
 
-.new-box{
-    display: flex;
-    align-items: center;
+.nav-item {
+    margin-left: 10px;
 }
- 
+
+
+
+
+
+
+
 </style>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
