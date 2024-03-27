@@ -17,9 +17,6 @@
 <template>
     <main>
 
-<<<<<<< HEAD
-
-=======
         <!--SEZIONE 1 - RICERCA RISTORANTI-->
         <!--Cose da sistemare: 
         1) Fare in modo che quando vado nella versione mobile la foto si adatti automaticamente e non si tagli
@@ -38,7 +35,6 @@
             </div>
         </section>
         <!--FINE SEZIONE 1-->
->>>>>>> AppMain
 
 
         <!--SEZIONE 2 - PERCHE' SCEGLIERE I NOSTRI SERVIZI (Puntualità, qualità, cordialità)-->
