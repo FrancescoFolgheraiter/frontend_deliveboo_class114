@@ -22,7 +22,7 @@
     
 
 
-<header class="fixed-top">
+<header class="sticky-top">
 
     <nav class="navbar navbar-dark bg-danger">
 
@@ -46,6 +46,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="login">Login</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="carrello">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </a>
+                </li>
             </ul>
         </div>
         
@@ -54,9 +59,9 @@
 
     <!-- Collapse div -->
     <div class="collapse bg-danger lg-none" id="navbarToggleExternalContent" data-bs-theme="black">
-        <div class="bg-danger p-4">
+        <div class="bg-danger p-4 ">
             <h5 class="text-body-emphasis h4">
-                Link
+                Links
             </h5>
 
             <ul class="navbar-nav">
@@ -78,8 +83,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-pizza-slice"></i>
+                    <a class="nav-link" href="carrello">
+                        <i class="fa-solid fa-bag-shopping"></i>
                     </a>
                 </li>
             </ul>
