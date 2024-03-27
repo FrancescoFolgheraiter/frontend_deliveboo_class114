@@ -22,7 +22,7 @@
     
 
 
-<header class="navbar navbar-expand-lg navbar-light bg-warning">
+<header class="navbar navbar-expand-lg navbar-light bg-danger">
 
     <div class="container">
            <!-- img logo -->
@@ -36,12 +36,12 @@
                
             <ul class="navbar-nav">
                 <!-- link -->
-                
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Lavora con noi</a>
+                    <a class="nav-link" href="lavora con noi">Lavora con noi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login">Login</a>
                 </li>
 
                 <!-- Aggiungi icone qui -->
