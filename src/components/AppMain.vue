@@ -1,4 +1,5 @@
 <script>
+import BoxComponent from './BoxComponent.vue'; 
 
     export default{
         data(){
@@ -9,6 +10,10 @@
         },
         methods:{
          
+
+        },
+        components: {
+          BoxComponent
 
         }
     }
@@ -74,6 +79,10 @@
         <hr>
 
 
+
+        <BoxComponent />
+
+
     </main>
   </template>
 
@@ -112,6 +121,8 @@
 h4{
     text-align: center;
 }
+
+
 
 
 
