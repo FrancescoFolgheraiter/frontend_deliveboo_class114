@@ -1,5 +1,6 @@
 <script>
 import BoxComponent from './BoxComponent.vue'; 
+import TestimonialComponent from './TestimonialComponent.vue'; 
 
     export default{
         data(){
@@ -13,7 +14,8 @@ import BoxComponent from './BoxComponent.vue';
 
         },
         components: {
-          BoxComponent
+          BoxComponent,
+          TestimonialComponent
 
         }
     }
@@ -90,6 +92,7 @@ import BoxComponent from './BoxComponent.vue';
 
 
         <BoxComponent />
+        <TestimonialComponent />
 
 
     </main>

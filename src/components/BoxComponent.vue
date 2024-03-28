@@ -36,7 +36,7 @@ export default {
 <template>
     <div class="box-component d-flex flex-wrap">
 
-        <div v-for="(item, index) in cards" :key="index" class="card col-lg-4 col-md-2">
+        <div v-for="(item, index) in cards" :key="index" class="card col-lg-4 col-md-4">
 
             <div class="card-content">
 
