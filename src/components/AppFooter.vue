@@ -35,13 +35,13 @@
 
 <footer>
     <div class="container-fluid">
-        <div class="container">
-            <div class="row pb-3">
+        <div class="container text-center ">
+            <div class="row pb-3 justify-content-center ">
 
                 <!--1 blocco App-->
                 <div class="col-lg-4 col-md-12 col-sm-12 mt-md-3 mt-sm-3" v-for="(elem, i) in downloadApp" :key="i">
                     <h3>{{ elem.title }}</h3>
-                    <div class="d-flex mt-md-3 mt-sm-3">
+                    <div class="d-flex justify-content-center  mt-md-3 mt-sm-3">
                         <div>
                             <a href="#">
                                 <img :src="elem.img" alt="">
