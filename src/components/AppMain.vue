@@ -139,7 +139,7 @@ import BoxComponent from './BoxComponent.vue';
     width: 60%;
     /* height: 40%; */
     position: absolute;
-    top:55%;
+    top:5%;
     left: 20%;
     border-radius: 20px;
     padding: 20px;
