@@ -24,22 +24,22 @@
 
 <header class="sticky-top">
 
-    <nav class="navbar navbar-dark bg-danger">
+    <nav class="container-fluid navbar navbar-dark">
 
-        <div class="container-fluid">
+        <div class="container">
             <!-- Logo visibile solo su dispositivi lg e superiori -->
             <a class="navbar-brand d-lg-block" href="#">
                 <img :src="imglogo[0].img" alt="Logo" height="40">
             </a>
 
             <!-- Toggle button visibile solo da md e ms -->
-            <button class="navbar-toggler d-md-block d-sm-block d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent">
+            <button class="navbar-toggler d-md-block d-sm-block d-lg-none bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
             <!-- link visibile solo su dispositivi lg e superiori -->
-            <ul class="navbar-nav d-none d-lg-flex flex-row">
-                <!-- link -->
+           <ul class="navbar-nav d-none d-lg-flex flex-row">
+                 <!-- link -->
                 <li class="nav-item">
                     <a class="nav-link" href="lavora con noi">Lavora con noi</a>
                 </li>
@@ -59,7 +59,7 @@
 
     <!-- Collapse div -->
     <div class="collapse bg-danger lg-none" id="navbarToggleExternalContent" data-bs-theme="black">
-        <div class="bg-danger p-4 ">
+        <div class="bg-white p-4 ">
             <h5 class="text-body-emphasis h4">
                 Links
             </h5>
@@ -106,8 +106,7 @@ header {
 
 .navbar-brand img {
     width: 100%; 
-    height: auto; 
-    max-height: 40px; 
+    
 }
 
 .navbar-nav {
@@ -119,6 +118,9 @@ header {
     margin-left: 10px;
 }
 
+a{
+    color:black;
+}
 
 
 
