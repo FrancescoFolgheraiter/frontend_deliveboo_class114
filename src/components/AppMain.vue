@@ -247,6 +247,26 @@ h4{
     text-align: center;
 }
 
+//CSS SEZIONE 4
+.background-color-section-4{
+    background-color: rgb(219, 53, 69);
+    color: white;
+    .background-color-text-section-4{
+        background-color: rgb(219, 53, 69);
+        color: white;
+    }
+    .wrapper-name{ ////Classe e sottoclasse applicata per il carosello in modo che la foto mi prende il 100% del contenitore
+    max-width: 800px;
+        img{
+            width: 100%;
+        }
+    }
+    .circular-text:hover, .fa-regular:hover { //Hover sulle icone e sugli H5
+        color: yellow;
+        cursor: pointer;
+    }
+}
+//FINE CSS SEZIONE 4
 
 
 </style>
