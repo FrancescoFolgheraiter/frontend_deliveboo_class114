@@ -24,7 +24,7 @@
 
 <header class="sticky-top">
 
-    <nav class="container-fluid navbar navbar-dark">
+    <nav class="container-fluid navbar navbar-dark bg-white">
 
         <div class="container">
             <!-- Logo visibile solo su dispositivi lg e superiori -->
