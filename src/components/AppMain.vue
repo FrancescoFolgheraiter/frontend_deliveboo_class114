@@ -1,4 +1,5 @@
 <script>
+import BoxComponent from './BoxComponent.vue'; 
 
     export default{
         data(){
@@ -26,6 +27,10 @@
         methods:{
          
 
+        },
+        components: {
+          BoxComponent
+
         }
     }
 </script>
@@ -36,17 +41,26 @@
         <!--SEZIONE 1 - RICERCA RISTORANTI-->
         <!--Cose da sistemare: 
         1) Fare in modo che quando vado nella versione mobile la foto si adatti automaticamente e non si tagli
-        2) Centrare tutto il blocco contenente la barra di ricerca -->
-        <section class="background-main-image">
-            <div class="container-fluid">
-                <div class="container">
-                    <div class="search-restaurant">
-                        <h2>Cerca qui i ristoranti della tua zona!</h2>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+        2) Centrare tutto il blocco contenente la barra di ricerca 
+        3) RENDERE RESPONSIVE LA SEARCH BAR   -->
+
+        <section class="jumbotron">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="img-jumbo">
+                    <img src="../../img/pngwing.com.png" alt="jumboimg">
+                </div>
+                <div class="search-box d-flex flex-column align-items-center">
+                    <div>
+                        <h2 class="text-center">
+                            Deliveboo: Il Gusto Arriva, Tu Sorridi!
+                        </h2>
+                        <p class="text-center">Cerca i tuoi ristoranti preferiti</p>
                     </div>
+                    <div class="search-bar">
+                        <input type="search" placeholder="Cerca il tuo ristorante...">
+                        <button class="btn btn-pers">CERCA</button>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -122,37 +136,109 @@
         <hr>
 
 
+
+        <BoxComponent />
+
+
     </main>
   </template>
 
 <style lang="scss" scoped>
 
 //CSS SEZIONE 1
-.background-main-image {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-image: url('https://png.pngtree.com/background/20230621/original/pngtree-rapidly-satisfy-your-hunger-with-3d-fast-food-background-03-picture-image_3910286.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.jumbotron{
+    /* height: 600px; */
+    background-repeat: no-repeat;
+    background-size:cover;
+    position: relative;
+    /* background: rgb(241,70,71);
+    background: linear-gradient(169deg, rgba(241,70,71,1) 49.7%, rgba(235,235,235,1) 50%);  */  
+    background-image: linear-gradient(
+        310deg,
+        hsl(359deg 78% 52%) 10%,
+        hsl(359deg 78% 54%) 24%,
+        hsl(359deg 78% 56%) 30%,
+        hsl(359deg 78% 58%) 33%,
+        hsl(359deg 78% 61%) 36%,
+        hsl(359deg 78% 63%) 38%,
+        hsl(359deg 78% 65%) 40%,
+        hsl(359deg 78% 67%) 41%,
+        hsl(359deg 78% 69%) 43%,
+        hsl(359deg 78% 71%) 44%,
+        hsl(359deg 78% 74%) 46%,
+        hsl(359deg 78% 76%) 48%,
+        hsl(359deg 78% 78%) 50%,
+        hsl(359deg 78% 80%) 52%,
+        hsl(359deg 77% 83%) 55%,
+        hsl(359deg 77% 85%) 58%,
+        hsl(359deg 76% 87%) 62%,
+        hsl(359deg 76% 90%) 66%,
+        hsl(359deg 74% 92%) 72%,
+        hsl(359deg 72% 95%) 78%,
+        hsl(359deg 65% 97%) 87%,
+        hsl(0deg 0% 99%) 100%
+    );
+}
 
-  .search-restaurant {
+
+
+.search-box{
+    background-color:#f7f7f7ea;
+    width: 60%;
+    /* height: 40%; */
     position: absolute;
-    bottom: 50px;
-    width: 80%; 
-    margin: auto;
-    background-color: rgba(255, 255, 255, 0.7);
+    top:55%;
+    left: 20%;
+    border-radius: 20px;
     padding: 20px;
-    border-radius: 12px;
-  }
+    -webkit-box-shadow: -1px 3px 12px -2px #000000; 
+    box-shadow: -1px 3px 12px -2px #000000; 
+
+    h2{
+        color: rgb(241,70,71);
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    p{
+        font-size: 20px;
+    }
 }
 
-@media (min-width: 768px) {
-  .search-restaurant {
-    width: 50%; /* Ritornato al 50% per schermi più grandi */
-  }
+.search-bar{
+    
+    border: 1px solid black;
+    width: 60%;
+    border-radius: 20px;
+    background-color: white;
+
+    input{
+        border: none;
+        border-radius: 20px;
+        width: 85%;
+        height: 40px;
+        padding: 10px;
+        border-right:none;
+        
+        &:focus{
+            outline-style: none;
+        }
+    }
+
+    
+
+    .btn-pers{
+        background-color: rgb(241,70,71);
+        color: white;
+        vertical-align:baseline;
+        height: 40px;
+        padding: 0 24px;
+        border-radius: 20px;
+    }
 }
+
+
+
 //FINE CSS SEZIONE 1
 
 
@@ -160,35 +246,6 @@
 h4{
     text-align: center;
 }
-
-
-
-
-//CSS SEZIONE 4
-.background-color-section-4{
-    background-color: rgb(219, 53, 69);
-    color: white;
-
-    .background-color-text-section-4{
-        background-color: rgb(219, 53, 69);
-        color: white;
-    }
-
-    .wrapper-name{ ////Classe e sottoclasse applicata per il carosello in modo che la foto mi prende il 100% del contenitore
-    max-width: 800px;  
-    
-        img{
-            width: 100%;
-        } 
-    }
-
-    .circular-text:hover, .fa-regular:hover { //Hover sulle icone e sugli H5
-        color: yellow;
-        cursor: pointer;
-    }
-}
-//FINE CSS SEZIONE 4   
-
 
 
 
