@@ -3,6 +3,8 @@
         data(){
             return{
 
+                MainTitle: 'ciao',
+
             };
         },
         methods:{
@@ -15,8 +17,9 @@
 <template>
 
 
+
 <h1>
-    ciao
+    {{ MainTitle }}
 </h1>
        
 

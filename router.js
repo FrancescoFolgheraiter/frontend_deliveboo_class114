@@ -1,19 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import AppHome from './pages/AppHome.vue';
-import FormLogin from './pages/FormLogin.vue';
+import IndexPage from './src/components/pages/indexPage.vue';
+import ResturantPage from './src/components/pages/ResturantPage.vue';
+
 const router = createRouter({
-history: createWebHistory(),
-routes: [
-{
-path: '/',
-name: 'home',
-component: AppHome
-},
-{
-path: '/formlogin',
-name: 'formlogin',
-component: formpage
-},
-]
+  history: createWebHistory(),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: IndexPage 
+    },
+    {
+      path: '/resturant',
+      name: 'resturant.index',
+      component: ResturantPage
+    }
+  ]
 });
-export { router };
+
+export {router};
