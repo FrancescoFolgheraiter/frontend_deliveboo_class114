@@ -95,14 +95,14 @@ import TestimonialComponent from '../TestimonialComponent.vue';
 
         <!--INIZIO SEZIONE 4 - PERCHE' SCEGLIERCI -->
         <section>
-            <div class="container-fluid background-color-section-4">
+            <div class="container">
                 <h2 class="text-center text-white mb-4">
                     Perché scegliere i nostri servizi
                 </h2>
                 <div class="container d-flex justify-content-center align-items-center mb-3 p-3">
-                    <div class="card border-0 " style="max-width: 1100px;">
+                    <div class="card border-0 " >
                         <div class="row g-0">
-                            <div class="col-lg-8 col-12 background-color-section-4">
+                            <div class="col-lg-8 col-12 ">
 
                                 <!--INIZIO CODICE CAROSELLO DI IMMAGINI-->
                                 <div class="wrapper-name h-100 d-flex align-items-center justify-content-center ">
@@ -138,13 +138,17 @@ import TestimonialComponent from '../TestimonialComponent.vue';
                             
                             
                             <!--ICONE, TITOLO E TESTO DEL PERCHE' SCEGLIERCI-->
-                            <div class="col-lg-4 col-12 background-color-text-section-4">
-                                <div class="card-body border-0">
+                            <div class="box-sezione-4 col-lg-4 col-12  ">
+                                <div class="card-body border-0 p-0">
                                     <div class="row">
                                         <div class="col-12" v-for="(elem, i) in whyChoose" :key="i">
-                                            <i class="me-2 mt-5" :class="elem.icon"></i>
+                                            <i class="me-2 mt-4 " :class="elem.icon"></i>
                                             <h5 class="card-title d-inline circular-text">{{elem.title}}</h5> 
-                                            <p class="card-text">{{elem.text}}</p>
+
+                                            <div class="servizi">
+                                                <p class="card-text  mb-md-3">{{elem.text}}</p>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -159,9 +163,9 @@ import TestimonialComponent from '../TestimonialComponent.vue';
 
         <!--INIZIO SEZIONE 5 - FAQ-->
         <section>
-    <div class="container-fluid background-color-section-5">
+    <div class="">
         <div class="container">
-            <div class="row d-flex align-items-center">
+            <div class="row align-items-center m-0">
                 <div class="col-lg-6">
                     <div>
                         <img class="w-100" src="/img/foto4_faq.png" alt="">
@@ -211,9 +215,7 @@ import TestimonialComponent from '../TestimonialComponent.vue';
 </section>
         <!--FINE SEZIONE 5-->
 
-        <hr>
-        <hr>
-        <hr>
+       
 
 
 
@@ -225,15 +227,7 @@ import TestimonialComponent from '../TestimonialComponent.vue';
   </template>
 
 <style lang="scss" scoped>
-
-//CSS SEZIONE 1
-.jumbotron{
-    /* height: 600px; */
-    background-repeat: no-repeat;
-    background-size:cover;
-    position: relative;
-    /* background: rgb(241,70,71);
-    background: linear-gradient(169deg, rgba(241,70,71,1) 49.7%, rgba(235,235,235,1) 50%);  */  
+main{
     background-image: linear-gradient(
         310deg,
         hsl(359deg 78% 52%) 10%,
@@ -260,6 +254,18 @@ import TestimonialComponent from '../TestimonialComponent.vue';
         hsl(0deg 0% 99%) 100%
     );
 }
+//CSS SEZIONE 1
+.jumbotron{
+    /* height: 600px; */
+    background-repeat: no-repeat;
+    background-size:cover;
+    position: relative;
+    /* background: rgb(241,70,71);
+    background: linear-gradient(169deg, rgba(241,70,71,1) 49.7%, rgba(235,235,235,1) 50%);  */  
+   
+}
+
+
 
 
 
@@ -328,15 +334,14 @@ h4{
     text-align: center;
 }
 
+
+
 //CSS SEZIONE 4
 .background-color-section-4{
     background-color: rgb(219, 53, 69);
-    color: white;
+    color: red;
     
-    .background-color-text-section-4{
-        background-color: rgb(219, 53, 69);
-        color: white;
-    }
+    
 
     .wrapper-name{ ////Classe e sottoclasse applicata per il carosello in modo che la foto mi prende il 100% del contenitore
     max-width: 800px;
@@ -349,6 +354,14 @@ h4{
         color: yellow;
         cursor: pointer;
     }
+
+    
+}
+.servizi{
+    margin-top: 0;
+    color: black;
+    padding-left: 10px;
+    padding-top: 0px;
 }
 //FINE CSS SEZIONE 4
 

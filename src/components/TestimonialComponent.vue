@@ -10,11 +10,11 @@ export default {
 
 <template>
 
-    <div class="box-Testimonial">
+    <div class="container box-Testimonial">
 
         <div class="container-intestazione text-center">
             <h4 >testimonial</h4>
-            <h1>Perché i nostri clienti ci scelgono</h1>
+            <h2>Perché i nostri clienti ci scelgono</h2>
         </div>
 
         <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
@@ -23,7 +23,7 @@ export default {
 
                 <div class="carousel-item active">
 
-                    <div class="d-block w-100 text-dark text-center">
+                    <div class="d-block w-100 text-white text-center">
                         <h5><em>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias expedita nam recusandae aliquid impedit. <br> Quam architecto nesciunt quidem asperiores eius nobis facilis id praesentium. <br>Eum natus deserunt exercitationem et modi adipisci amet, vel quos! <br> Consectetur ipsa totam obcaecati adipisci labore maxime natus reiciendis ea laboriosam accusamus, iste ad placeat ratione!</em></h5>
                     </div>
 
@@ -35,7 +35,7 @@ export default {
                         <i v-for="index in 4" :key="index" class="fa-solid fa-star"></i>
                     </div>
 
-                    <div class="d-block w-100 text-dark text-end">
+                    <div class="d-block w-100 text-white text-end">
                         <h5>Marco Pelli</h5>
                     </div>
                     
@@ -43,7 +43,7 @@ export default {
 
                 <div class="carousel-item">
 
-                    <div class="d-block w-100 text-dark text-center">
+                    <div class="d-block w-100 text-white text-center">
                         <h5><em>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias expedita nam recusandae aliquid impedit. <br> Quam architecto nesciunt quidem asperiores eius nobis facilis id praesentium. <br>Eum natus deserunt exercitationem et modi adipisci amet, vel quos! <br> Consectetur ipsa totam obcaecati adipisci labore maxime natus reiciendis ea laboriosam accusamus, iste ad placeat ratione!</em></h5>
                     </div>
 
@@ -55,7 +55,7 @@ export default {
                         <i v-for="index in 4" :key="index" class="fa-solid fa-star"></i>
                     </div>
 
-                    <div class="d-block w-100 text-dark text-end">
+                    <div class="d-block w-100 text-white text-end">
                         <h5>Giorgia Misa</h5>
                     </div>
 
@@ -63,7 +63,7 @@ export default {
 
                 <div class="carousel-item">
 
-                    <div class="d-block w-100 text-dark text-center">
+                    <div class="d-block w-100 text-white text-center">
                         <h5><em>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias expedita nam recusandae aliquid impedit. <br> Quam architecto nesciunt quidem asperiores eius nobis facilis id praesentium. <br>Eum natus deserunt exercitationem et modi adipisci amet, vel quos! <br> Consectetur ipsa totam obcaecati adipisci labore maxime natus reiciendis ea laboriosam accusamus, iste ad placeat ratione!</em></h5>
                     </div>
 
@@ -75,7 +75,7 @@ export default {
                         <i v-for="index in 4" :key="index" class="fa-solid fa-star"></i>
                     </div>
 
-                    <div class="d-block w-100  text-dark text-end">
+                    <div class="d-block w-100  text-white text-end">
                         <h5>Domenico Lepre</h5>
                     </div>
 
@@ -83,7 +83,7 @@ export default {
 
             </div>
 
-            <button class="carousel-control-prev btn btn-dark" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev" style="width: 30px; height: 30px; border-radius: 50%; position: absolute; top: 0; bottom: 0;  margin: auto;"> 
+            <button class="carousel-control-prev btn btn-white" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev" style="width: 30px; height: 30px; border-radius: 50%; position: absolute; top: 0; bottom: 0;  margin: auto;"> 
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
@@ -93,8 +93,7 @@ export default {
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-    </div>
-
+        </div>
     </div>
 
 
@@ -110,31 +109,6 @@ export default {
 
     font-family: 'Times New Roman', Times, serif;
 
-    background-image: linear-gradient(
-        310deg,
-        hsl(359deg 78% 52%) 10%,
-        hsl(359deg 78% 54%) 24%,
-        hsl(359deg 78% 56%) 30%,
-        hsl(359deg 78% 58%) 33%,
-        hsl(359deg 78% 61%) 36%,
-        hsl(359deg 78% 63%) 38%,
-        hsl(359deg 78% 65%) 40%,
-        hsl(359deg 78% 67%) 41%,
-        hsl(359deg 78% 69%) 43%,
-        hsl(359deg 78% 71%) 44%,
-        hsl(359deg 78% 74%) 46%,
-        hsl(359deg 78% 76%) 48%,
-        hsl(359deg 78% 78%) 50%,
-        hsl(359deg 78% 80%) 52%,
-        hsl(359deg 77% 83%) 55%,
-        hsl(359deg 77% 85%) 58%,
-        hsl(359deg 76% 87%) 62%,
-        hsl(359deg 76% 90%) 66%,
-        hsl(359deg 74% 92%) 72%,
-        hsl(359deg 72% 95%) 78%,
-        hsl(359deg 65% 97%) 87%,
-        hsl(0deg 0% 99%) 100%
-    );
 }
 .box-Testimonial {
     
@@ -142,7 +116,8 @@ export default {
 }
 
 button {
-    background-color: rgb(63, 61, 61);
+    background-color: white;
+    color: black;
     border: none; 
 }
 
@@ -176,10 +151,18 @@ button {
 
 
 .container-intestazione h4{
-    color: rgb(240, 54, 54);
+    color: white;
 }
 
 .container-intestazione h4:hover {
+    color: black;
+}
+
+.container-intestazione h2{
+    color: white;
+}
+
+.container-intestazione h2:hover {
     color: black;
 }
 
@@ -188,13 +171,13 @@ button {
 }
 
 .container-star i:hover {
-    color: rgb(240, 54, 54);
+    color: rgb(247, 247, 247);
 }
 
 .container-img img {
     border-radius: 50%; 
-    width: 80px;
-    max-height: 80px; 
+    width: 160px;
+    height: 130px; 
     margin: 0 auto;
     
 }
