@@ -144,7 +144,7 @@ import TestimonialComponent from '../TestimonialComponent.vue';
                                         <div class="col-12" v-for="(elem, i) in whyChoose" :key="i">
                                             <i class="me-2 mt-5" :class="elem.icon"></i>
                                             <h5 class="card-title d-inline circular-text">{{elem.title}}</h5> 
-                                            <p class="card-text">{{elem.text}}</p>
+                                            <p class="card-text mb-lg">{{elem.text}}</p>
                                         </div>
                                     </div>
                                 </div>
