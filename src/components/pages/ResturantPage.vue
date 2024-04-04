@@ -1,72 +1,114 @@
 <script>
-    export default{
-        data(){
-            return{
+import axios from 'axios'
 
-                MainTitle: 'ciao',
-
-            };
+export default {
+    data() {
+        return {
+            items: [], // Array di piatti
+            restaurantId: 0, // ID del ristorante desiderato (da impostare manualmente o in base a qualche logica)
+            restaurant: {}, // Oggetto ristorante
+            dishes: {}
+        };
+    },
+    created() {
+        this.getAllDishesForRestaurant();
+    },
+    methods: {
+        getAllDishesForRestaurant() {
+            axios.get(`http://127.0.0.1:8000/api/dishes?restaurant_id=${this.restaurantId}`)
+                .then((res) => {
+                    console.log(res);
+                    this.items = res.data.data.foods.data;
+                    
+                    if (this.items.length > 0) {
+                        this.restaurant = this.items[3].user;
+                        this.dishes = this.items[2];
+                    }
+                   
+                        
+                    
+                })
+                .catch((error) => {
+                    console.error('Errore durante il recupero dei piatti:', error);
+                });
         },
-        methods:{
-            
-
-        }
-    }
+    },
+}
 </script>
-
-
-
 
 <template>
     <div class="restaurant-page">
         <div class="container">
             <div class="row">
-                <div class="col-md-2">
-                    <!-- Blocco a sinistra -->
-                    <div class="left-block">
-                        <div class="navbar">
-                            <ul>
-                                <li><a href="#">Prodotto 1</a></li>
-                                <li><a href="#">Prodotto 2</a></li>
-                                <li><a href="#">Prodotto 3</a></li>
-                                <li><a href="#">Prodotto 4</a></li>
-                                <li><a href="#">Prodotto 5</a></li>
-                                <li><a href="#">Prodotto 6</a></li>
-                                <li><a href="#">Prodotto 7</a></li>
-                                <li><a href="#">Prodotto 8</a></li>
-                                <li><a href="#">Prodotto 9</a></li>
-                                <li><a href="#">Prodotto 10</a></li>
-                            </ul>
+                <!-- Blocco al centro -->
+                <div class="center-block text-center col-lg-8 col-md-12">
+
+
+                    <div class="box-name-resturant">
+                        <h1>{{ restaurant.resturant_name }}</h1>
+                        <h2>{{ restaurant.address}}</h2>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div v-for="item in items" :key="item.id" class="box-card col-md-12 col-lg-12 mb-2">
+                            <div class="box-description">
+                                <h3 class="m-2">{{ item.name }}</h3>
+                                
+                                <h5 class="d-none d-sm-block">ingredienti:</h5>
+                                <h4 class="m-2 d-none d-sm-none d-md-none d-lg-block">{{ item.ingredients }}</h4>
+
+                                <div class="accordion accordion-flush d-md-block d-lg-none p-1" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <p class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                INGREDIENTI
+                                            </button>
+                                        </p>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">{{ item.ingredients }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6>{{ item.price }}€</h6>
+                                <button type="button" class="btn btn-primary mb-3 col" disabled>aggiungi</button>
+                            </div>
+
+                            <div class="box-dx">
+                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ item.image" alt="">
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <!-- Blocco al centro -->
-                    <div class="center-block text-center">
-                        <div class="container ">
-                            <h1>milano resturant</h1>
-                            <p>type</p>
-                        </div>
-                        <div class="container-fluid">
-                            <div v-for="index in 12" :key="index" class="box-card">
-                               <div>
-                                 description
-                               </div>
-                               <div class="box-dx">
-                               </div>
+                
+                <!--Blocco 2 -- Carrello-->
+                <div class="col-lg-4 mb-4 col-12 col-sm-12">
+                    <div class="cart text-center width-cart-sm">
+                        <h3>Il tuo ordine</h3>
+                        <div class="cart-item">
+                            <p>Resoconto ordine:</p>
+                            <p>Prezzo: $XX</p>
+                            <div>
+                                <img src="/img/foto2.png" alt="">
+                            </div>
+                            <div>
+                                <button class="btn btn-danger">Rimuovi</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Blocco a destra -->
-                    <div class="right-block text-center">
-                    aaaa
+                        <hr>
+                        <div>
+                            <p>Totale: $XX</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-success">Vai al pagamento</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>
+           
 </template>
        
 
@@ -75,64 +117,132 @@
 
 
 <style lang="scss" scoped>
-div{
-    border: 1px solid red;
-    border-radius: 10px;
+
+
+
+.box-name-resturant {
+    font-family: 'Times New Roman', Times, serif;
 }
-.box-card{
+
+.center-block::-webkit-scrollbar {
+    display: none; 
+}
+
+.center-block {
+    overflow-y: scroll;
+    height: 700px;
+    border-radius: 10%;
+}
+
+h1 {
+    color: rgb(241, 70, 71);
+}
+
+.box-card {
     display: flex;
     justify-content: space-between;
-}
-.box-dx{
-    width: 200px;
-    height: 100px;
-}
-.navbar {
-  position: fixed;
-  height: calc(100% - 122px); /* considerando l'altezza del footer */
-  width: 200px;
-  top: 0;
-  left: 0;
-  margin-bottom: 100px; /* altezza del footer */
-  background-color: black;
-}
-.navbar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 20px 0;
-}
-.navbar ul li {
-  padding: 10px 0;
-}
-.navbar ul li a {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-}
-.content {
-    margin-left: 220px; /* Aggiunge spazio per la barra di navigazione */
-  padding: 20px;
-  max-width: calc(100% - 200px);
-}
-.navbar > ul > li {
-    margin-left: 10px;
-}
-/* Media query per la modalità responsive */
-@media screen and (max-width: 768px) {
-  /* Modifica il layout della riga per far sì che la barra di navigazione vada sotto il contenuto principale */
-  .row {
-    flex-wrap: wrap-reverse;
-  }
-  /* Imposta il 100% di larghezza per la navbar */
-  .navbar {
-    width: 100%;
+    align-items: center;
     height: auto;
-    position: static;
-    margin-bottom: 0;
-  }
-  .content {
-    margin-left: 0;
-    max-width: 100%;
-  }
+    border-radius: 50px;
+    background-image: linear-gradient(
+        310deg,
+        hsl(359deg 78% 52%) 10%,
+        hsl(359deg 78% 54%) 24%,
+        hsl(359deg 78% 56%) 30%,
+        hsl(359deg 78% 58%) 33%,
+        hsl(359deg 78% 61%) 36%,
+        hsl(359deg 78% 63%) 38%,
+        hsl(359deg 78% 65%) 40%,
+        hsl(359deg 78% 67%) 41%,
+        hsl(359deg 78% 69%) 43%,
+        hsl(359deg 78% 71%) 44%,
+        hsl(359deg 78% 74%) 46%,
+        hsl(359deg 78% 76%) 48%,
+        hsl(359deg 78% 78%) 50%,
+        hsl(359deg 78% 80%) 52%,
+        hsl(359deg 77% 83%) 55%,
+        hsl(359deg 77% 85%) 58%,
+        hsl(359deg 76% 87%) 62%,
+        hsl(359deg 76% 90%) 66%,
+        hsl(359deg 74% 92%) 72%,
+        hsl(359deg 72% 95%) 78%,
+        hsl(359deg 65% 97%) 87%,
+        hsl(0deg 0% 99%) 100%
+    );
 }
+
+.box-dx {
+    width: 200px;
+    height: 300px; 
+    object-fit: contain;
+    
+   
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: linear-gradient(to start, rgba(1,0,0,0), rgba(1,0,0,1));
+    }
+}
+
+.box-description {
+    text-align: center; // Aggiunto per centrare il testo
+    padding: 20px;
+}
+
+.cart {
+    background-image: linear-gradient(
+        310deg,
+        hsl(359deg 78% 52%) 10%,
+        hsl(359deg 78% 54%) 24%,
+        hsl(359deg 78% 56%) 30%,
+        hsl(359deg 78% 58%) 33%,
+        hsl(359deg 78% 61%) 36%,
+        hsl(359deg 78% 63%) 38%,
+        hsl(359deg 78% 65%) 40%,
+        hsl(359deg 78% 67%) 41%,
+        hsl(359deg 78% 69%) 43%,
+        hsl(359deg 78% 71%) 44%,
+        hsl(359deg 78% 74%) 46%,
+        hsl(359deg 78% 76%) 48%,
+        hsl(359deg 78% 78%) 50%,
+        hsl(359deg 78% 80%) 52%,
+        hsl(359deg 77% 83%) 55%,
+        hsl(359deg 77% 85%) 58%,
+        hsl(359deg 76% 87%) 62%,
+        hsl(359deg 76% 90%) 66%,
+        hsl(359deg 74% 92%) 72%,
+        hsl(359deg 72% 95%) 78%,
+        hsl(359deg 65% 97%) 87%,
+        hsl(0deg 0% 99%) 100%
+    );
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 50px;
+    border: 3px solid white;
+
+    h3 {
+        color: rgb(241, 70, 71);
+    }
+
+    .cart-item {
+        margin-bottom: 20px;
+        border: 3px solid white;
+        border-radius: 50px;
+        padding: 10px;
+
+        img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    }
+}
+
 </style>
+
+
+
+
+
+
