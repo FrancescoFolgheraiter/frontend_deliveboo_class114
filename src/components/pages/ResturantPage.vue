@@ -4,9 +4,9 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            items: [], // Array di piatti
-            restaurantId: 0, // ID del ristorante desiderato (da impostare manualmente o in base a qualche logica)
-            restaurant: {}, // Oggetto ristorante
+            items: [], 
+            restaurantId: 0, 
+            restaurant: {}, 
             dishes: {}
         };
     },
@@ -21,11 +21,9 @@ export default {
                     this.items = res.data.data.foods.data;
                     
                     if (this.items.length > 0) {
-                        this.restaurant = this.items[3].user;
-                        this.dishes = this.items[2];
+                        this.restaurant = this.items[5].user;
                     }
-                   
-                        
+                
                     
                 })
                 .catch((error) => {
@@ -37,51 +35,68 @@ export default {
 </script>
 
 <template>
-    <div class="restaurant-page">
+    <div class="resturant-page">
         <div class="container">
             <div class="row">
-                <!-- Blocco al centro -->
-                <div class="center-block text-center col-lg-8 col-md-12">
+
+                <!-- Blocco ristorante -->
+                    <div class="center-block text-center col-lg-8 col-md-12">
+                        <!-- blocco descrizione ristorante -->
+                            <div class="box-name-resturant">  
+                                <h1>{{ restaurant.resturant_name }}</h1>
+                                <p>Distanza: 1.31 km</p>
+                                <p>Chiude alle: 23:30</p>
+                                <p>Minimo d'ordine: 10,00 €</p>
+                                <p>Consegna a 1,75 €</p>
+                                <h5>indirizzo:{{ restaurant.address}}</h5>
+                            </div>
+                        <!-- fine blocco descrizione ristorante -->
+
+                        <!-- blocco piatti -->
+                            <div class="container-fluid">
+                                <div v-for="item in items" :key="item.id" class="box-card col-md-12 col-lg-12 mb-2">
+                                    <div class="box-description">
 
 
-                    <div class="box-name-resturant">
-                        <h1>{{ restaurant.resturant_name }}</h1>
-                        <h2>{{ restaurant.address}}</h2>
-                    </div>
+                                        <h3 class="m-2">{{ item.name }}</h3>
+                                        <h5 class="d-none d-sm-none  d-none d-md-none">ingredienti:</h5>
+                                        <h4 class="m-2 d-none d-sm-none d-md-none d-lg-block">{{ item.ingredients }}</h4>
+                                        
 
-                    <div class="container-fluid">
-                        <div v-for="item in items" :key="item.id" class="box-card col-md-12 col-lg-12 mb-2">
-                            <div class="box-description">
-                                <h3 class="m-2">{{ item.name }}</h3>
-                                
-                                <h5 class="d-none d-sm-block">ingredienti:</h5>
-                                <h4 class="m-2 d-none d-sm-none d-md-none d-lg-block">{{ item.ingredients }}</h4>
+                                    
+                                            <div class="accordion accordion-flush d-md-block d-lg-none p-1" id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <p class="accordion-header ">
+                                                        <button class="accordion-button bg-primary text-white collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                            INGREDIENTI
+                                                        </button>
+                                                    </p>
+                                                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body">
+                                                            <ul class="ingredient-list">
+                                                                <li>{{ item.ingredients }}</li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div class="accordion accordion-flush d-md-block d-lg-none p-1" id="accordionFlushExample">
-                                    <div class="accordion-item">
-                                        <p class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                INGREDIENTI
-                                            </button>
-                                        </p>
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">{{ item.ingredients }}</div>
-                                        </div>
+
+                                            <h6 class="ms-2">{{ item.price }}€</h6>
+                                        <button type="button" class="btn btn-primary mb-3 ms-2" disabled>aggiungi</button>
                                     </div>
+
+                                    <div class="box-dx">
+                                        <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ item.image" alt="">
+                                    </div>
+
                                 </div>
-
-                                <h6>{{ item.price }}€</h6>
-                                <button type="button" class="btn btn-primary mb-3 col" disabled>aggiungi</button>
                             </div>
-
-                            <div class="box-dx">
-                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ item.image" alt="">
-                            </div>
-
-                        </div>
+                        <!-- fine blocco piatti -->
                     </div>
-                </div>
-                
+                <!--fine Blocco ristorante -->
+
                 <!--Blocco 2 -- Carrello-->
                 <div class="col-lg-4 mb-4 col-12 col-sm-12">
                     <div class="cart text-center width-cart-sm">
@@ -105,6 +120,7 @@ export default {
                         </div>
                     </div>
                 </div>
+                <!--Blocco 2 -fine- Carrello-->
             </div>
         </div>
     </div>
@@ -119,10 +135,47 @@ export default {
 <style lang="scss" scoped>
 
 
+.resturant-page{
+    background-color: #f7f7f7ea;
+}
+
+
 
 .box-name-resturant {
-    font-family: 'Times New Roman', Times, serif;
-}
+        font-family: 'Times New Roman', Times, serif;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        
+        flex-direction: column;
+        margin: auto;
+        width: 100%;
+        padding: 20px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        background-color: #fff;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease; /* Animazione*/
+        align-items: start;
+    }
+
+    .box-name-resturant:hover {
+        transform: translateY(-5px); /* Sposta leggermente verso l'alto al passaggio del mouse */
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .box-name-resturant h1 {
+        color:rgb(13, 110, 273);
+        margin-bottom: 10px;
+        font-size: 44px; 
+    }
+
+    .box-name-resturant p {
+        color: #666;
+        margin-bottom: 5px;
+        font-size: 16px; 
+        align-items: start;
+    }
 
 .center-block::-webkit-scrollbar {
     display: none; 
@@ -131,7 +184,7 @@ export default {
 .center-block {
     overflow-y: scroll;
     height: 700px;
-    border-radius: 10%;
+   
 }
 
 h1 {
@@ -140,86 +193,54 @@ h1 {
 
 .box-card {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: auto;
-    border-radius: 50px;
-    background-image: linear-gradient(
-        310deg,
-        hsl(359deg 78% 52%) 10%,
-        hsl(359deg 78% 54%) 24%,
-        hsl(359deg 78% 56%) 30%,
-        hsl(359deg 78% 58%) 33%,
-        hsl(359deg 78% 61%) 36%,
-        hsl(359deg 78% 63%) 38%,
-        hsl(359deg 78% 65%) 40%,
-        hsl(359deg 78% 67%) 41%,
-        hsl(359deg 78% 69%) 43%,
-        hsl(359deg 78% 71%) 44%,
-        hsl(359deg 78% 74%) 46%,
-        hsl(359deg 78% 76%) 48%,
-        hsl(359deg 78% 78%) 50%,
-        hsl(359deg 78% 80%) 52%,
-        hsl(359deg 77% 83%) 55%,
-        hsl(359deg 77% 85%) 58%,
-        hsl(359deg 76% 87%) 62%,
-        hsl(359deg 76% 90%) 66%,
-        hsl(359deg 74% 92%) 72%,
-        hsl(359deg 72% 95%) 78%,
-        hsl(359deg 65% 97%) 87%,
-        hsl(0deg 0% 99%) 100%
-    );
+    border-radius: 10px;
+    -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
+    box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
+    width: auto;
+    background-color: white;
+    transition: all 0.5s ease;
+    
 }
 
+
+.box-card:hover {transform: translateY(-5px); /* Sposta leggermente verso l'alto al passaggio del mouse */
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+} 
+
+
 .box-dx {
-    width: 200px;
-    height: 300px; 
+    width: 150px;
+    height: 150px;
+    border: 1px solid black; 
+    border-radius: 5px;
     object-fit: contain;
-    
-   
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background: linear-gradient(to start, rgba(1,0,0,0), rgba(1,0,0,1));
-    }
+    overflow: hidden; /* Per rimuovere il bordo impercettibile */
+    margin-right: 10px;
+}
+
+.box-dx img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .box-description {
-    text-align: center; // Aggiunto per centrare il testo
+    text-align: start; // Aggiunto per centrare il testo
     padding: 20px;
+    
 }
 
 .cart {
-    background-image: linear-gradient(
-        310deg,
-        hsl(359deg 78% 52%) 10%,
-        hsl(359deg 78% 54%) 24%,
-        hsl(359deg 78% 56%) 30%,
-        hsl(359deg 78% 58%) 33%,
-        hsl(359deg 78% 61%) 36%,
-        hsl(359deg 78% 63%) 38%,
-        hsl(359deg 78% 65%) 40%,
-        hsl(359deg 78% 67%) 41%,
-        hsl(359deg 78% 69%) 43%,
-        hsl(359deg 78% 71%) 44%,
-        hsl(359deg 78% 74%) 46%,
-        hsl(359deg 78% 76%) 48%,
-        hsl(359deg 78% 78%) 50%,
-        hsl(359deg 78% 80%) 52%,
-        hsl(359deg 77% 83%) 55%,
-        hsl(359deg 77% 85%) 58%,
-        hsl(359deg 76% 87%) 62%,
-        hsl(359deg 76% 90%) 66%,
-        hsl(359deg 74% 92%) 72%,
-        hsl(359deg 72% 95%) 78%,
-        hsl(359deg 65% 97%) 87%,
-        hsl(0deg 0% 99%) 100%
-    );
+   
     padding: 20px;
     margin-top: 30px;
     border-radius: 50px;
     border: 3px solid white;
+    -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
+    box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
 
     h3 {
         color: rgb(241, 70, 71);
@@ -238,6 +259,35 @@ h1 {
         }
     }
 }
+/* CSS */
+.accordion-body {
+    border-radius: 10px;
+    padding: 15px;
+}
+.accordion-button{
+    border-radius: 200px !important;
+    width: 150px;
+    height: 30px;
+    
+    
+}
+.ingredient-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.accordion-item{
+    background-color: transparent;
+}
+
+.ingredient-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Aggiungi altri stili CSS secondo necessità */
 
 </style>
 
