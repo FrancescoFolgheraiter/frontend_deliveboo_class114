@@ -64,31 +64,55 @@ import TestimonialComponent from '../TestimonialComponent.vue';
         
 
         <!--SEZIONE 1 - RICERCA RISTORANTI-->
-        <!--Cose da sistemare: 
-        1) Fare in modo che quando vado nella versione mobile la foto si adatti automaticamente e non si tagli
-        2) Centrare tutto il blocco contenente la barra di ricerca 
-        3) RENDERE RESPONSIVE LA SEARCH BAR   -->
+        <section class="my-2"> <!-- JUMBOTRON -->
+                <div class="container">
+                   <div class="jumbotron">
+                        <div class="text-jumbo">
+                            <h2>
+                                Super Fast <span>Food Delivery</span> Service
+                            </h2>
+                            <p>We provide Super Fast-Delivery Service. Let's Use Our Services Right Now And Get Discounts Od Up To 50%</p>
+                            
+                            <button>DOWNLOAD APP</button>
+                        </div>
 
-        <section class="jumbotron">
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <div class="img-jumbo">
-                    <img src="/public/img/pngwing.com.png" alt="jumboimg">
-                </div>
-                <div class="search-box d-flex flex-column align-items-center">
-                    <div>
-                        <h2 class="text-center">
-                            Deliveboo: Il Gusto Arriva, Tu Sorridi!
-                        </h2>
-                        <p class="text-center">Cerca i tuoi ristoranti preferiti</p>
-                    </div>
-                    <div class="search-bar">
-                        <input type="search" placeholder="Cerca il tuo ristorante...">
-                        <button class="btn btn-pers">CERCA</button>
+                        <div class="img-jumbo">
+                            <img src="/img/bgremove.png" alt="">
+                        </div>
+                   </div>
+                </div>   
+            </section>
+            
+            <section class="my-5"> <!-- CATEGORIE -->
+                <div class="container">
+                    <div class="text-center title-section">
+                        <h2>Le Nostre Categorie <span>Popolari</span></h2>
                     </div>
 
+                    <div class="category-card">
+                        <div>
+                            <i class="fa-solid fa-burger"></i>
+                            <span>Americano</span>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-pizza-slice"></i>
+                            <span>Pizza</span>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-bowl-food"></i>
+                            <span>Sushi</span>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-bacon"></i>
+                            <span>BBQ</span>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-pepper-hot"></i>
+                            <span>Messicano</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
         <!--FINE SEZIONE 1-->
 
 
@@ -227,102 +251,139 @@ import TestimonialComponent from '../TestimonialComponent.vue';
   </template>
 
 <style lang="scss" scoped>
-main{
-    background-image: linear-gradient(
-        310deg,
-        hsl(359deg 78% 52%) 10%,
-        hsl(359deg 78% 54%) 24%,
-        hsl(359deg 78% 56%) 30%,
-        hsl(359deg 78% 58%) 33%,
-        hsl(359deg 78% 61%) 36%,
-        hsl(359deg 78% 63%) 38%,
-        hsl(359deg 78% 65%) 40%,
-        hsl(359deg 78% 67%) 41%,
-        hsl(359deg 78% 69%) 43%,
-        hsl(359deg 78% 71%) 44%,
-        hsl(359deg 78% 74%) 46%,
-        hsl(359deg 78% 76%) 48%,
-        hsl(359deg 78% 78%) 50%,
-        hsl(359deg 78% 80%) 52%,
-        hsl(359deg 77% 83%) 55%,
-        hsl(359deg 77% 85%) 58%,
-        hsl(359deg 76% 87%) 62%,
-        hsl(359deg 76% 90%) 66%,
-        hsl(359deg 74% 92%) 72%,
-        hsl(359deg 72% 95%) 78%,
-        hsl(359deg 65% 97%) 87%,
-        hsl(0deg 0% 99%) 100%
-    );
-}
-//CSS SEZIONE 1
 .jumbotron{
-    /* height: 600px; */
-    background-repeat: no-repeat;
-    background-size:cover;
-    position: relative;
-    /* background: rgb(241,70,71);
-    background: linear-gradient(169deg, rgba(241,70,71,1) 49.7%, rgba(235,235,235,1) 50%);  */  
-   
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0,5px solid gray;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
+    box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
 
-
-
-
-
-.search-box{
-    background-color:#f7f7f7ea;
-    width: 60%;
-    /* height: 40%; */
-    position: absolute;
-    top:5%;
-    left: 20%;
-    border-radius: 20px;
-    padding: 20px;
-    -webkit-box-shadow: -1px 3px 12px -2px #000000; 
-    box-shadow: -1px 3px 12px -2px #000000; 
-
-    h2{
-        color: rgb(241,70,71);
-        font-weight: bold;
-        margin-top: 20px;
+    >*{
+        width: calc(100% / 2);
     }
-
-    p{
-        font-size: 20px;
-    }
-}
-
-.search-bar{
     
-    border: 1px solid black;
-    width: 60%;
-    border-radius: 20px;
-    background-color: white;
 
-    input{
+    .text-jumbo{
+       padding: 20px;
+       margin-right: 10px; 
+
+       p{
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+       }
+
+       h2{
+        font-size: 50px;
+        font-weight: 600;
+
+        span{
+            color: #f14647;
+        }
+       }
+
+       button{
+        background-color: #f14647;
+        color: white;
         border: none;
-        border-radius: 20px;
-        width: 85%;
-        height: 40px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: 600;
+       }
+    }
+
+
+
+    .img-jumbo{
         padding: 10px;
-        border-right:none;
+        margin-right: 5px;
+        img{
+            width: 80%;
+        };
+    }
+}
+
+
+
+
+.title-section{
+    h2{
+        font-weight: 600;
+        font-size: 40px;
+    }
+
+    span{
+        color: #f14647;
+    }
+}
+
+
+
+.category-card{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    
+
+
+    div:first-child{
+        background-color: #f14647;
+        cursor: pointer;
+        span{
+            background-color: #f14647;
+            color: white;
+        }
         
-        &:focus{
-            outline-style: none;
+        i{
+            background-color: #f14647;
+            color: white;
+        }
+        
+    }
+
+    >*{
+        background-color: white;
+        padding: 10px 10px;
+        width: calc(100% / 5 - 20px);
+        margin: 10px;
+        color:#1f272d;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
+        box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
+
+        i{
+            font-size: 20px;
+        }
+
+        span{
+            background-color: white;
+            margin-left: 10px;
+            font-size: 20px;
+            font-weight: 600; 
+        }
+    }
+    
+    div:hover:not(div:first-child){
+        background-color: #f14647;
+        cursor: pointer;
+
+        i{
+            background-color: #f14647;
+            color: white;
+        }
+
+        span{
+            background-color: #f14647;
+            color: white;
         }
     }
 
     
-
-    .btn-pers{
-        background-color: rgb(241,70,71);
-        color: white;
-        vertical-align:baseline;
-        height: 40px;
-        padding: 0 24px;
-        border-radius: 20px;
-    }
 }
+
 
 
 
