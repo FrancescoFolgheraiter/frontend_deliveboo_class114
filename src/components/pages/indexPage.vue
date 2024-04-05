@@ -134,61 +134,62 @@ import TestimonialComponent from '../TestimonialComponent.vue';
                     </div>
                 </div>
             </section>
-        <!--FINE SEZIONE 4-->
-
-
-        <!--INIZIO SEZIONE 5 - FAQ-->
+            <!--FINE SEZIONE 4-->
+            
+            <TestimonialComponent />
+            
+            <!--INIZIO SEZIONE 5 - FAQ-->
         <section>
-    <div class="">
-        <div class="container">
-            <div class="row align-items-center m-0">
-                <div class="col-lg-6">
-                    <div>
-                        <img class="w-100" src="/img/foto4_faq.png" alt="">
-                    </div>
-                </div>
+            <div class="">
+                <div class="container">
+                    <div class="row align-items-center m-0">
+                        <div class="col-lg-6">
+                            <h3 class="text-center">
+                                FAQ
+                            </h3>
+                            <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed background-h2-faq" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            Quali pagamenti accettate sul vostro sito?
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">Accettiamo tutte le modalità di pagamento, quindi, carte di credito, carte di debito, PayPal e altri metodi di pagamento online. Accettiamo anche pagamenti in contanti alla consegna.</div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed background-h2-faq" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                            Qual è il tempo stimato di consegna medio?
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">Il tempo medio stimato per la consegna è tra 30 e 45 minuti. La puntualità della consegna può variare in base a diversi fattori come l'orario di punta o le condizioni meteorologiche.</div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed background-h2-faq" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                            Come posso controllare lo stato del mio ordine?
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">È possibile controllare lo stato dell'ordine attraverso la nostra App o sul sito web. Troverete diversi stati dell'ordine: "In preparazione", "In consegna" o "Consegnato".</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="col-lg-6">
-                    <h3 class="text-center">
-                        FAQ
-                    </h3>
-                    <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed background-h2-faq" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    Quali pagamenti accettate sul vostro sito?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">Accettiamo tutte le modalità di pagamento, quindi, carte di credito, carte di debito, PayPal e altri metodi di pagamento online. Accettiamo anche pagamenti in contanti alla consegna.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed background-h2-faq" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    Qual è il tempo stimato di consegna medio?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">Il tempo medio stimato per la consegna è tra 30 e 45 minuti. La puntualità della consegna può variare in base a diversi fattori come l'orario di punta o le condizioni meteorologiche.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed background-h2-faq" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                    Come posso controllare lo stato del mio ordine?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">È possibile controllare lo stato dell'ordine attraverso la nostra App o sul sito web. Troverete diversi stati dell'ordine: "In preparazione", "In consegna" o "Consegnato".</div>
+                        <div class="col-lg-6">
+                            <div>
+                                <img class="w-100" src="/img/foto5.png" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
         <!--FINE SEZIONE 5-->
 
        
@@ -196,7 +197,6 @@ import TestimonialComponent from '../TestimonialComponent.vue';
 
 
         
-        <TestimonialComponent />
 
 
     </main>
