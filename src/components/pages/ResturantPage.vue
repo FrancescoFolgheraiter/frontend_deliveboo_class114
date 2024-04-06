@@ -165,7 +165,7 @@ export default {
                             <p v-else>Il carrello è vuoto</p>
                         </div>
                         <div>
-                            <button class="btn btn-success">Vai al pagamento</button>
+                            <button   class="btn btn-success">Vai al pagamento</button>
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@ h1 {
 .box-dx {
     width: 150px;
     height: 150px;
-    border: 1px solid black; 
+    
     border-radius: 5px;
     object-fit: contain;
     overflow: hidden; /* Per rimuovere il bordo impercettibile */
