@@ -78,6 +78,10 @@ export default {
             // Assegna il costo totale calcolato alla proprietà totalCost
             this.totalCost = total;
         },
+        vaiAlPagamento() {
+        // Reindirizza l'utente all'URL desiderato
+        window.location.href = 'http://localhost:3000/';
+    }
     }
 }
 </script>
@@ -165,7 +169,7 @@ export default {
                             <p v-else>Il carrello è vuoto</p>
                         </div>
                         <div>
-                            <button   class="btn btn-success">Vai al pagamento</button>
+                            <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
                         </div>
                     </div>
                 </div>
