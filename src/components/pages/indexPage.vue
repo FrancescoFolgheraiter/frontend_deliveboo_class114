@@ -1,6 +1,8 @@
 <script>
 import BoxComponent from '../BoxComponent.vue'; 
-import TestimonialComponent from '../TestimonialComponent.vue'; 
+import TestimonialComponent from '../TestimonialComponent.vue';
+import RestaurantListComponent from '../RestaurantListComponent.vue';
+import Slider1Component from '../Slider1Component.vue'; 
 
     export default{
         data(){
@@ -34,7 +36,9 @@ import TestimonialComponent from '../TestimonialComponent.vue';
         },
         components: {
           BoxComponent,
-          TestimonialComponent
+          TestimonialComponent,
+          RestaurantListComponent,
+          Slider1Component
 
         }
     }
@@ -43,10 +47,14 @@ import TestimonialComponent from '../TestimonialComponent.vue';
 <template>
     <main>
 
-        
+        <div>
+            <routerLink :to="{name:'resturant.index'}">
+                RESTAURANT
+            </routerLink>
+        </div>
 
         <!--SEZIONE 1 - RICERCA RISTORANTI-->
-        <section class="my-2"> <!-- JUMBOTRON -->
+        <section class="my-4"> <!-- JUMBOTRON -->
                 <div class="container">
                    <div class="jumbotron">
                         <div class="text-jumbo">
@@ -63,6 +71,10 @@ import TestimonialComponent from '../TestimonialComponent.vue';
                         </div>
                    </div>
                 </div>   
+            </section>
+
+            <section>
+                <Slider1Component/>
             </section>
             
             <section class="my-5"> <!-- CATEGORIE -->
@@ -97,10 +109,10 @@ import TestimonialComponent from '../TestimonialComponent.vue';
             </section>
         <!--FINE SEZIONE 1-->
 
-
+        <RestaurantListComponent/>   
 
         <!--INIZIO SEZIONE 4 - PERCHE' SCEGLIERCI -->
-        <section class="mb-4">
+        <section class="my-4">
                 <div class="container">
                     <div class="why-choose">
                         <div class="img-why">
@@ -136,7 +148,7 @@ import TestimonialComponent from '../TestimonialComponent.vue';
             </section>
             <!--FINE SEZIONE 4-->
             
-            <TestimonialComponent />
+            <TestimonialComponent/>
             
             <!--INIZIO SEZIONE 5 - FAQ-->
         <section>
