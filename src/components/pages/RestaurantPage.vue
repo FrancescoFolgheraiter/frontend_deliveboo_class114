@@ -14,9 +14,10 @@ export default {
         //chiamata api che mi preleva i piatti con il parametro
         //name del ristorante 
         getAllDishes() {
+            
             axios.get('http://127.0.0.1:8000/api/dishes',{
                 params:{
-                    name:'Galloway'
+                    name: this.store.restaurantActive['resturant_name']
                 }
             })
             .then((res) => {
@@ -102,12 +103,11 @@ export default {
                 <div class="center-block text-center col-lg-8 col-md-12">
                     <!-- blocco descrizione ristorante -->
                     <div class="box-name-resturant">  
-                        <h1>{{ 'restaurant.resturant_name' }}</h1>
-                        <p>Distanza: 1.31 km</p>
-                        <p>Chiude alle: 23:30</p>
-                        <p>Minimo d'ordine: 10,00 €</p>
-                        <p>Consegna a 1,75 €</p>
-                        <h5>indirizzo:{{ 'restaurant.address'}}</h5>
+                        <h1>{{ store.restaurantActive['resturant_name']}}</h1>
+                        <div class="box-dx">
+                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ store.restaurantActive['resturant_image']" :alt="store.restaurantActive['resturant_name']">
+                        </div>
+                        <h5>indirizzo:{{ store.restaurantActive['address']}}</h5>
                     </div>
                     <!-- fine blocco descrizione ristorante -->
 
@@ -138,7 +138,7 @@ export default {
                                 <button type="button" class="btn btn-primary mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
                             </div>
                             <div class="box-dx">
-                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ dish.image" alt="">
+                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ dish.image" :alt="dish.name">
                             </div>
                         </div>
                     </div>
