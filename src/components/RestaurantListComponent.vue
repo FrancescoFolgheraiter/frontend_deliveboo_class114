@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import {store} from '../store' 
+import { RouterLink } from 'vue-router';
 
 
 export default {
@@ -57,25 +58,27 @@ export default {
     <div class="container">
       <div class="cont-section row p-3" v-if="(isClicked)">
          <div class = "__area col-4 gy-3" v-if="ristoFilter.length > 0 && ristoFilter[0].hasOwnProperty('users')" v-for="(typesOfRisto,i) in ristoFilter[0].users">
-          <a class = "__card" @click="valuedRestaurantName(typesOfRisto.resturant_name)">
-            <button class = "__favorit"><i class = "la la-heart-o"></i></button>
-            <img src = "" class="img-fluid __img"/>
-            <div class = "__card_detail text-left">
-              <h4>{{ typesOfRisto.resturant_name }}</h4>
-              <p>
-                2238 Polk St, San Francisco, CA 94109, United States
-              </p>
-              <div class = "__type">
-                <span href = "#Italian">Italian</span>
-                <span href = "#Vegetarian">Vegetarian</span>
-                <span href = "#Pizza">Pizza</span>
-                <span href = "#off">10%</span>
+          <RouterLink :to="{name: 'restaurant.index'}"> 
+            <a class = "__card" @click="valuedRestaurantName(typesOfRisto)">
+              <button class = "__favorit"><i class = "la la-heart-o"></i></button>
+              <img src = "" class="img-fluid __img"/>
+              <div class = "__card_detail text-left">
+                <h4>{{ typesOfRisto.resturant_name }}</h4>
+                <p>
+                  2238 Polk St, San Francisco, CA 94109, United States
+                </p>
+                <div class = "__type">
+                  <span href = "#Italian">Italian</span>
+                  <span href = "#Vegetarian">Vegetarian</span>
+                  <span href = "#Pizza">Pizza</span>
+                  <span href = "#off">10%</span>
+                </div>
+                <div class = "__detail">
+                  <i class = "la la-star-o"></i> <span>5.0</span> <i class = "la la-clock-o"></i> <span>30 m</span>
+                </div>
               </div>
-              <div class = "__detail">
-                <i class = "la la-star-o"></i> <span>5.0</span> <i class = "la la-clock-o"></i> <span>30 m</span>
-              </div>
-            </div>
-          </a>
+            </a>
+          </RouterLink>
         </div> 
         <div>
           {{ type }}
