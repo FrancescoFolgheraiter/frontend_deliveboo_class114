@@ -19,11 +19,6 @@
             AppFooter
         },
         mounted(){
-            axios
-            .get()
-            .then((response) =>{
-                console,log(response)
-            })
         }
     }
 </script>
