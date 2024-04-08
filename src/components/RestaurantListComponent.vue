@@ -13,18 +13,26 @@ export default {
     setValueType(value){
       this.type = value
 
-      this.ristoFilter = this.restaurantList.filter((oggetto)=> oggetto.name === this.type)
+      axios
+      .get('http://127.0.0.1:8000/api/types')
+      .then((response) =>{
+        console.log(response)
+        this.restaurantList = response.data.data.types.data
+    
+        this.ristoFilter = this.restaurantList.filter((oggetto)=> oggetto.name === this.type)
+    })
+     
       console.log(this.ristoFilter[0]['users'])
     }
   },
   mounted(){
     axios
-    .get('http://127.0.0.1:8000/api/types')
-    .then((response) =>{
-        console.log(response)
-        this.restaurantList = response.data.data.types.data
+      .get('http://127.0.0.1:8000/api/types')
+      .then((response) =>{
+          console.log(response)
+          this.restaurantList = response.data.data.types.data
 
-        console.log(this.restaurantList)
+          console.log(this.restaurantList)
     })
 }
 };
@@ -39,11 +47,9 @@ export default {
       </div>
 
       <div class="category-card">
-          <form action="POST" @submit.prevent v-for="types in restaurantList">
-            <div>
+            <div v-for="types in restaurantList">
               <button type="submit" @click="setValueType(types.name)">{{ types.name }}</button>
             </div>
-          </form>
       </div>
   </div>
 </section>
@@ -71,10 +77,6 @@ export default {
             </div>
           </a>
         </div> 
-
-        <div v-for="elem in restaurantFilter ">
-          {{ elem.name }}
-        </div>
         <div>
           {{ type }}
         </div>
