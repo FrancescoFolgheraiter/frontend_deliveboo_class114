@@ -41,7 +41,7 @@ export default {
                 const newItem = { ...item, quantity: 1, imageUrl: 'http://127.0.0.1:8000/storage/' + item.image };
                 this.store.cartItems.push(newItem);
             }
-            console.log(this.store.carItems);
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems))
             this.calculateTotalCost();
         },
         calculateTotalCost() {
@@ -79,8 +79,22 @@ export default {
             this.store.cartItems.splice(index, 1);
             this.totalCost -= itemPrice.toFixed(2);
         },
+        emptyCart() {
+        //svuoto il localStorage
+        localStorage.clear();
+        //svuoto il carrello 
+        this.store.cartItems = [];
+        // Ricalcolo del costo totale
+        this.calculateTotalCost();
+    },
     },
     created() {
+        //recupero del carrello salvato nello storage
+        const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        if (savedCartItems) {
+            this.store.cartItems = savedCartItems;
+        }
+
         this.getAllDishes();
         this.calculateTotalCost();
     },
@@ -178,10 +192,10 @@ export default {
                         </div>
                         <div class="d-flex justify-content-between ">
                             <div>
-                                <button class="btn btn-success" @click="">Vai al pagamento</button>
+                                <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
                             </div>
                             <div v-if="this.store.cartItems.length > 0">
-                                <button class="btn btn-danger" @click="">Svuota carrello</button>
+                                <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
                             </div>
                         </div>
                     </div>
