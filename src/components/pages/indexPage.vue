@@ -47,7 +47,11 @@ import Slider1Component from '../Slider1Component.vue';
 <template>
     <main>
 
-        
+        <div>
+            <routerLink :to="{name:'resturant.index'}">
+                RESTAURANT
+            </routerLink>
+        </div>
 
         <!--SEZIONE 1 - RICERCA RISTORANTI-->
         <section class="my-4"> <!-- JUMBOTRON -->
