@@ -61,11 +61,11 @@ export default {
           <RouterLink :to="{name: 'restaurant.index'}"> 
             <a class = "__card" @click="valuedRestaurantName(typesOfRisto)">
               <button class = "__favorit"><i class = "la la-heart-o"></i></button>
-              <img src = "" class="img-fluid __img"/>
+              <img :src = "typesOfRisto.image" class="img-fluid __img"/>
               <div class = "__card_detail text-left">
                 <h4>{{ typesOfRisto.resturant_name }}</h4>
                 <p>
-                  2238 Polk St, San Francisco, CA 94109, United States
+                  {{ typesOfRisto.address }}
                 </p>
                 <div class = "__type">
                   <span href = "#Italian">Italian</span>
@@ -73,16 +73,10 @@ export default {
                   <span href = "#Pizza">Pizza</span>
                   <span href = "#off">10%</span>
                 </div>
-                <div class = "__detail">
-                  <i class = "la la-star-o"></i> <span>5.0</span> <i class = "la la-clock-o"></i> <span>30 m</span>
-                </div>
               </div>
             </a>
           </RouterLink>
         </div> 
-        <div>
-          {{ type }}
-        </div>
       </div>
     </div>
 
@@ -99,7 +93,6 @@ export default {
 
 .cont-section{
   display: flex;
-  justify-content: space-between;
   background-color: white;
   border-radius: 5px;
   -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
@@ -115,6 +108,7 @@ export default {
   position: relative;
   display: inline-block;
   color: unset;
+  text-decoration: none;
 }
 .__card:hover {
   color: unset;
@@ -163,6 +157,7 @@ export default {
   font-weight: bold;
   margin-bottom: 0.4rem;
   background-color: #f7f7f7;
+  color: #1f272d;
 }
 
 .__type{

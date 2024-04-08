@@ -47,9 +47,7 @@
 
                 <!-- Bottone "Login" -->
                 
-                <a href="login" class="nav-link login-link">
-                  Login
-                </a>
+                <button class="btn">Login</button>
 
                 <!-- Link "Carrello" -->
                 <a href="carrello" class="nav-link cart-link">
@@ -116,6 +114,14 @@ header {
 .navbar-nav {
     display: flex;
     justify-content: flex-end; 
+
+    button{
+        background-color:#f14647;
+        margin-right: 20px;
+        padding: 10px 20px;
+        color: white;
+        font-weight: 600;
+    }
 }
 
 .nav-item {
@@ -127,12 +133,7 @@ a{
     color: black;
 }
 
-.login-link {
-    color: #007bff; 
-    text-decoration: none; 
-    font-weight: bold; 
-    margin-right: 20px; 
-}
+
 
 /* Stile per il link "Carrello" */
 .cart-link {
@@ -142,13 +143,13 @@ a{
 }
 
 /* Effetto hover per i link */
-.nav-link:hover {
+.nav-link:hover, button:hover {
     opacity: 0.8; 
 }
 
 /* Stile per il link "Lavora con noi" */
 .lavora-con-noi-link {
-    color: #4CAF50; 
+    color: #1f272d; 
     text-decoration: none; 
     font-weight: bold; 
     margin-right: 20px; 
