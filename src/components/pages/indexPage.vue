@@ -48,7 +48,7 @@ import Slider1Component from '../Slider1Component.vue';
     <main>
 
         <div>
-            <routerLink :to="{name:'resturant.index'}">
+            <routerLink :to="{name:'restaurant.index'}">
                 RESTAURANT
             </routerLink>
         </div>
@@ -174,13 +174,6 @@ import Slider1Component from '../Slider1Component.vue';
             </div>
         </section>
         <!--FINE SEZIONE 5-->
-
-       
-
-
-
-        
-
 
     </main>
   </template>
