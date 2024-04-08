@@ -58,7 +58,7 @@ export default {
             }
 
             // Assegna il costo totale calcolato alla proprietà totalCost
-            this.totalCost = total;
+            this.totalCost = total.toFixed(2);
         },
             // Incrementa la quantità di un elemento nel carrello
         incrementQuantity(index) {
@@ -76,7 +76,7 @@ export default {
         removeFromCart(index) {
             const itemPrice = this.store.cartItems[index].price * this.store.cartItems[index].quantity;
             this.store.cartItems.splice(index, 1);
-            this.totalCost -= itemPrice;
+            this.totalCost -= itemPrice.toFixed(2);
         },
     },
     created() {
@@ -176,8 +176,13 @@ export default {
                             <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
                             <p v-else>Il carrello è vuoto</p>
                         </div>
-                        <div>
-                            <button class="btn btn-success" @click="">Vai al pagamento</button>
+                        <div class="d-flex justify-content-between ">
+                            <div>
+                                <button class="btn btn-success" @click="">Vai al pagamento</button>
+                            </div>
+                            <div v-if="this.store.cartItems.length > 0">
+                                <button class="btn btn-danger" @click="">Svuota carrello</button>
+                            </div>
                         </div>
                     </div>
                 </div>
