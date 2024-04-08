@@ -50,7 +50,7 @@ export default {
 
     <div class="container">
       <div class="cont-section row p-3">
-         <div class = "__area col-4 gy-3" v-for="(typesOfRisto,i) in ristoFilter[0]['users']">
+         <div class = "__area col-4 gy-3" v-for="(typesOfRisto,i) in ristoFilter[0]">
           <a href = "#" class = "__card">
             <button class = "__favorit"><i class = "la la-heart-o"></i></button>
             <img src = "" class="img-fluid __img"/>
