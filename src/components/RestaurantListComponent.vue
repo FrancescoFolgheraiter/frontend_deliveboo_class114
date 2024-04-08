@@ -1,23 +1,61 @@
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      
+      restaurantList: [],
+      type: '',
+      ristoFilter :[]
     };
-  }
+  },
+  methods:{
+    setValueType(value){
+      this.type = value
+
+      this.ristoFilter = this.restaurantList.filter((oggetto)=> oggetto.name === this.type)
+      console.log(this.ristoFilter[0]['users'])
+    }
+  },
+  mounted(){
+    axios
+    .get('http://127.0.0.1:8000/api/types')
+    .then((response) =>{
+        console.log(response)
+        this.restaurantList = response.data.data.types.data
+
+        console.log(this.restaurantList)
+    })
+}
 };
 </script>
 
 <template>
 
+<section class="my-5"> <!-- CATEGORIE -->
+  <div class="container">
+      <div class="text-center title-section">
+          <h2>Le Nostre Categorie <span>Popolari</span></h2>
+      </div>
+
+      <div class="category-card">
+          <form action="POST" @submit.prevent v-for="types in restaurantList">
+            <div>
+              <button type="submit" @click="setValueType(types.name)">{{ types.name }}</button>
+            </div>
+          </form>
+      </div>
+  </div>
+</section>
+
     <div class="container">
       <div class="cont-section row p-3">
-        <div class = "__area col-4 gy-3">
+         <div class = "__area col-4 gy-3" v-for="(typesOfRisto,i) in ristoFilter[0]['users']">
           <a href = "#" class = "__card">
             <button class = "__favorit"><i class = "la la-heart-o"></i></button>
             <img src = "" class="img-fluid __img"/>
             <div class = "__card_detail text-left">
-              <h4>NOME</h4>
+              <h4>{{ typesOfRisto.resturant_name }}</h4>
               <p>
                 2238 Polk St, San Francisco, CA 94109, United States
               </p>
@@ -32,6 +70,13 @@ export default {
               </div>
             </div>
           </a>
+        </div> 
+
+        <div v-for="elem in restaurantFilter ">
+          {{ elem.name }}
+        </div>
+        <div>
+          {{ type }}
         </div>
       </div>
     </div>
@@ -153,6 +198,89 @@ export default {
 }
 
 
+.title-section{
+    h2{
+        font-weight: 600;
+        font-size: 40px;
+    }
+
+    span{
+        color: #f14647;
+    }
+}
+
+
+.category-card{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    
+
+    div:first-child{
+        background-color: #f14647;
+        cursor: pointer;
+        span{
+            background-color: #f14647;
+            color: white;
+        }
+        
+        i{
+            background-color: #f14647;
+            color: white;
+        }
+        
+    }
+
+    >*{
+        background-color: white;
+        padding: 10px 10px;
+        width: calc(100% / 5 - 20px);
+        margin: 10px;
+        color:#1f272d;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
+        box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
+
+        i{
+            font-size: 20px;
+        }
+
+        button{
+            background-color: white;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            text-align: center;
+        }
+
+        &:hover ,button:hover{
+          background-color: #f14647;
+        }
+    }
+    
+    
+
+   /*  form:hover{
+      background-color: #f14647;
+      button:hover{
+        background-color: #f14647;
+        cursor: pointer;
+
+        i{
+            background-color: #f14647;
+            color: white;
+        }
+
+        span{
+            background-color: #f14647;
+            color: white;
+        }
+    }
+    } */
+
+    
+}
 
 
 
