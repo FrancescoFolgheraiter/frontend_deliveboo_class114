@@ -1,5 +1,6 @@
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import {store} from '../../store.js';
 
 export default {
     data() {
@@ -8,8 +9,9 @@ export default {
             restaurantId: 0, 
             restaurant: {}, 
             dishes: {},
-            cartItems: [], // Aggiungi questa proprietà per tenere traccia degli elementi nel carrello
-            totalCost: 0 // Totale dei costi nel carrello
+           // this.store.cartItems: [], // Aggiungi questa proprietà per tenere traccia degli elementi nel carrello
+            totalCost: 0, // Totale dei costi nel carrello
+            store
         };
     },
     created() {
@@ -32,61 +34,73 @@ export default {
         },
 // Aggiunge un elemento al carrello
         addToCart(item) {
-            const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+            const existingItem = this.store.cartItems.find(cartItem => cartItem.id === item.id);
             if (existingItem) {
                 existingItem.quantity++;
             } else {
                 // Aggiungi l'URL dell'immagine al nuovo elemento del carrello
                 const newItem = { ...item, quantity: 1, imageUrl: 'http://127.0.0.1:8000/storage/' + item.image };
-                this.cartItems.push(newItem);
+                this.store.cartItems.push(newItem);
             }
             this.calculateTotalCost();
         },
         // Rimuove un elemento dal carrello
         removeFromCart(index) {
-            const itemPrice = this.cartItems[index].price * this.cartItems[index].quantity;
-            this.cartItems.splice(index, 1);
+            const itemPrice = this.store.cartItems[index].price * this.store.cartItems[index].quantity;
+            this.store.cartItems.splice(index, 1);
             this.totalCost -= itemPrice;
         },
         // Incrementa la quantità di un elemento nel carrello
         incrementQuantity(index) {
-            this.cartItems[index].quantity++;
+            this.store.cartItems[index].quantity++;
             this.calculateTotalCost();
         },
         // Decrementa la quantità di un elemento nel carrello
         decrementQuantity(index) {
-            if (this.cartItems[index].quantity > 1) {
-                this.cartItems[index].quantity--;
+            if (this.store.cartItems[index].quantity > 1) {
+                this.store.cartItems[index].quantity--;
                 this.calculateTotalCost();
             }
         },
         // Calcola il totale dei costi nel carrello
         calculateTotalCost() {
-            let total = 0;
+            let total = this.store.totalCostSave;
 
             // Itera attraverso ogni elemento nel carrello
-            for (let i = 0; i < this.cartItems.length; i++) {
-                const item = this.cartItems[i];
+            for (let i = 0; i < this.store.cartItems.length; i++) {
+                const item = this.store.cartItems[i];
                 
                 // Calcola il costo totale per questo elemento (prezzo * quantità)
                 const itemTotalCost = item.price * item.quantity;
 
                 // Aggiungi il costo totale di questo elemento al costo totale complessivo
                 total += itemTotalCost;
+                console.log(item);
             }
 
             // Assegna il costo totale calcolato alla proprietà totalCost
             this.totalCost = total;
         },
+        
         vaiAlPagamento() {
         // Reindirizza l'utente all'URL desiderato
         window.location.href = 'http://localhost:3000/';
-    }
+    },
+    },
+
+    mounted(){
+        console.log(this.store.cartItems);
     }
 }
 </script>
 
 <template>
+<div>
+    <routerLink :to="{name:'home'}">
+        HOME
+    </routerLink>
+</div>
+
     <div class="resturant-page">
         <div class="container">
             <div class="row">
@@ -142,7 +156,7 @@ export default {
                     <div class="cart text-center width-cart-sm">
                         <h3>Il tuo ordine</h3>
                         <div class="cart-items">
-                            <div v-for="(cartItem, index) in cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
+                            <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
                                 <!-- Immagine del prodotto -->
                                 <div>
                                     <button class="button-delete me-1" @click="removeFromCart(index)">
@@ -153,7 +167,7 @@ export default {
                                     <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image w-100">
                                 </div>
                                 <div>
-                                    <p>{{ cartItem.name }}</p>
+                                    <p>{{cartItem.name }}</p>
                                     <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
                                     <div>
                                         <button class="btn" @click="decrementQuantity(index)">-</button>
@@ -165,7 +179,7 @@ export default {
                         </div>
                         <hr>
                         <div>
-                            <p v-if="cartItems.length > 0">Totale: {{ totalCost }}€</p>
+                            <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
                             <p v-else>Il carrello è vuoto</p>
                         </div>
                         <div>
@@ -177,6 +191,10 @@ export default {
             </div>
         </div>
     </div>
+    <h1>
+        {{ this.store.cart }}
+        
+    </h1>
 </template>
        
 
