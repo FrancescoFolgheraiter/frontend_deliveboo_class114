@@ -1,28 +1,28 @@
 <script>
 import axios from 'axios';
+import {store} from '../store' 
+
 
 export default {
   data() {
     return {
       restaurantList: [],
       type: '',
-      ristoFilter :[]
+      ristoFilter :[],
+      isClicked: false,
+      store,
     };
   },
   methods:{
     setValueType(value){
       this.type = value
-
-      axios
-      .get('http://127.0.0.1:8000/api/types')
-      .then((response) =>{
-        console.log(response)
-        this.restaurantList = response.data.data.types.data
-    
-        this.ristoFilter = this.restaurantList.filter((oggetto)=> oggetto.name === this.type)
-    })
-     
+      this.ristoFilter = this.restaurantList.filter((oggetto)=> oggetto.name === this.type)    
       console.log(this.ristoFilter[0]['users'])
+      this.isClicked = true
+    },
+    valuedRestaurantName(valueName){
+      this.store.restaurantActive = valueName
+      console.log(this.store.restaurantActive)
     }
   },
   mounted(){
@@ -55,9 +55,9 @@ export default {
 </section>
 
     <div class="container">
-      <div class="cont-section row p-3">
-         <div class = "__area col-4 gy-3" v-for="(typesOfRisto,i) in ristoFilter[0]">
-          <a href = "#" class = "__card">
+      <div class="cont-section row p-3" v-if="(isClicked)">
+         <div class = "__area col-4 gy-3" v-if="ristoFilter.length > 0 && ristoFilter[0].hasOwnProperty('users')" v-for="(typesOfRisto,i) in ristoFilter[0].users">
+          <a class = "__card" @click="valuedRestaurantName(typesOfRisto.resturant_name)">
             <button class = "__favorit"><i class = "la la-heart-o"></i></button>
             <img src = "" class="img-fluid __img"/>
             <div class = "__card_detail text-left">
@@ -222,12 +222,7 @@ export default {
     div:first-child{
         background-color: #f14647;
         cursor: pointer;
-        span{
-            background-color: #f14647;
-            color: white;
-        }
-        
-        i{
+        button{
             background-color: #f14647;
             color: white;
         }
@@ -256,8 +251,17 @@ export default {
             text-align: center;
         }
 
-        &:hover ,button:hover{
+        &:hover{
           background-color: #f14647;
+          cursor: pointer;
+          
+          button{
+            background-color: #f14647;
+            cursor: pointer;
+            color: white;
+          }
+          
+          
         }
     }
     
