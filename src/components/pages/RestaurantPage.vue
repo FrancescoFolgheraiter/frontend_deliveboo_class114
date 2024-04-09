@@ -339,6 +339,7 @@ h1 {
     -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
     box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
     width: 100%;
+    width: 100%;
     background-color: white;
     transition: all 0.5s ease;
     
