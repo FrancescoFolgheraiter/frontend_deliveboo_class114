@@ -178,10 +178,10 @@ export default {
                                     </button>
                                 </div>
                                 <div class="width-cart-img">
-                                    <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image w-100">
+                                    <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image">
                                 </div>
                                 <div>
-                                    <p>{{cartItem.name }}</p>
+                                    <p class="cart-p-width">{{cartItem.name }}</p>
                                     <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
                                     <div>
                                         <button class="btn" @click="decrementQuantity(index)">-</button>
@@ -221,48 +221,46 @@ export default {
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body  d-block d-lg-none">
-                    <div>
-                        <div class="">
-                        <div class="cart text-center width-cart-sm ">
-                            <h3>Il tuo ordine</h3>
-                            <div class="cart-items">
-                                <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
-                                    <div>
-                                        <button class="button-delete me-1" @click="removeFromCart(index)">
-                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                        </button>
-                                    </div>
-                                    <div class="width-cart-img">
-                                        <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image w-100">
-                                    </div>
-                                    <div>
-                                        <p>{{cartItem.name }}</p>
-                                        <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
-                                        <div>
-                                            <button class="btn" @click="decrementQuantity(index)">-</button>
-                                            Tot: {{ cartItem.quantity }}
-                                            <button class="btn me-1" @click="incrementQuantity(index)">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div>
-                                <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
-                                <p v-else>Il carrello è vuoto</p>
-                            </div>
-                            <div class="d-flex justify-content-between ">
+
+                    <div class="carta text-center h-100 ">
+                        <h3>Il tuo ordine</h3>
+                        <div class="cart-items">
+                            <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item">
                                 <div>
-                                    <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
+                                    <button class="button-delete me-1" @click="removeFromCart(index)">
+                                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                    </button>
                                 </div>
-                                <div v-if="this.store.cartItems.length > 0">
-                                    <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
+                                <div class="width-cart-img">
+                                    <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image ">
+                                </div>
+                                <div>
+                                    <p class="cart-p-width">{{cartItem.name }}</p>
+                                    <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
+                                    <div>
+                                        <button class="btn" @click="decrementQuantity(index)">-</button>
+                                        Tot: {{ cartItem.quantity }}
+                                        <button class="btn me-1" @click="incrementQuantity(index)">+</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <hr>
+                        <div>
+                            <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
+                            <p v-else>Il carrello è vuoto</p>
+                        </div>
+                        <div class="d-flex justify-content-between ">
+                            <div>
+                                <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
+                            </div>
+                            <div v-if="this.store.cartItems.length > 0">
+                                <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
+                            </div>
+                        </div>
                     </div>
+                    
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -340,23 +338,23 @@ h1 {
     border-radius: 10px;
     -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
     box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
-    width: auto;
+    width: 100%;
     background-color: white;
     transition: all 0.5s ease;
+    
     
 }
 
 
 
-.box-card:hover {transform: translateY(-5px); /* Sposta leggermente verso l'alto al passaggio del mouse */
+.box-card:hover { /* Sposta leggermente verso l'alto al passaggio del mouse */
         box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
 } 
 
 
 .box-dx {
-    width: 150px;
     height: 150px;
-    
+    width: 20%;
     border-radius: 5px;
     object-fit: contain;
     overflow: hidden; /* Per rimuovere il bordo impercettibile */
@@ -372,6 +370,7 @@ h1 {
 .box-description {
     text-align: start; // Aggiunto per centrare il testo
     padding: 20px;
+    width: 80%;
     
 }
 
@@ -380,8 +379,12 @@ h1 {
 
 //CSS CARRELLO
 
+.cart-p-width{
+    width: 200px;
+}
+
 .cart {
-    padding: 20px;
+    padding: 10px;
     margin-top: 30px;
     border-radius: 20px;
     border: 3px solid white;
@@ -390,6 +393,7 @@ h1 {
 
     h3 {
         color: rgb(241, 70, 71);
+        padding: 10px;
     }
 
     .cart-items {
@@ -437,10 +441,14 @@ h1 {
             border: 1px solid red;
             background-color: rgb(242, 70, 70);
             color: white;
+            margin-right: 3px;
         }
 
         .width-cart-img{
-            width: 115px;
+            width: 60%;
+        }
+        .cart-item-image {
+            width: 100px;
         }
     }
 }
@@ -492,18 +500,93 @@ h1 {
   }
 
   .button-delete {
-    margin-bottom: 10px; 
+    position: relative;
+    right: 100px;
+    top: 50px;
   }
 
   .width-cart-img{
     margin-bottom: 5px;
+    
   }
+  
 }
 
 // OFFCANVAS
 .color-button-offcanvas, .accordion-button, .color-button-aggiungi{
     background-color: rgb(241, 70, 71);
     color: white
+}
+
+.carta {
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 20px;
+    border: 3px solid white;
+    
+    
+
+    h3 {
+        color: rgb(241, 70, 71);
+    }
+
+    .cart-items {
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: scroll;
+        max-height: 300px;
+
+        &::-webkit-scrollbar{
+            display: none
+        }
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        padding: 10px;
+        background-color: #f7f7f7ea;
+        border-radius: 10px;
+        margin-bottom: 5px;
+
+        &:hover {
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        p {
+            margin: 0;
+        }
+
+        button {
+            margin-left: 5px;
+            border-radius: 50px;
+            height: 24px;
+            width: 24px;
+            padding: 1px;
+            background-color: rgb(26, 135, 84);
+            color: white;
+        }
+
+        .button-delete{
+            width: 24px;
+            height: auto;
+            border-radius: 50px;
+            border: 1px solid red;
+            background-color: rgb(242, 70, 70);
+            color: white;
+        }
+
+        .width-cart-img{
+            width: 30%;
+        }
+        .cart-item-image {
+            width: 100%;
+        }
+        
+    }
 }
 
 
