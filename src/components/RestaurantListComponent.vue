@@ -65,7 +65,7 @@ export default {
               <div class = "__card_detail text-left">
                 <h4>{{ typesOfRisto.resturant_name }}</h4>
                 <p>
-                  2238 Polk St, San Francisco, CA 94109, United States
+                  {{ typesOfRisto.address }}
                 </p>
                 <div class = "__type">
                   <span href = "#Italian">Italian</span>
