@@ -109,6 +109,7 @@ export default {
 	padding: 20px;
 	width: 400px;
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 .img-area {
 	width: 80px;
