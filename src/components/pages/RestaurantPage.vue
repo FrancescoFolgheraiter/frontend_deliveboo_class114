@@ -64,12 +64,18 @@ export default {
             // Incrementa la quantità di un elemento nel carrello
         incrementQuantity(index) {
             this.store.cartItems[index].quantity++;
+
+            // aggiorno la quantità del carrello anche nel localstorage (cartItems)
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
             this.calculateTotalCost();
         },
         // Decrementa la quantità di un elemento nel carrello
         decrementQuantity(index) {
             if (this.store.cartItems[index].quantity > 1) {
                 this.store.cartItems[index].quantity--;
+                
+                // aggiorno la quantità del carrello anche nel localstorage (cartItems)
+                localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
                 this.calculateTotalCost();
             }
         },
