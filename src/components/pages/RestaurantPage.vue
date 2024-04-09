@@ -141,7 +141,7 @@ export default {
                                 <div class="accordion accordion-flush d-md-block d-lg-none p-1" id="accordionFlushExample">
                                     <div class="accordion-item">
                                         <p class="accordion-header ">
-                                            <button class="accordion-button bg-primary text-white collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <button class="accordion-button text-white collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 INGREDIENTI
                                             </button>
                                         </p>
@@ -155,7 +155,7 @@ export default {
                                     </div>
                                 </div>
                                 <h6 class="ms-2">{{ dish.price }}€</h6>
-                                <button type="button" class="btn btn-primary mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
+                                <button type="button" class="btn color-button-aggiungi mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
                             </div>
                             <div class="box-dx">
                                 <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ dish.image" :alt="dish.name">
@@ -167,8 +167,8 @@ export default {
                 <!--fine Blocco ristorante -->
 
                 <!-- Blocco 2 - Carrello -->
-                <div class="col-lg-4 mb-4 col-12 col-sm-12">
-                    <div class="cart text-center width-cart-sm">
+                <div class="col-lg-4 mb-4 col-12 d-none d-lg-block">
+                    <div class="cart text-center width-cart-sm ">
                         <h3>Il tuo ordine</h3>
                         <div class="cart-items">
                             <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
@@ -208,6 +208,62 @@ export default {
                 </div>
                 <!-- Blocco 2 - fine - Carrello -->
             </div>
+
+           <!-- blocco 3 offcanvas -->
+
+           <button class="btn sticky-bottom color-button-offcanvas d-block d-lg-none w-100  mt-5 mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+             il tuo carrello
+           </button>
+
+            <div class="offcanvas offcanvas-bottom d-block h-100 d-lg-none" data-bs-backdrop="static" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="staticBackdropLabel">carrello</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body  d-block d-lg-none">
+                    <div>
+                        <div class="">
+                        <div class="cart text-center width-cart-sm ">
+                            <h3>Il tuo ordine</h3>
+                            <div class="cart-items">
+                                <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
+                                    <div>
+                                        <button class="button-delete me-1" @click="removeFromCart(index)">
+                                            <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </button>
+                                    </div>
+                                    <div class="width-cart-img">
+                                        <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image w-100">
+                                    </div>
+                                    <div>
+                                        <p>{{cartItem.name }}</p>
+                                        <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
+                                        <div>
+                                            <button class="btn" @click="decrementQuantity(index)">-</button>
+                                            Tot: {{ cartItem.quantity }}
+                                            <button class="btn me-1" @click="incrementQuantity(index)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
+                                <p v-else>Il carrello è vuoto</p>
+                            </div>
+                            <div class="d-flex justify-content-between ">
+                                <div>
+                                    <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
+                                </div>
+                                <div v-if="this.store.cartItems.length > 0">
+                                    <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
 
@@ -224,7 +280,6 @@ export default {
 .resturant-page{
     background-color: #f7f7f7ea;
 }
-
 
 
 .box-name-resturant {
@@ -319,6 +374,8 @@ h1 {
     padding: 20px;
     
 }
+
+
 
 
 //CSS CARRELLO
@@ -441,6 +498,12 @@ h1 {
   .width-cart-img{
     margin-bottom: 5px;
   }
+}
+
+// OFFCANVAS
+.color-button-offcanvas, .accordion-button, .color-button-aggiungi{
+    background-color: rgb(241, 70, 71);
+    color: white
 }
 
 
