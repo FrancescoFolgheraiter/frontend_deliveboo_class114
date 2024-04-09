@@ -7,22 +7,26 @@ export default {
         return {
             store,
             totalCost: 0,
-            dishes:{}
+            dishes:{},
+            user:[]
         };
     },
     methods: {
         //chiamata api che mi preleva i piatti con il parametro
-        //name del ristorante 
+        //name del ristorante
+        
         getAllDishes() {
-            
+            const resturantName = this.$route.params.name ;
+            console.log(resturantName)
             axios.get('http://127.0.0.1:8000/api/dishes',{
                 params:{
-                    name: this.store.restaurantActive['resturant_name']
+                    name: resturantName
                 }
             })
             .then((res) => {
                 this.dishes = res.data.data.foods;
-                console.log(this.dishes);
+                this.user = res.data.data.user;
+                console.log(this.user);
             })
             .catch((error) => {
                 console.log('Recupero paitti non riuscito errrore: '.error)
@@ -112,9 +116,7 @@ export default {
 
 <template>
 <div>
-    <routerLink :to="{name:'home'}">
-        HOME
-    </routerLink>
+
 </div>
 
     <div class="resturant-page">
@@ -123,11 +125,11 @@ export default {
                 <div class="center-block text-center col-lg-8 col-md-12">
                     <!-- blocco descrizione ristorante -->
                     <div class="box-name-resturant">  
-                        <h1>{{ store.restaurantActive['resturant_name']}}</h1>
+                        <h1>{{ user['resturant_name']}}</h1>
                         <div class="box-dx">
-                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ store.restaurantActive['resturant_image']" :alt="store.restaurantActive['resturant_name']">
+                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ user['resturant_image']" :alt="user['resturant_name']">
                         </div>
-                        <h5>indirizzo:{{ store.restaurantActive['address']}}</h5>
+                        <h5>indirizzo:{{ user['address']}}</h5>
                     </div>
                     <!-- fine blocco descrizione ristorante -->
 
@@ -198,9 +200,6 @@ export default {
                         </div>
                         <div class="d-flex justify-content-between ">
                             <div>
-                                <routerLink :to="{name:'payment.index'}" class="text-white text-decoration-none btn btn-success">
-                                    Vai al pagamento
-                                </routerLink>
                             </div>
                             <div v-if="this.store.cartItems.length > 0">
                                 <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
