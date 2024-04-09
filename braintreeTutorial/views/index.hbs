@@ -1,29 +1,26 @@
 <form action="/submit_registration" method="post">
 
         <div class="container">
-
-            <label for="nome">Nome:</label><br>
-            <input type="text" id="nome" name="nome" required><br>
-            <label for="cognome">Cognome:</label><br>
-            <input type="text" id="cognome" name="cognome" required><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <label for="indirizzo">Indirizzo:</label><br>
-            <input type="text" id="indirizzo" name="indirizzo" required><br>
-            <label for="indirizzo">telefono:</label><br>
-            <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br><br>
-            <div id="dropin-wrapper">
-                <div id="checkout-message"></div>
-                <div id="dropin-container"></div>
-                <button id="submit-button btn btn-primary">Submit payment</button>
-            </div>
-
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome" required><br>
+        <label for="cognome">Cognome:</label><br>
+        <input type="text" id="cognome" name="cognome" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="indirizzo">Indirizzo:</label><br>
+        <input type="text" id="indirizzo" name="indirizzo" required><br>
+         <label for="indirizzo">telefono:</label><br>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br><br>
+        <div id="dropin-wrapper">
+            <div id="checkout-message"></div>
+            <div id="dropin-container"></div>
+            <button id="submit-button">Submit payment</button>
+        </div>
         </div>
         
 </form>
 
 <script>
-    
   var button = document.querySelector('#submit-button');
 
   braintree.dropin.create({
@@ -70,7 +67,6 @@
             margin: 0;
             padding: 0;
             
-            
         }
         .container {
             max-width: 500px;
@@ -79,7 +75,7 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 1.0);
-            
+            background-color: #f14647;
         }
         h2 {
             text-align: center;
@@ -88,26 +84,16 @@
         label {
             font-weight: bold;
         }
-        input[type="text"], input[type="email"], input[type="tel"] {
+        input{
             width: 95%;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            background-color:white;
+            color: black;
         }
-        input[type="submit"] {
-            width: 100%;
-            padding: 15px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+        
         .payment-container {
             margin-top: 20px;
             border-top: 1px solid #ccc;
@@ -118,7 +104,5 @@
             text-align: center;
             font-weight: bold;
         }
-
-        
 </style>
 

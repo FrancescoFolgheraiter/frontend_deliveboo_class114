@@ -1,6 +1,8 @@
 <script>
 import BoxComponent from '../BoxComponent.vue'; 
-import TestimonialComponent from '../TestimonialComponent.vue'; 
+import TestimonialComponent from '../TestimonialComponent.vue';
+import RestaurantListComponent from '../RestaurantListComponent.vue';
+import Slider1Component from '../Slider1Component.vue'; 
 
     export default{
         data(){
@@ -34,7 +36,9 @@ import TestimonialComponent from '../TestimonialComponent.vue';
         },
         components: {
           BoxComponent,
-          TestimonialComponent
+          TestimonialComponent,
+          RestaurantListComponent,
+          Slider1Component
 
         }
     }
@@ -43,10 +47,14 @@ import TestimonialComponent from '../TestimonialComponent.vue';
 <template>
     <main>
 
-        
+        <div>
+            <routerLink :to="{name:'restaurant.index'}">
+                RESTAURANT
+            </routerLink>
+        </div>
 
         <!--SEZIONE 1 - RICERCA RISTORANTI-->
-        <section class="my-2"> <!-- JUMBOTRON -->
+        <section class="my-4"> <!-- JUMBOTRON -->
                 <div class="container">
                    <div class="jumbotron">
                         <div class="text-jumbo">
@@ -64,43 +72,18 @@ import TestimonialComponent from '../TestimonialComponent.vue';
                    </div>
                 </div>   
             </section>
-            
-            <section class="my-5"> <!-- CATEGORIE -->
-                <div class="container">
-                    <div class="text-center title-section">
-                        <h2>Le Nostre Categorie <span>Popolari</span></h2>
-                    </div>
 
-                    <div class="category-card">
-                        <div>
-                            <i class="fa-solid fa-burger"></i>
-                            <span>Americano</span>
-                        </div>
-                        <div>
-                            <i class="fa-solid fa-pizza-slice"></i>
-                            <span>Pizza</span>
-                        </div>
-                        <div>
-                            <i class="fa-solid fa-bowl-food"></i>
-                            <span>Sushi</span>
-                        </div>
-                        <div>
-                            <i class="fa-solid fa-bacon"></i>
-                            <span>BBQ</span>
-                        </div>
-                        <div>
-                            <i class="fa-solid fa-pepper-hot"></i>
-                            <span>Messicano</span>
-                        </div>
-                    </div>
-                </div>
+            <section>
+                <Slider1Component/>
             </section>
+            
+            
         <!--FINE SEZIONE 1-->
 
-
+        <RestaurantListComponent/>   
 
         <!--INIZIO SEZIONE 4 - PERCHE' SCEGLIERCI -->
-        <section class="mb-4">
+        <section class="my-4">
                 <div class="container">
                     <div class="why-choose">
                         <div class="img-why">
@@ -136,7 +119,7 @@ import TestimonialComponent from '../TestimonialComponent.vue';
             </section>
             <!--FINE SEZIONE 4-->
             
-            <TestimonialComponent />
+            <TestimonialComponent/>
             
             <!--INIZIO SEZIONE 5 - FAQ-->
         <section>
@@ -191,13 +174,6 @@ import TestimonialComponent from '../TestimonialComponent.vue';
             </div>
         </section>
         <!--FINE SEZIONE 5-->
-
-       
-
-
-
-        
-
 
     </main>
   </template>
@@ -256,88 +232,6 @@ import TestimonialComponent from '../TestimonialComponent.vue';
         };
     }
 }
-
-
-
-
-.title-section{
-    h2{
-        font-weight: 600;
-        font-size: 40px;
-    }
-
-    span{
-        color: #f14647;
-    }
-}
-
-
-
-.category-card{
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    
-
-
-    div:first-child{
-        background-color: #f14647;
-        cursor: pointer;
-        span{
-            background-color: #f14647;
-            color: white;
-        }
-        
-        i{
-            background-color: #f14647;
-            color: white;
-        }
-        
-    }
-
-    >*{
-        background-color: white;
-        padding: 10px 10px;
-        width: calc(100% / 5 - 20px);
-        margin: 10px;
-        color:#1f272d;
-        border-radius: 5px;
-        -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
-        box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
-
-        i{
-            font-size: 20px;
-        }
-
-        span{
-            background-color: white;
-            margin-left: 10px;
-            font-size: 20px;
-            font-weight: 600; 
-        }
-    }
-    
-    div:hover:not(div:first-child){
-        background-color: #f14647;
-        cursor: pointer;
-
-        i{
-            background-color: #f14647;
-            color: white;
-        }
-
-        span{
-            background-color: #f14647;
-            color: white;
-        }
-    }
-
-    
-}
-
-
-
 
 //FINE CSS SEZIONE 1
 

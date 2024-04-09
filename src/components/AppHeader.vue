@@ -12,7 +12,10 @@
         };
         },
         methods:{
-            
+            countCart(){
+                const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+
+            } 
 
         }
     }
@@ -40,17 +43,20 @@
             <!-- link visibile solo su dispositivi lg e superiori -->
            <ul class="navbar-nav d-none d-lg-flex flex-row">
                  <!-- link -->
-                <li class="nav-item">
-                    <a class="nav-link" href="lavora con noi">Lavora con noi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="carrello">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                    </a>
-                </li>
+                
+                 <router-link :to="{ name: 'LavoraConNoi.index' }" class="router-link lavora-con-noi-link">
+                    Lavora con noi
+                </router-link>
+
+                <!-- Bottone "Login" -->
+                
+                <a class="btn btn-danger text-white " href="http://127.0.0.1:8000/login">Login</a>
+
+                <!-- Link "Carrello" -->
+                <a href="carrello" class="nav-link cart-link">
+                    {{ countCart() }}
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </a>
             </ul>
         </div>
         
@@ -70,7 +76,7 @@
                     <a class="nav-link" href="lavora con noi">Lavora con noi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
+                    <a class="nav-link" href="#">Login</a>
                 </li>
             </ul>
 
@@ -112,15 +118,53 @@ header {
 .navbar-nav {
     display: flex;
     justify-content: flex-end; 
+
+    button{
+        background-color:#f14647;
+        margin-right: 20px;
+        padding: 10px 20px;
+        color: white;
+        font-weight: 600;
+    }
 }
 
 .nav-item {
     margin-left: 10px;
 }
 
+
 a{
-    color:black;
+    color: black;
 }
+
+
+
+/* Stile per il link "Carrello" */
+.cart-link {
+    color: #000; 
+    text-decoration: none; 
+    font-size: 20px; 
+}
+
+/* Effetto hover per i link */
+.nav-link:hover, button:hover {
+    opacity: 0.8; 
+}
+
+/* Stile per il link "Lavora con noi" */
+.lavora-con-noi-link {
+    color: #1f272d; 
+    text-decoration: none; 
+    font-weight: bold; 
+    margin-right: 20px; 
+    line-height: 40px;
+}
+
+/* Effetto hover per il link */
+.lavora-con-noi-link:hover {
+    opacity: 0.8; 
+}
+
 
 
 

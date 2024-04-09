@@ -5,64 +5,45 @@ import {store} from '../../store.js';
 export default {
     data() {
         return {
-            items: [], 
-            restaurantId: 0, 
-            restaurant: {}, 
-            dishes: {},
-           // this.store.cartItems: [], // Aggiungi questa proprietà per tenere traccia degli elementi nel carrello
-            totalCost: 0, // Totale dei costi nel carrello
-            store
+            store,
+            totalCost: 0,
+            dishes:{}
         };
     },
-    created() {
-        this.getAllDishesForRestaurant();
-    },
     methods: {
-        getAllDishesForRestaurant() {
-            axios.get(`http://127.0.0.1:8000/api/dishes?restaurant_id=${this.restaurantId}`)
-                .then((res) => {
-                    console.log(res);
-                    this.items = res.data.data.foods.data;
-                    
-                    if (this.items.length > 0) {
-                        this.restaurant = this.items[5].user;
-                    }
-                })
-                .catch((error) => {
-                    console.error('Errore durante il recupero dei piatti:', error);
-                });
+        //chiamata api che mi preleva i piatti con il parametro
+        //name del ristorante 
+        getAllDishes() {
+            
+            axios.get('http://127.0.0.1:8000/api/dishes',{
+                params:{
+                    name: this.store.restaurantActive['resturant_name']
+                }
+            })
+            .then((res) => {
+                this.dishes = res.data.data.foods;
+                console.log(this.dishes);
+            })
+            .catch((error) => {
+                console.log('Recupero paitti non riuscito errrore: '.error)
+            })
         },
-// Aggiunge un elemento al carrello
+        //funzione che prende come argomento il piatto e lo aggiunge al carrello
         addToCart(item) {
+            //controllo se il piatto è già stato inserito all'interno del carrello
             const existingItem = this.store.cartItems.find(cartItem => cartItem.id === item.id);
+            //se  il piatto è già presente incremento la quantità
             if (existingItem) {
                 existingItem.quantity++;
             } else {
-                // Aggiungi l'URL dell'immagine al nuovo elemento del carrello
+                //significa che il piatto non è presente
+                //quindi creo un nuovo oggetto partendo da dish ed aggiungendo l'immagine
                 const newItem = { ...item, quantity: 1, imageUrl: 'http://127.0.0.1:8000/storage/' + item.image };
                 this.store.cartItems.push(newItem);
             }
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems))
             this.calculateTotalCost();
         },
-        // Rimuove un elemento dal carrello
-        removeFromCart(index) {
-            const itemPrice = this.store.cartItems[index].price * this.store.cartItems[index].quantity;
-            this.store.cartItems.splice(index, 1);
-            this.totalCost -= itemPrice;
-        },
-        // Incrementa la quantità di un elemento nel carrello
-        incrementQuantity(index) {
-            this.store.cartItems[index].quantity++;
-            this.calculateTotalCost();
-        },
-        // Decrementa la quantità di un elemento nel carrello
-        decrementQuantity(index) {
-            if (this.store.cartItems[index].quantity > 1) {
-                this.store.cartItems[index].quantity--;
-                this.calculateTotalCost();
-            }
-        },
-        // Calcola il totale dei costi nel carrello
         calculateTotalCost() {
             let total = this.store.totalCostSave;
 
@@ -75,21 +56,56 @@ export default {
 
                 // Aggiungi il costo totale di questo elemento al costo totale complessivo
                 total += itemTotalCost;
-                console.log(item);
             }
 
             // Assegna il costo totale calcolato alla proprietà totalCost
-            this.totalCost = total;
+            this.totalCost = total.toFixed(2);
         },
-        
-        vaiAlPagamento() {
-        // Reindirizza l'utente all'URL desiderato
-        window.location.href = 'http://localhost:3000/';
-    },
-    },
+            // Incrementa la quantità di un elemento nel carrello
+        incrementQuantity(index) {
+            this.store.cartItems[index].quantity++;
 
+            // aggiorno la quantità del carrello anche nel localstorage (cartItems)
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+            this.calculateTotalCost();
+        },
+        // Decrementa la quantità di un elemento nel carrello
+        decrementQuantity(index) {
+            if (this.store.cartItems[index].quantity > 1) {
+                this.store.cartItems[index].quantity--;
+                
+                // aggiorno la quantità del carrello anche nel localstorage (cartItems)
+                localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+                this.calculateTotalCost();
+            }
+        },
+        // Rimuove un elemento dal carrello
+        removeFromCart(index) {
+            const itemPrice = this.store.cartItems[index].price * this.store.cartItems[index].quantity;
+            this.store.cartItems.splice(index, 1);
+            this.totalCost -= itemPrice.toFixed(2);
+        },
+        emptyCart() {
+        //svuoto il localStorage
+        localStorage.clear();
+        //svuoto il carrello 
+        this.store.cartItems = [];
+        // Ricalcolo del costo totale
+        this.calculateTotalCost();
+    },
+    },
+    created() {
+        //recupero del carrello salvato nello storage
+        const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        if (savedCartItems) {
+            this.store.cartItems = savedCartItems;
+        }
+
+        this.getAllDishes();
+        this.calculateTotalCost();
+    },
     mounted(){
-        console.log(this.store.cartItems);
+
     }
 }
 </script>
@@ -107,22 +123,21 @@ export default {
                 <div class="center-block text-center col-lg-8 col-md-12">
                     <!-- blocco descrizione ristorante -->
                     <div class="box-name-resturant">  
-                        <h1>{{ restaurant.resturant_name }}</h1>
-                        <p>Distanza: 1.31 km</p>
-                        <p>Chiude alle: 23:30</p>
-                        <p>Minimo d'ordine: 10,00 €</p>
-                        <p>Consegna a 1,75 €</p>
-                        <h5>indirizzo:{{ restaurant.address}}</h5>
+                        <h1>{{ store.restaurantActive['resturant_name']}}</h1>
+                        <div class="box-dx">
+                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ store.restaurantActive['resturant_image']" :alt="store.restaurantActive['resturant_name']">
+                        </div>
+                        <h5>indirizzo:{{ store.restaurantActive['address']}}</h5>
                     </div>
                     <!-- fine blocco descrizione ristorante -->
 
                     <!-- blocco piatti -->
                     <div class="container-fluid">
-                        <div v-for="item in items" :key="item.id" class="box-card col-md-12 col-lg-12 mb-2">
+                        <div v-for="dish in dishes" :key="dish.id" class="box-card col-md-12 col-lg-12 mb-2">
                             <div class="box-description">
-                                <h3 class="m-2">{{ item.name }}</h3>
+                                <h3 class="m-2">{{ dish.name }}</h3>
                                 <h5 class="d-none d-sm-none  d-none d-md-none">ingredienti:</h5>
-                                <h4 class="m-2 d-none d-sm-none d-md-none d-lg-block">{{ item.ingredients }}</h4>
+                                <h4 class="m-2 d-none d-sm-none d-md-none d-lg-block">{{ dish.ingredients }}</h4>
                                 <div class="accordion accordion-flush d-md-block d-lg-none p-1" id="accordionFlushExample">
                                     <div class="accordion-item">
                                         <p class="accordion-header ">
@@ -133,17 +148,17 @@ export default {
                                         <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body">
                                                 <ul class="ingredient-list">
-                                                    <li>{{ item.ingredients }}</li>
+                                                    <li>{{ dish.ingredients }}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <h6 class="ms-2">{{ item.price }}€</h6>
-                                <button type="button" class="btn btn-primary mb-3 ms-2" @click="addToCart(item)">aggiungi</button>
+                                <h6 class="ms-2">{{ dish.price }}€</h6>
+                                <button type="button" class="btn btn-primary mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
                             </div>
                             <div class="box-dx">
-                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ item.image" alt="">
+                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ dish.image" :alt="dish.name">
                             </div>
                         </div>
                     </div>
@@ -157,7 +172,6 @@ export default {
                         <h3>Il tuo ordine</h3>
                         <div class="cart-items">
                             <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
-                                <!-- Immagine del prodotto -->
                                 <div>
                                     <button class="button-delete me-1" @click="removeFromCart(index)">
                                         <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
@@ -182,8 +196,13 @@ export default {
                             <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
                             <p v-else>Il carrello è vuoto</p>
                         </div>
-                        <div>
-                            <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
+                        <div class="d-flex justify-content-between ">
+                            <div>
+                                <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
+                            </div>
+                            <div v-if="this.store.cartItems.length > 0">
+                                <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,10 +210,7 @@ export default {
             </div>
         </div>
     </div>
-    <h1>
-        {{ this.store.cart }}
-        
-    </h1>
+
 </template>
        
 
