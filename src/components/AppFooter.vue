@@ -41,7 +41,7 @@
                 <!--1 blocco App-->
                 <div class="col-lg-4 col-md-12 col-sm-12 mt-md-3 mt-sm-3" v-for="(elem, i) in downloadApp" :key="i">
                     <h3>{{ elem.title }}</h3>
-                    <div class="d-flex justify-content-center  mt-md-3 mt-sm-3">
+                    <div class="d-flex justify-content-center  mt-md-2 mt-sm-2">
                         <div>
                             <a href="#">
                                 <img :src="elem.img" alt="">
@@ -52,7 +52,7 @@
                 <!--fine 1 blocco-->
                 
                 <!--2 blocco feedback-->
-                <div class="col-lg-4 col-md-12 col-sm-12 mt-md-3 mt-sm-3" v-for="(elem, i) in feedback" :key="i">
+                <div class="col-lg-4 col-md-12 col-sm-12 mt-md-3 mt-sm-3 feedbackDiv" v-for="(elem, i) in feedback" :key="i">
                     <h3>
                         {{ elem.title}}
                     </h3>
@@ -96,8 +96,16 @@
 
         i{
             margin-right: 10px;
-        }
-        
+        }   
     }
+
+
+
+/* Nascondi il div del feedback solo su smartphone e tablet */
+@media only screen and (max-width: 991px) {
+    .feedbackDiv {
+        display: none;
+    }
+}
 
 </style>
