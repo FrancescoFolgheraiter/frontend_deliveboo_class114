@@ -28,6 +28,7 @@ export default {
       if (this.types.length > 0) {
         this.getRestaurant();
       }
+      console.log('Tipologie selezionate: '+this.types)
     },
     //funzione per recupeare i ristoranti di quel tipo
     getRestaurant(){
@@ -81,11 +82,10 @@ export default {
                 <p>
                   {{ restaurant['address'] }}
                 </p>
+                <div class="container-img-rest">
+                  <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ restaurant.resturant_image" :alt="restaurant.name">
+                </div>
                 <div class = "__type">
-                  <span href = "#Italian">Italian</span>
-                  <span href = "#Vegetarian">Vegetarian</span>
-                  <span href = "#Pizza">Pizza</span>
-                  <span href = "#off">10%</span>
                 </div>
               </div>
             </a>
@@ -99,6 +99,16 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.container-img-rest{
+  height:100%;
+  width:100px;
+  img{
+    border-radius: 50%;
+    overflow: hidden;
+    width:100%;
+  }
+}
+
 .__area {
   font-family: 'Cairo', sans-serif;
   color: #7c7671;
