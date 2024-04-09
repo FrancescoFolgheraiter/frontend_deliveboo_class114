@@ -340,7 +340,7 @@ h1 {
     border-radius: 10px;
     -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
     box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
-    width: auto;
+    width: 100%;
     background-color: white;
     transition: all 0.5s ease;
     
@@ -348,13 +348,13 @@ h1 {
 
 
 
-.box-card:hover {transform: translateY(-5px); /* Sposta leggermente verso l'alto al passaggio del mouse */
-        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+.box-card:hover { /* Sposta leggermente verso l'alto al passaggio del mouse */
+        box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.2);
 } 
 
 
 .box-dx {
-    width: 150px;
+    width: 20%;
     height: 150px;
     
     border-radius: 5px;
@@ -372,6 +372,7 @@ h1 {
 .box-description {
     text-align: start; // Aggiunto per centrare il testo
     padding: 20px;
+    width: 80%;
     
 }
 
