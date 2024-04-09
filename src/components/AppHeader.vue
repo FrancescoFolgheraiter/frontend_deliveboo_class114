@@ -12,7 +12,10 @@
         };
         },
         methods:{
-            
+            countCart(){
+                const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+
+            } 
 
         }
     }
@@ -47,10 +50,11 @@
 
                 <!-- Bottone "Login" -->
                 
-                <button class="btn">Login</button>
+                <a class="btn btn-danger text-white " href="http://127.0.0.1:8000/login">Login</a>
 
                 <!-- Link "Carrello" -->
                 <a href="carrello" class="nav-link cart-link">
+                    {{ countCart() }}
                     <i class="fa-solid fa-bag-shopping"></i>
                 </a>
             </ul>
@@ -72,7 +76,7 @@
                     <a class="nav-link" href="lavora con noi">Lavora con noi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
+                    <a class="nav-link" href="#">Login</a>
                 </li>
             </ul>
 
