@@ -8,32 +8,46 @@ export default {
   data() {
     return {
       restaurantList: [],
-      type: '',
-      ristoFilter :[],
-      isClicked: false,
+      types: [],
+      allTypes:[],
       store,
     };
   },
   methods:{
-    setValueType(value){
-      this.type = value
-      this.ristoFilter = this.restaurantList.filter((oggetto)=> oggetto.name === this.type)    
-      console.log(this.ristoFilter[0]['users'])
-      this.isClicked = true
+    setValueType(value) {
+      const index = this.types.indexOf(value);
+      // Se il valore è presente in types lo rimuovo
+      if (index !== -1) {
+        this.types.splice(index, 1);
+      } else {
+        // Se il valore non è presente in types lo aggiungo
+        this.types.push(value);
+      }
+      //Verifica se  types contiene almeno un elemento
+      //e in caso effettuo la chiamata API
+      if (this.types.length > 0) {
+        this.getRestaurant();
+      }
     },
-    valuedRestaurantName(valueName){
-      this.store.restaurantActive = valueName
-      console.log(this.store.restaurantActive)
+    //funzione per recupeare i ristoranti di quel tipo
+    getRestaurant(){
+      axios
+      .get('http://127.0.0.1:8000/api/types/restaurant',{
+        params:{
+          types:this.types
+        }
+      })
+      .then((response) =>{
+          this.restaurantList=response.data.data.types
+    })
     }
   },
   mounted(){
     axios
       .get('http://127.0.0.1:8000/api/types')
       .then((response) =>{
-          console.log(response)
-          this.restaurantList = response.data.data.types.data
-
-          console.log(this.restaurantList)
+          this.allTypes=response.data.data.types
+          console.log(this.allTypes)
     })
 }
 };
@@ -48,24 +62,24 @@ export default {
       </div>
 
       <div class="category-card">
-            <div v-for="types in restaurantList">
-              <button type="submit" @click="setValueType(types.name)">{{ types.name }}</button>
+            <div v-for="category in allTypes">
+              <button type="submit" @click="setValueType(category.name)">{{ category.name }}</button>
             </div>
       </div>
   </div>
 </section>
 
     <div class="container">
-      <div class="cont-section row p-3" v-if="(isClicked)">
-         <div class = "__area col-4 gy-3" v-if="ristoFilter.length > 0 && ristoFilter[0].hasOwnProperty('users')" v-for="(typesOfRisto,i) in ristoFilter[0].users">
+      <div class="cont-section row p-3">
+         <div class = "__area col-4 gy-3" >
           <RouterLink :to="{name: 'restaurant.index'}"> 
-            <a class = "__card" @click="valuedRestaurantName(typesOfRisto)">
+            <a class = "__card" v-for="restaurant in restaurantList">
               <button class = "__favorit"><i class = "la la-heart-o"></i></button>
-              <img :src = "typesOfRisto.image" class="img-fluid __img"/>
+              <img src = "" class="img-fluid __img"/>
               <div class = "__card_detail text-left">
-                <h4>{{ typesOfRisto.resturant_name }}</h4>
+                <h4>{{restaurant['resturant_name']}}</h4>
                 <p>
-                  {{ typesOfRisto.address }}
+                  {{ restaurant['address'] }}
                 </p>
                 <div class = "__type">
                   <span href = "#Italian">Italian</span>
