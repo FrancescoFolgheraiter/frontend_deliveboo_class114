@@ -337,12 +337,16 @@ h4{
     }
 }
 
-@media(max-width: 767px){
+@media(max-width: 991px){
     .img-faq{
         img{
             display: none;
         }
     }
+}
+
+ul{
+    list-style: none;
 }
 
 

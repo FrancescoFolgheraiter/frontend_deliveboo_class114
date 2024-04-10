@@ -39,11 +39,10 @@ export default {
         <swiper
           :slidesPerView="4"
           :spaceBetween="400"
-          :freeMode="true"
           :modules="modules"
           :autoplay="{
-          delay: 1000,
-          disableOnInteraction: true,
+            delay:2000,
+            disableOnInteraction: false,
           }"
           :breakpoints="{
             '1024':{
@@ -55,7 +54,8 @@ export default {
               spaceBetween: 200,
             },
             '767':{
-              slidesPerView: 1
+              slidesPerView: 1,
+              spaceBetween: 100
             }
           }"
           class="mySwiper"
@@ -110,7 +110,6 @@ export default {
 
 
 .wrapper {
-	display: flex;
 	gap: 20px;
 	padding: 2% 0;
 }
@@ -121,6 +120,11 @@ export default {
 	width: 400px;
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+
+  @media(max-width:991px){
+    width: 100%;
+  }
+
 }
 .img-area {
 	width: 80px;
