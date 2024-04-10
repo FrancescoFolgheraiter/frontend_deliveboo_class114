@@ -84,7 +84,11 @@ export default {
 
 <style lang="scss" scoped>
 
-
+.swiper{
+  @media(max-width: 767px){
+    display: none;
+  }
+}
 
 
 
