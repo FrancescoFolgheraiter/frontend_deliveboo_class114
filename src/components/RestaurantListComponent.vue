@@ -73,23 +73,14 @@ export default {
     <div class="container">
       <div class="cont-section row p-3">
          <div class = "__area col-4 gy-3" >
-          <RouterLink :to="{name: 'restaurant.index'}"> 
-            <a class = "__card" v-for="restaurant in restaurantList">
-              <button class = "__favorit"><i class = "la la-heart-o"></i></button>
-              <img src = "" class="img-fluid __img"/>
-              <div class = "__card_detail text-left">
-                <h4>{{restaurant['resturant_name']}}</h4>
-                <p>
-                  {{ restaurant['address'] }}
-                </p>
-                <div class="container-img-rest">
-                  <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ restaurant.resturant_image" :alt="restaurant.name">
-                </div>
-                <div class = "__type">
-                </div>
-              </div>
-            </a>
-          </RouterLink>
+           <div v-for="restaurant in restaurantList">
+            <router-link :to="{ name: 'restaurant', params: {name: restaurant.resturant_name } }">
+              <h4>{{restaurant['resturant_name']}}</h4>
+              <p>
+                {{ restaurant['address'] }}
+              </p>
+            </router-link>
+            </div>
         </div> 
       </div>
     </div>

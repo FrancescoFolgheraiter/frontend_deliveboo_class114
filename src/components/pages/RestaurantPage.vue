@@ -7,22 +7,26 @@ export default {
         return {
             store,
             totalCost: 0,
-            dishes:{}
+            dishes:{},
+            user:[]
         };
     },
     methods: {
         //chiamata api che mi preleva i piatti con il parametro
-        //name del ristorante 
+        //name del ristorante
+        
         getAllDishes() {
-            
+            const resturantName = this.$route.params.name ;
+            console.log(resturantName)
             axios.get('http://127.0.0.1:8000/api/dishes',{
                 params:{
-                    name: this.store.restaurantActive['resturant_name']
+                    name: resturantName
                 }
             })
             .then((res) => {
                 this.dishes = res.data.data.foods;
-                console.log(this.dishes);
+                this.user = res.data.data.user;
+                console.log(this.user);
             })
             .catch((error) => {
                 console.log('Recupero paitti non riuscito errrore: '.error)
@@ -112,9 +116,7 @@ export default {
 
 <template>
 <div>
-    <routerLink :to="{name:'home'}">
-        HOME
-    </routerLink>
+
 </div>
 
     <div class="resturant-page">
@@ -123,11 +125,11 @@ export default {
                 <div class="center-block text-center col-lg-8 col-md-12">
                     <!-- blocco descrizione ristorante -->
                     <div class="box-name-resturant">  
-                        <h1>{{ store.restaurantActive['resturant_name']}}</h1>
+                        <h1>{{ user['resturant_name']}}</h1>
                         <div class="box-dx">
-                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ store.restaurantActive['resturant_image']" :alt="store.restaurantActive['resturant_name']">
+                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ user['resturant_image']" :alt="user['resturant_name']">
                         </div>
-                        <h5>indirizzo:{{ store.restaurantActive['address']}}</h5>
+                        <h5>indirizzo:{{ user['address']}}</h5>
                     </div>
                     <!-- fine blocco descrizione ristorante -->
 
@@ -141,7 +143,7 @@ export default {
                                 <div class="accordion accordion-flush d-md-block d-lg-none p-1" id="accordionFlushExample">
                                     <div class="accordion-item">
                                         <p class="accordion-header ">
-                                            <button class="accordion-button bg-primary text-white collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <button class="accordion-button text-white collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 INGREDIENTI
                                             </button>
                                         </p>
@@ -155,7 +157,7 @@ export default {
                                     </div>
                                 </div>
                                 <h6 class="ms-2">{{ dish.price }}€</h6>
-                                <button type="button" class="btn btn-primary mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
+                                <button type="button" class="btn color-button-aggiungi mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
                             </div>
                             <div class="box-dx">
                                 <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ dish.image" :alt="dish.name">
@@ -167,8 +169,8 @@ export default {
                 <!--fine Blocco ristorante -->
 
                 <!-- Blocco 2 - Carrello -->
-                <div class="col-lg-4 mb-4 col-12 col-sm-12">
-                    <div class="cart text-center width-cart-sm">
+                <div class="col-lg-4 mb-4 col-12 d-none d-lg-block">
+                    <div class="cart text-center width-cart-sm ">
                         <h3>Il tuo ordine</h3>
                         <div class="cart-items">
                             <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
@@ -178,10 +180,64 @@ export default {
                                     </button>
                                 </div>
                                 <div class="width-cart-img">
-                                    <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image w-100">
+                                    <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image">
                                 </div>
                                 <div>
-                                    <p>{{cartItem.name }}</p>
+                                    <p class="cart-p-width">{{cartItem.name }}</p>
+                                    <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
+                                    <div>
+                                        <button class="btn" @click="decrementQuantity(index)">-</button>
+                                        Tot: {{ cartItem.quantity }}
+                                        <button class="btn me-1" @click="incrementQuantity(index)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
+                            <p v-else>Il carrello è vuoto</p>
+                        </div>
+                        <div class="d-flex justify-content-between " v-if="this.store.cartItems.length > 0">
+                            <div>
+                                <button class="btn btn-success " >Paga</button>
+                            </div>
+                            <div >
+                                <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blocco 2 - fine - Carrello -->
+            </div>
+
+           <!-- blocco 3 offcanvas -->
+
+           <button class="btn sticky-bottom color-button-offcanvas d-block d-lg-none w-100  mt-5 mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+             il tuo carrello
+           </button>
+
+            <div class="offcanvas offcanvas-bottom d-block h-100 d-lg-none" data-bs-backdrop="static" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="staticBackdropLabel">carrello</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body  d-block d-lg-none">
+
+                    <div class="carta text-center h-100 ">
+                        <h3>Il tuo ordine</h3>
+                        <div class="cart-items">
+                            <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item">
+                                <div>
+                                    <button class="button-delete me-1" @click="removeFromCart(index)">
+                                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                    </button>
+                                </div>
+                                <div class="width-cart-img">
+                                    <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image ">
+                                </div>
+                                <div>
+                                    <p class="cart-p-width">{{cartItem.name }}</p>
                                     <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
                                     <div>
                                         <button class="btn" @click="decrementQuantity(index)">-</button>
@@ -205,8 +261,8 @@ export default {
                             </div>
                         </div>
                     </div>
+                    
                 </div>
-                <!-- Blocco 2 - fine - Carrello -->
             </div>
         </div>
     </div>
@@ -224,7 +280,6 @@ export default {
 .resturant-page{
     background-color: #f7f7f7ea;
 }
-
 
 
 .box-name-resturant {
@@ -285,23 +340,24 @@ h1 {
     border-radius: 10px;
     -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
     box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
-    width: auto;
+    width: 100%;
+    width: 100%;
     background-color: white;
     transition: all 0.5s ease;
+    
     
 }
 
 
 
-.box-card:hover {transform: translateY(-5px); /* Sposta leggermente verso l'alto al passaggio del mouse */
+.box-card:hover { /* Sposta leggermente verso l'alto al passaggio del mouse */
         box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
 } 
 
 
 .box-dx {
-    width: 150px;
     height: 150px;
-    
+    width: 20%;
     border-radius: 5px;
     object-fit: contain;
     overflow: hidden; /* Per rimuovere il bordo impercettibile */
@@ -317,14 +373,21 @@ h1 {
 .box-description {
     text-align: start; // Aggiunto per centrare il testo
     padding: 20px;
+    width: 80%;
     
 }
 
 
+
+
 //CSS CARRELLO
 
+.cart-p-width{
+    width: 200px;
+}
+
 .cart {
-    padding: 20px;
+    padding: 10px;
     margin-top: 30px;
     border-radius: 20px;
     border: 3px solid white;
@@ -333,6 +396,7 @@ h1 {
 
     h3 {
         color: rgb(241, 70, 71);
+        padding: 10px;
     }
 
     .cart-items {
@@ -380,10 +444,14 @@ h1 {
             border: 1px solid red;
             background-color: rgb(242, 70, 70);
             color: white;
+            margin-right: 3px;
         }
 
         .width-cart-img{
-            width: 115px;
+            width: 60%;
+        }
+        .cart-item-image {
+            width: 100px;
         }
     }
 }
@@ -435,12 +503,93 @@ h1 {
   }
 
   .button-delete {
-    margin-bottom: 10px; 
+    position: relative;
+    right: 100px;
+    top: 50px;
   }
 
   .width-cart-img{
     margin-bottom: 5px;
+    
   }
+  
+}
+
+// OFFCANVAS
+.color-button-offcanvas, .accordion-button, .color-button-aggiungi{
+    background-color: rgb(241, 70, 71);
+    color: white
+}
+
+.carta {
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 20px;
+    border: 3px solid white;
+    
+    
+
+    h3 {
+        color: rgb(241, 70, 71);
+    }
+
+    .cart-items {
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: scroll;
+        max-height: 300px;
+
+        &::-webkit-scrollbar{
+            display: none
+        }
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        padding: 10px;
+        background-color: #f7f7f7ea;
+        border-radius: 10px;
+        margin-bottom: 5px;
+
+        &:hover {
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        p {
+            margin: 0;
+        }
+
+        button {
+            margin-left: 5px;
+            border-radius: 50px;
+            height: 24px;
+            width: 24px;
+            padding: 1px;
+            background-color: rgb(26, 135, 84);
+            color: white;
+        }
+
+        .button-delete{
+            width: 24px;
+            height: auto;
+            border-radius: 50px;
+            border: 1px solid red;
+            background-color: rgb(242, 70, 70);
+            color: white;
+        }
+
+        .width-cart-img{
+            width: 30%;
+        }
+        .cart-item-image {
+            width: 100%;
+        }
+        
+    }
 }
 
 

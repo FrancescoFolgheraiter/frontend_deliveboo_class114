@@ -13,18 +13,18 @@ const router = createRouter({
       component: IndexPage 
     },
     {
-      path: '/restaurant',
-      name: 'restaurant.index',
+      path: '/restaurant/:name',
+      name: 'restaurant',
       component: RestaurantPage
     },
     {
       path: '/payment',
-      name: 'payment.index',
+      name: 'payment',
       component: PaymentPage
     },
     {
-      path: '/LavoraConNoi',
-      name: 'LavoraConNoi.index',
+      path: '/lavora-con-noi',
+      name: 'lavora-con-noi',
       component: LavoraConNoiPage
     }
   ]

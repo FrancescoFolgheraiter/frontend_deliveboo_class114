@@ -44,7 +44,7 @@
            <ul class="navbar-nav d-none d-lg-flex flex-row">
                  <!-- link -->
                 
-                 <router-link :to="{ name: 'LavoraConNoi.index' }" class="router-link lavora-con-noi-link">
+                 <router-link :to="{ name: 'lavora-con-noi' }" class="router-link lavora-con-noi-link">
                     Lavora con noi
                 </router-link>
 
