@@ -198,10 +198,11 @@ export default {
                             <p v-if="this.store.cartItems.length > 0">Totale: {{ totalCost }}€</p>
                             <p v-else>Il carrello è vuoto</p>
                         </div>
-                        <div class="d-flex justify-content-between ">
+                        <div class="d-flex justify-content-between " v-if="this.store.cartItems.length > 0">
                             <div>
+                                <button class="btn btn-success " >Paga</button>
                             </div>
-                            <div v-if="this.store.cartItems.length > 0">
+                            <div >
                                 <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
                             </div>
                         </div>
