@@ -159,7 +159,7 @@ import Slider1Component from '../Slider1Component.vue';
                         </div>
 
                         <div class="col-lg-6">
-                            <div>
+                            <div class="img-faq">
                                 <img class="w-100" src="/img/foto5.png" alt="">
                             </div>
                         </div>
@@ -185,11 +185,22 @@ import Slider1Component from '../Slider1Component.vue';
     >*{
         width: calc(100% / 2);
     }
-    
 
+    @media(max-width: 767px){
+        width:100%;
+        display: block;
+    }
+    
     .text-jumbo{
        padding: 20px;
-       margin-right: 10px; 
+       margin-right: 10px;
+    
+       @media(max-width: 767px){
+        width: 100%;
+       }
+
+
+
 
        p{
         font-size: 20px;
@@ -225,6 +236,16 @@ import Slider1Component from '../Slider1Component.vue';
             width: 80%;
         };
     }
+
+    @media(max-width:767px){ 
+        .img-jumbo{
+            img{
+                display: none;
+            }
+        }
+    }
+
+
 }
 
 //FINE CSS SEZIONE 1
@@ -313,6 +334,14 @@ h4{
 
     .background-h2-faq{
         background-color: rgb(242, 212, 90);
+    }
+}
+
+@media(max-width: 767px){
+    .img-faq{
+        img{
+            display: none;
+        }
     }
 }
 
