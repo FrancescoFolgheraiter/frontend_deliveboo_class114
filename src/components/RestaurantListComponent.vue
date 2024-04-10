@@ -11,6 +11,7 @@ export default {
       types: [],
       allTypes:[],
       store,
+      selectedCategories: []
     };
   },
   methods:{
@@ -41,7 +42,25 @@ export default {
       .then((response) =>{
           this.restaurantList=response.data.data.types
     })
+    },
+    toggleButton(types){
+      // Cerca l'indice della categoria nella lista delle categorie selezionate
+      const index = this.selectedCategories.indexOf(types);
+
+      // Se la categoria non è ancora stata selezionata, aggiungila alla lista
+      if (index === -1){
+        this.selectedCategories.push(types);
+      }
+      else{
+        // Se la categoria è già stata selezionata, rimuovila dalla lista
+        this.selectedCategories.splice(index, 1)
+      }
+     
+    },
+    isSelected(types){
+      return this.selectedCategories.includes(types);
     }
+
   },
   mounted(){
     axios
@@ -63,48 +82,52 @@ export default {
       </div>
 
       <div class="category-card">
-            <div v-for="category in allTypes">
-              <button type="submit" @click="setValueType(category.name)">{{ category.name }}</button>
-            </div>
-      </div>
+        <div v-for="category in allTypes" class="">
+          <button :class="{clicked: isSelected(category.name) , btn: true}" type="submit" @click="setValueType(category.name), toggleButton(category.name)">{{ category.name }}</button>
+        </div> 
+      </div>  
   </div>
 </section>
 
     <div class="container">
-      <div class="cont-section row p-3">
-         <div class = "__area col-4 gy-3" >
-           <div v-for="restaurant in restaurantList">
-            <router-link :to="{ name: 'restaurant', params: {name: restaurant.resturant_name } }">
-              <h4>{{restaurant['resturant_name']}}</h4>
-              <p>
-                {{ restaurant['address'] }}
-              </p>
-            </router-link>
-            </div>
-        </div> 
+      <div class="cont-section p-3" v-if="restaurantList.length > 1">
+         <div class = "__area row " >
+            <div class = "__card col-md-4 col-xl-6 col-12 justify-content-center justify-content-xl-start mx-xl-3 my-2" v-for="restaurant in restaurantList">
+              <router-link :to="{ name: 'restaurant', params: {name: restaurant.resturant_name } }">
+                <img :src="'http://127.0.0.1:8000/storage/'+ restaurant.resturant_image" class="img-fluid __img"/>
+                <div class = "__card_detail text-left">
+                  <h4>{{ restaurant.resturant_name }}</h4>
+                  <p>
+                      {{ restaurant.address }}
+                  </p>
+                  <div class = "__type">
+                      <span href = "#Italian">Italian</span>
+                      <span href = "#Vegetarian">Vegetarian</span>
+                      <span href = "#Pizza">Pizza</span>
+                      <span href = "#off">10%</span>
+                  </div>
+                </div>              
+              </router-link>
+            </div>          
+          </div> 
       </div>
     </div>
 
 
-    
+
 </template>
 
 <style lang="scss" scoped>
-.container-img-rest{
-  height:100%;
-  width:100px;
-  img{
-    border-radius: 50%;
-    overflow: hidden;
-    width:100%;
-  }
-}
-
 .__area {
   font-family: 'Cairo', sans-serif;
   color: #7c7671;
   /* margin-top: 100px */
 }
+
+a{
+  text-decoration: none;
+}
+
 
 .cont-section{
   display: flex;
@@ -226,78 +249,39 @@ export default {
 
 
 .category-card{
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    
+display: flex;
+justify-content: space-between;
 
-    div:first-child{
-        background-color: #f14647;
-        cursor: pointer;
-        button{
-            background-color: #f14647;
-            color: white;
-        }
-        
+  >*{
+    margin-top: 10px;
+  }
+
+  button{
+    background-color:rgb(226, 226, 226);
+    font-weight: 600;
+    white-space: nowrap;
+
+    &:hover{
+      background-color: #f14647;
+      color: white;
     }
+
+    &.clicked{
+      background-color: #f14647;
+      color: white;
+    }
+  }
+
+  @media(max-width: 991px){
+    flex-wrap: wrap;
+    justify-content: center;
 
     >*{
-        background-color: white;
-        padding: 10px 10px;
-        width: calc(100% / 5 - 20px);
-        margin: 10px;
-        color:#1f272d;
-        border-radius: 5px;
-        -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
-        box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
-
-        i{
-            font-size: 20px;
-        }
-
-        button{
-            background-color: white;
-            font-size: 20px;
-            font-weight: 600;
-            border: none;
-            text-align: center;
-        }
-
-        &:hover{
-          background-color: #f14647;
-          cursor: pointer;
-          
-          button{
-            background-color: #f14647;
-            cursor: pointer;
-            color: white;
-          }
-          
-          
-        }
+      flex-basis: 10%;
+      margin-top: 10px;
+      margin: 10px 10px;
     }
-    
-    
-
-   /*  form:hover{
-      background-color: #f14647;
-      button:hover{
-        background-color: #f14647;
-        cursor: pointer;
-
-        i{
-            background-color: #f14647;
-            color: white;
-        }
-
-        span{
-            background-color: #f14647;
-            color: white;
-        }
-    }
-    } */
-
+  }
     
 }
 
