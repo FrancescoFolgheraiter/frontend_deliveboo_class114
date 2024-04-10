@@ -42,8 +42,21 @@ export default {
           :freeMode="true"
           :modules="modules"
           :autoplay="{
-          delay: 2500,
-          disableOnInteraction: false,
+          delay: 1000,
+          disableOnInteraction: true,
+          }"
+          :breakpoints="{
+            '1024':{
+              slidesPerView:4,
+              spaceBetween:400
+            },
+            '991': {
+              slidesPerView: 2,
+              spaceBetween: 200,
+            },
+            '767':{
+              slidesPerView: 1
+            }
           }"
           class="mySwiper"
         >
@@ -98,8 +111,6 @@ export default {
 
 .wrapper {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
 	gap: 20px;
 	padding: 2% 0;
 }
@@ -166,15 +177,7 @@ export default {
 .rating span.active {
 	color: #fbc02d;
 }
-@media screen and (max-width: 767px) {
-	.wrapper {
-		flex-direction: column;
-		align-items: center;
-	}
-	.review-card {
-		width: 85%;
-	}
-}
+
 
 
 
