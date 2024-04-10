@@ -50,7 +50,7 @@
 
                 <!-- Bottone "Login" -->
                 
-                <a class="btn btn-danger text-white " href="http://127.0.0.1:8000/login">Login</a>
+                <a class="btn btn-danger text-white " href="http://127.0.0.1:8000">Login</a>
 
                 <!-- Link "Carrello" -->
                 <a href="carrello" class="nav-link cart-link">
