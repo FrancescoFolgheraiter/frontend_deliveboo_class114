@@ -34,19 +34,50 @@ export default {
         },
         //funzione che prende come argomento il piatto e lo aggiunge al carrello
         addToCart(item) {
-            //controllo se il piatto è già stato inserito all'interno del carrello
-            const existingItem = this.store.cartItems.find(cartItem => cartItem.id === item.id);
-            //se  il piatto è già presente incremento la quantità
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                //significa che il piatto non è presente
-                //quindi creo un nuovo oggetto partendo da dish ed aggiungendo l'immagine
-                const newItem = { ...item, quantity: 1, imageUrl: 'http://127.0.0.1:8000/storage/' + item.image };
+            //controllo se il carrello è vuoto
+            if (this.store.cartItems.length === 0) {
+                //controllo se il piatto è già stato inserito all'interno del carrello
+                const newItem = { ...item, quantity: 1, imageUrl: 'http://127.0.0.1:8000/storage/' + item.image, restaurant_name: this.user['resturant_name'] };
                 this.store.cartItems.push(newItem);
+                localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+                this.calculateTotalCost();
+            } else {
+                // controllo se il piatto appartiene al ristorante su cui mi trovo 
+                // mettendo a confronto this.store.cartItems (che ha restaurant_name) con this.user['resturant_name']
+                // che è il nome del ristorante. Se corrispondono mi restituisce true se no false
+                const restaurantCheck = this.store.cartItems.every(cartItem => cartItem.restaurant_name === this.user['resturant_name']);
+                if (restaurantCheck) {
+                    // se il ristorante del piatto nel carrello è lo stesso del ristorante attualmente visualizzato, aggiungo il piatto al carrello
+                    const existingItem = this.store.cartItems.find(cartItem => cartItem.id === item.id);
+                    //se il piatto è già presente incremento la quantità
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        //significa che il piatto non è presente
+                        //quindi creo un nuovo oggetto partendo da dish ed aggiungendo l'immagine
+                        const newItem = { ...item, quantity: 1, imageUrl: 'http://127.0.0.1:8000/storage/' + item.image, restaurant_name: this.user['resturant_name'] };
+                        this.store.cartItems.push(newItem);
+                    }
+                    localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
+                    this.calculateTotalCost();
+                } else {
+                    // se il carrello contiene piatti di un ristorante diverso, 
+                    // mostro il model
+                    this.showModal('Non puoi aggiungere piatti da un altro ristorante. Svuota il carrello prima di continuare.');
+                }
             }
-            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems))
-            this.calculateTotalCost();
+        },
+        //funzione che mi permette di mostrare un messaggio e di selezionare 
+        // il modal
+        showModal(message) {
+            document.getElementById('errorMessage').innerHTML = message;
+            document.getElementById('customModal').classList.add('show');
+            document.getElementById('customModal').style.display = 'block';
+        },
+        //funzione che mi permette di chiudere il modal tramite button o X
+        closeModal() {
+            document.getElementById('customModal').classList.remove('show');
+            document.getElementById('customModal').style.display = 'none';
         },
         calculateTotalCost() {
             let total = this.store.totalCostSave;
@@ -157,7 +188,9 @@ export default {
                                     </div>
                                 </div>
                                 <h6 class="ms-2">{{ dish.price }}€</h6>
-                                <button type="button" class="btn color-button-aggiungi mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
+                                <button type="button" class="btn color-button-aggiungi mb-3 ms-2" @click="addToCart(dish)">
+                                    aggiungi
+                                </button>
                             </div>
                             <div class="box-dx">
                                 <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ dish.image" :alt="dish.name">
@@ -167,7 +200,23 @@ export default {
                     <!-- fine blocco piatti -->
                 </div>
                 <!--fine Blocco ristorante -->
-
+                <!-- Modal che blocca l'aggiunta di un piatto di un ristorante diverso -->
+                <div class="modal fade" id="customModal" tabindex="-1" aria-labelledby="customModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-danger" id="customModalLabel">ATTENZIONE!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" @click="closeModal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="errorMessage"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal" @click="closeModal">Chiudi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Blocco 2 - Carrello -->
                 <div class="col-lg-4 mb-4 col-12 d-none d-lg-block">
                     <div class="cart text-center width-cart-sm ">
