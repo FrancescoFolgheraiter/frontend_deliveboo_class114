@@ -55,7 +55,7 @@ export default {
 </script>
 
 <template>
-
+  <section class="my-5">
     <div class="container">
       <swiper
         :slidesPerView="4"
@@ -77,6 +77,7 @@ export default {
       </swiper>
       
     </div>
+  </section>
 
 
     
@@ -84,7 +85,11 @@ export default {
 
 <style lang="scss" scoped>
 
-
+.swiper{
+  @media(max-width: 767px){
+    display: none;
+  }
+}
 
 
 
