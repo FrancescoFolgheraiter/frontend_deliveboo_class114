@@ -42,7 +42,7 @@
                 <ul>
                     <li>
                         <button class="btn btn-work">
-                            <a href="#">Lavora Con Noi</a>
+                            <a href="/lavora-con-noi">Lavora Con Noi</a>
                         </button>
                     </li>
                     <li>
