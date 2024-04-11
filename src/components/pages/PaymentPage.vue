@@ -78,6 +78,7 @@ export default {
     mounted() {
         const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
         this.total_price = parseFloat(localStorage.getItem('total_price'));
+        console.log(this.total_price)
         this.manipulateCartData(savedCartItems)
         this.setupBraintree();
   },

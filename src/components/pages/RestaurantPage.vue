@@ -102,7 +102,6 @@ export default {
             //prima lo converto in stringa e poi lo salvo
             const totalCostString = this.store.totalCostSave.toString();
             localStorage.setItem('total_price', totalCostString);
-            console.log(totalCostString)
         },
         // Incrementa la quantità di un elemento nel carrello
         incrementQuantity(index) {
