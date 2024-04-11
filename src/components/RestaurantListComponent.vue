@@ -41,12 +41,13 @@ export default {
             })
             .then((response) =>{
                 this.restaurantList=response.data.data.types
-                this.showNoResultMessage = this.restaurantList.length === 0
+                this.showNoResultMessage = this.restaurantList.length === 0 && this.types.length !== this.allTypes.length;
           })
 
           this.visibleRestaurant = false
         }
         else{
+          this.showNoResultMessage = this.restaurantList.length === 0 && this.types.length === this.allTypes.length;
           this.visibleRestaurant = true
           console.log(this.visibleRestaurant)
         }
@@ -63,6 +64,10 @@ export default {
       else{
         // Se la categoria è già stata selezionata, rimuovila dalla lista
         this.selectedCategories.splice(index, 1)
+      }
+
+      if (this.selectedCategories.length === 0 && !this.visibleRestaurant) {
+        this.showNoResultMessage = false;
       }
      
     },
@@ -130,7 +135,7 @@ export default {
       <div class="cont-section" v-if="(restaurantList.length < 1 && selectedCategories.length < 1) || visibleRestaurant == true">
         <div class="text-center bg-logo-placeholder">
           <div>
-            <img src="/public/img/NessunaCategoriaSelezionata.png" alt="">
+            <img src="/img/NessunaCategoriaSelezionata.png" alt="NessunaCategoriaSelezionata">
           </div>
         </div>
       </div>
@@ -138,7 +143,7 @@ export default {
       <div class="cont-section" v-if="showNoResultMessage">
         <div class="text-center bg-logo-placeholder">
           <div>
-            <img src="/public/img/NessunRistorante.png" alt="">
+            <img src="/img/NessunRistorante.png" alt="NessunRistorante">
           </div>
         </div>
       </div>
