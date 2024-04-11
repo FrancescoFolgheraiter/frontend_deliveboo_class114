@@ -61,7 +61,7 @@ import Slider1Component from '../Slider1Component.vue';
                         </div>
 
                         <div class="img-jumbo">
-                            <img src="/img/bgremove.png" alt="">
+                            <img src="/img/logoremove.png" alt="">
                         </div>
                    </div>
                 </div>   
@@ -77,7 +77,7 @@ import Slider1Component from '../Slider1Component.vue';
         <RestaurantListComponent/>   
 
         <!--INIZIO SEZIONE 4 - PERCHE' SCEGLIERCI -->
-        <section class="my-4">
+        <section class="my-5">
                 <div class="container">
                     <div class="why-choose">
                         <div class="img-why">
@@ -116,7 +116,7 @@ import Slider1Component from '../Slider1Component.vue';
             <TestimonialComponent/>
             
             <!--INIZIO SEZIONE 5 - FAQ-->
-        <section>
+        <section class="my-4">
             <div class="">
                 <div class="container">
                     <div class="row align-items-center m-0">
@@ -181,6 +181,8 @@ import Slider1Component from '../Slider1Component.vue';
     border-radius: 10px;
     -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
     box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
+    padding: 10px;
+    
 
     >*{
         width: calc(100% / 2);
@@ -233,7 +235,8 @@ import Slider1Component from '../Slider1Component.vue';
         padding: 10px;
         margin-right: 5px;
         img{
-            width: 80%;
+            width: 100%;
+            transform: scale(1.5);
         };
     }
 

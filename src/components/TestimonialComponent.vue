@@ -31,6 +31,7 @@ export default {
 
 <template>
 
+  <section class="mt-5">
     <div class="container">
       <div class="title-section text-center">
         <h4>Cosa Dicono <span>Di Noi</span></h4>
@@ -42,7 +43,6 @@ export default {
           :modules="modules"
           :autoplay="{
             delay:2000,
-            disableOnInteraction: false,
           }"
           :breakpoints="{
             '1024':{
@@ -88,14 +88,17 @@ export default {
         </swiper-slide>
         </swiper>
       </div>
-    </div>
+    </div> 
+  </section>
 
 
     
 </template>
 
 <style lang="scss" scoped>
-
+.swiper-button-rev, .swiper-button-next{
+  background-color: black;
+}
 .title-section{
   h4{
     font-weight: 600;
