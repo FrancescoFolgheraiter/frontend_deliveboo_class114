@@ -227,8 +227,8 @@ export default {
                     </div>
                 </div>
                 <!-- Blocco 2 - Carrello -->
-                <div class="col-lg-4 mb-4 col-12 d-none d-lg-block">
-                    <div class="cart text-center width-cart-sm ">
+                <div class="col-lg-4 mb-4 col-12 d-none d-lg-block block-cart">
+                    <div class="cart text-center width-cart-sm cart-sticky ">
                         <h3>Il tuo ordine</h3>
                         <div class="cart-items">
                             <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
@@ -336,7 +336,7 @@ export default {
 
 
 .resturant-page{
-    background-color: #f7f7f7ea;
+    background-color: #white;
 }
 
 
@@ -403,11 +403,7 @@ export default {
     display: none; 
 }
 
-.center-block {
-    overflow-y: scroll;
-    height: 700px;
-   
-}
+
 
 h1 {
     color: rgb(241, 70, 71);
@@ -462,6 +458,17 @@ h1 {
 
 
 //CSS CARRELLO
+
+.block-cart{
+    position: relative;
+
+    .cart-sticky{
+        position: sticky;
+        top: 20%;
+    }
+}
+
+
 
 .cart-p-width{
     width: 200px;
