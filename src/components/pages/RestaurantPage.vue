@@ -96,7 +96,11 @@ export default {
         this.store.cartItems = [];
         // Ricalcolo del costo totale
         this.calculateTotalCost();
-    },
+        },
+        // funzione apertura ingredienti 
+        toggleIngredient(dish) {
+        dish.isOpen = !dish.isOpen; // Inverti lo stato quando apri il pannello 
+        },
     },
     created() {
         //recupero del carrello salvato nello storage
@@ -125,11 +129,16 @@ export default {
                 <div class="center-block text-center col-lg-8 col-md-12">
                     <!-- blocco descrizione ristorante -->
                     <div class="box-name-resturant">  
-                        <h1>{{ user['resturant_name']}}</h1>
-                        <div class="box-dx">
-                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ user['resturant_image']" :alt="user['resturant_name']">
+
+                        <div class="box-dx-description ">
+                            <h1>{{ user['resturant_name']}}</h1>
+                            <h5 class="address-font">{{ user['address']}}</h5>
+                            <div class="img-restaurant">
+                              <img  class="" :src="'http://127.0.0.1:8000/storage/'+ user['resturant_image']" :alt="user['resturant_name']">
+                            </div>
                         </div>
-                        <h5>indirizzo:{{ user['address']}}</h5>
+                
+
                     </div>
                     <!-- fine blocco descrizione ristorante -->
 
@@ -138,16 +147,16 @@ export default {
                         <div v-for="dish in dishes" :key="dish.id" class="box-card col-md-12 col-lg-12 mb-2">
                             <div class="box-description">
                                 <h3 class="m-2">{{ dish.name }}</h3>
-                                <h5 class="d-none d-sm-none  d-none d-md-none">ingredienti:</h5>
-                                <h4 class="m-2 d-none d-sm-none d-md-none d-lg-block">{{ dish.ingredients }}</h4>
+                                <h5 class="d-none d-sm-none d-none d-md-none">ingredienti:</h5>
+                                <p class="m-2 d-none d-sm-none d-md-none d-lg-block">{{ dish.ingredients }}</p>
                                 <div class="accordion accordion-flush d-md-block d-lg-none p-1" id="accordionFlushExample">
                                     <div class="accordion-item">
-                                        <p class="accordion-header ">
-                                            <button class="accordion-button text-white collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <p class="accordion-header">
+                                            <button class="accordion-button text-white collapsed" type="button" @click="toggleIngredient(dish)" :aria-expanded="dish.isOpen" :aria-controls="'flush-collapse-' + dish.id">
                                                 INGREDIENTI
                                             </button>
                                         </p>
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <div :id="'flush-collapse-' + dish.id" class="accordion-collapse collapse" :class="{ 'show': dish.isOpen }" data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body">
                                                 <ul class="ingredient-list">
                                                     <li>{{ dish.ingredients }}</li>
@@ -160,7 +169,7 @@ export default {
                                 <button type="button" class="btn color-button-aggiungi mb-3 ms-2" @click="addToCart(dish)">aggiungi</button>
                             </div>
                             <div class="box-dx">
-                                <img class="imge-returant"  :src="'http://127.0.0.1:8000/storage/'+ dish.image" :alt="dish.name">
+                                <img class="imge-returant" :src="'http://127.0.0.1:8000/storage/' + dish.image" :alt="dish.name">
                             </div>
                         </div>
                     </div>
@@ -200,7 +209,7 @@ export default {
                         </div>
                         <div class="d-flex justify-content-between " v-if="this.store.cartItems.length > 0">
                             <div>
-                                <button class="btn btn-success " >Paga</button>
+                                <button class="btn btn-success ">Vai al pagamento</button>
                             </div>
                             <div >
                                 <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
@@ -214,12 +223,12 @@ export default {
            <!-- blocco 3 offcanvas -->
 
            <button class="btn sticky-bottom color-button-offcanvas d-block d-lg-none w-100  mt-5 mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
-             il tuo carrello
+            Il tuo carrello <span class="badge bg-primary">{{ store.cartItems.length }}</span>
            </button>
 
             <div class="offcanvas offcanvas-bottom d-block h-100 d-lg-none" data-bs-backdrop="static" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="staticBackdropLabel">carrello</h5>
+                    <h5 class="offcanvas-title" id="staticBackdropLabel">Carrello</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body  d-block d-lg-none">
@@ -285,38 +294,61 @@ export default {
 .box-name-resturant {
         font-family: 'Times New Roman', Times, serif;
         border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        
-        flex-direction: column;
         margin: auto;
         width: 100%;
+        display: flex;
+        justify-content: end;
         padding: 20px;
         margin-top: 15px;
+        height: 300px;
         margin-bottom: 15px;
-        background-color: #fff;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-        transition: all 0.5s ease; /* Animazione*/
-        align-items: start;
-    }
+        text-align: center;
+        background-image: linear-gradient(to right, rgba(255,255,255,0.5), rgba(255, 255, 255, 0.887)), url('/img/bgremove.png');
+        background-size: auto;
+        background-repeat: no-repeat;
+        background-position:unset;
+        
+}
 
-    .box-name-resturant:hover {
-        transform: translateY(-5px); /* Sposta leggermente verso l'alto al passaggio del mouse */
-        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
-    }
 
-    .box-name-resturant h1 {
-        color:rgb(13, 110, 273);
-        margin-bottom: 10px;
-        font-size: 44px; 
-    }
 
-    .box-name-resturant p {
-        color: #666;
-        margin-bottom: 5px;
-        font-size: 16px; 
-        align-items: start;
+/* Rimuovi il gradiente sui dispositivi più piccoli */
+@media (min-width: 769px) {
+    .box-name-resturant{
+        background-image: url('/img/bgremove.png');
     }
+}
+
+
+
+
+
+.box-dx-description{
+    text-align: end;
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+
+}
+
+
+
+.img-restaurant {
+    height: 150px;
+    width: 150px;
+    border-radius: 75px;
+    
+}
+.img-restaurant img {
+    width: 100%; /* Imposta la larghezza dell'immagine al 100% del contenitore */
+    height: 100%; /* Imposta l'altezza dell'immagine al 100% del contenitore */
+    object-fit: cover; /* Per mantenere l'aspect ratio e riempire completamente il contenitore */
+    border-radius: 75px;
+    position: relative;
+    left: 100px;
+    margin: 0;
+}
+
 
 .center-block::-webkit-scrollbar {
     display: none; 
@@ -357,7 +389,7 @@ h1 {
 
 .box-dx {
     height: 150px;
-    width: 20%;
+    width: 30%;
     border-radius: 5px;
     object-fit: contain;
     overflow: hidden; /* Per rimuovere il bordo impercettibile */
@@ -373,7 +405,7 @@ h1 {
 .box-description {
     text-align: start; // Aggiunto per centrare il testo
     padding: 20px;
-    width: 80%;
+    width: 70%;
     
 }
 
@@ -452,6 +484,8 @@ h1 {
         }
         .cart-item-image {
             width: 100px;
+            height: 100px;
+            object-fit: cover;
         }
     }
 }
@@ -513,6 +547,23 @@ h1 {
     
   }
   
+}
+
+@media (min-width: 300px) and (max-width: 520px) {
+    .address-font{
+        font-size: 15px;
+    }
+    
+}
+
+@media (min-width: 300px) and (max-width: 720px) {
+    
+    
+}
+@media (min-width: 300px) and (max-width: 445px) {
+    .address-font{
+        font-size: 10px;
+    }
 }
 
 // OFFCANVAS
@@ -587,6 +638,8 @@ h1 {
         }
         .cart-item-image {
             width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
         
     }
