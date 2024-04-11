@@ -5,13 +5,12 @@ export default {
     data() {
         return {
             //dati cliente
-            customer: {
-                firstName: '',
-                lastName: '',
-                address: '',
-                phoneNumber: '',
-                note:''
-            },
+            name: '',
+            surname: '',
+            address: '',
+            phoneNumber: '',
+            note:'',
+            total_price:10,
             dataOrder: [],
         };
     },
@@ -35,7 +34,7 @@ export default {
                 button.addEventListener('click', function () {
                     instance.requestPaymentMethod(function (err, payload) {
                         alert('pagamento effettuato')
-                        console.log(self.customer)
+                        self.loadDataOrder()
                     });
                 })
             });
@@ -53,15 +52,21 @@ export default {
             });
         },
         loadDataOrder(){
+
             axios.post('http://127.0.0.1:8000/api/orders',{
                     params:{
-                        name: resturantName
+                        note: this.note,
+                        total_price: this.total_price,
+                        name: this.name,
+                        surname: this.surname,
+                        address: this.address,
+                        phone_number: this.phoneNumber,
+                        order: this.dataOrder,
                     }
                 })
                 .then((res) => {
-                    this.dishes = res.data.data.foods;
-                    this.user = res.data.data.user;
-                    console.log(this.user);
+                    console.log(res);
+                    localStorage.clear();
                 })
                 .catch((error) => {
                     console.log('Recupero paitti non riuscito errrore: '.error)
@@ -73,7 +78,6 @@ export default {
     mounted() {
         const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
         this.manipulateCartData(savedCartItems)
-        console.log(savedCartItems)
         this.setupBraintree();
   },
 };
@@ -84,23 +88,23 @@ export default {
         <form class="p-5 m-5 bg-success-subtle" @submit.prevent="submitOrder">
             <div class="mb-3">
                 <label for="firstName" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="firstName" v-model="customer.firstName" required>
+                <input type="text" class="form-control" id="firstName" v-model="name" required>
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Cognome</label>
-                <input type="text" class="form-control" id="lastName" v-model="customer.lastName" required>
+                <input type="text" class="form-control" id="lastName" v-model="surname" required>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
-                <input type="text" class="form-control" id="address" v-model="customer.address" required>
+                <input type="text" class="form-control" id="address" v-model="address" required>
             </div>
             <div class="mb-3">
                 <label for="phoneNumber" class="form-label">Numero di telefono</label>
-                <input type="tel" class="form-control" id="phoneNumber" v-model="customer.phoneNumber" required>
+                <input type="text" class="form-control" id="phoneNumber" v-model="phoneNumber" required>
             </div>
             <div class="mb-3">
                 <label for="note" class="form-label">Note</label>
-                <textarea class="form-control" id="note" rows="3" v-model="customer.note"></textarea>
+                <textarea class="form-control" id="note" rows="3" v-model="note"></textarea>
             </div>
             <div id="dropin-container"></div>
             <button id="submit-button" class="button button--small button--green">Purchase</button>
