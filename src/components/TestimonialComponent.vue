@@ -31,6 +31,7 @@ export default {
 
 <template>
 
+  <section class="mt-5">
     <div class="container">
       <div class="title-section text-center">
         <h4>Cosa Dicono <span>Di Noi</span></h4>
@@ -39,11 +40,23 @@ export default {
         <swiper
           :slidesPerView="4"
           :spaceBetween="400"
-          :freeMode="true"
           :modules="modules"
           :autoplay="{
-          delay: 2500,
-          disableOnInteraction: false,
+            delay:2000,
+          }"
+          :breakpoints="{
+            '1024':{
+              slidesPerView:4,
+              spaceBetween:400
+            },
+            '991': {
+              slidesPerView: 2,
+              spaceBetween: 200,
+            },
+            '767':{
+              slidesPerView: 1,
+              spaceBetween: 100
+            }
           }"
           class="mySwiper"
         >
@@ -75,14 +88,17 @@ export default {
         </swiper-slide>
         </swiper>
       </div>
-    </div>
+    </div> 
+  </section>
 
 
     
 </template>
 
 <style lang="scss" scoped>
-
+.swiper-button-rev, .swiper-button-next{
+  background-color: black;
+}
 .title-section{
   h4{
     font-weight: 600;
@@ -97,9 +113,6 @@ export default {
 
 
 .wrapper {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
 	gap: 20px;
 	padding: 2% 0;
 }
@@ -110,6 +123,11 @@ export default {
 	width: 400px;
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+
+  @media(max-width:991px){
+    width: 100%;
+  }
+
 }
 .img-area {
 	width: 80px;
@@ -166,15 +184,7 @@ export default {
 .rating span.active {
 	color: #fbc02d;
 }
-@media screen and (max-width: 767px) {
-	.wrapper {
-		flex-direction: column;
-		align-items: center;
-	}
-	.review-card {
-		width: 85%;
-	}
-}
+
 
 
 

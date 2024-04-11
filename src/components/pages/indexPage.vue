@@ -61,7 +61,7 @@ import Slider1Component from '../Slider1Component.vue';
                         </div>
 
                         <div class="img-jumbo">
-                            <img src="/img/bgremove.png" alt="">
+                            <img src="/img/logoremove.png" alt="">
                         </div>
                    </div>
                 </div>   
@@ -77,7 +77,7 @@ import Slider1Component from '../Slider1Component.vue';
         <RestaurantListComponent/>   
 
         <!--INIZIO SEZIONE 4 - PERCHE' SCEGLIERCI -->
-        <section class="my-4">
+        <section class="my-5">
                 <div class="container">
                     <div class="why-choose">
                         <div class="img-why">
@@ -116,7 +116,7 @@ import Slider1Component from '../Slider1Component.vue';
             <TestimonialComponent/>
             
             <!--INIZIO SEZIONE 5 - FAQ-->
-        <section>
+        <section class="my-4">
             <div class="">
                 <div class="container">
                     <div class="row align-items-center m-0">
@@ -159,7 +159,7 @@ import Slider1Component from '../Slider1Component.vue';
                         </div>
 
                         <div class="col-lg-6">
-                            <div>
+                            <div class="img-faq">
                                 <img class="w-100" src="/img/foto5.png" alt="">
                             </div>
                         </div>
@@ -181,15 +181,28 @@ import Slider1Component from '../Slider1Component.vue';
     border-radius: 10px;
     -webkit-box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35); 
     box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
+    padding: 10px;
+    
 
     >*{
         width: calc(100% / 2);
     }
-    
 
+    @media(max-width: 767px){
+        width:100%;
+        display: block;
+    }
+    
     .text-jumbo{
        padding: 20px;
-       margin-right: 10px; 
+       margin-right: 10px;
+    
+       @media(max-width: 767px){
+        width: 100%;
+       }
+
+
+
 
        p{
         font-size: 20px;
@@ -222,9 +235,20 @@ import Slider1Component from '../Slider1Component.vue';
         padding: 10px;
         margin-right: 5px;
         img{
-            width: 80%;
+            width: 100%;
+            transform: scale(1.5);
         };
     }
+
+    @media(max-width:767px){ 
+        .img-jumbo{
+            img{
+                display: none;
+            }
+        }
+    }
+
+
 }
 
 //FINE CSS SEZIONE 1
@@ -314,6 +338,18 @@ h4{
     .background-h2-faq{
         background-color: rgb(242, 212, 90);
     }
+}
+
+@media(max-width: 991px){
+    .img-faq{
+        img{
+            display: none;
+        }
+    }
+}
+
+ul{
+    list-style: none;
 }
 
 

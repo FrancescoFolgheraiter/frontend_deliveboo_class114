@@ -6,7 +6,7 @@
                 imglogo: [
                 {
                     title:"img-logo",
-                    img:"https://www.filepicker.io/api/file/PrjQ7ZxTQye3aR2Tzt3N",
+                    img:"/img/logo deliveboo1.png",
                 }
             ],
         };
@@ -27,40 +27,28 @@
 
 <header class="sticky-top">
 
-    <nav class="container-fluid navbar navbar-dark bg-white">
+    <div class="container">
+        <div class="header">
+            <div class="img-header">
+                <img :src="imglogo[0].img" alt="">
+            </div>
 
-        <div class="container">
-            <!-- Logo visibile solo su dispositivi lg e superiori -->
-            <a class="navbar-brand d-lg-block" href="#">
-                <img :src="imglogo[0].img" alt="Logo" height="40">
-            </a>
-
-            <!-- Toggle button visibile solo da md e ms -->
-            <button class="navbar-toggler d-md-block d-sm-block d-lg-none bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- link visibile solo su dispositivi lg e superiori -->
-           <ul class="navbar-nav d-none d-lg-flex flex-row">
-                 <!-- link -->
-                
-                 <router-link :to="{ name: 'lavora-con-noi' }" class="router-link lavora-con-noi-link">
-                    Lavora con noi
-                </router-link>
-
-                <!-- Bottone "Login" -->
-                
-                <a class="btn btn-danger text-white " href="http://127.0.0.1:8000/login">Login</a>
-
-                <!-- Link "Carrello" -->
-                <a href="carrello" class="nav-link cart-link">
-                    {{ countCart() }}
-                    <i class="fa-solid fa-bag-shopping"></i>
-                </a>
-            </ul>
+            <div>
+                <ul>
+                    <li>
+                        <button class="btn btn-work">
+                            <a href="#">Lavora Con Noi</a>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btn btn-login">
+                            <a href="#">Login</a>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-        
-    </nav>
+    </div>
 
 
     <!-- Collapse div -->
@@ -104,38 +92,63 @@
 </template>
 
 <style lang="scss" scoped>
-
-header {
-    font-family: 'Times New Roman', Times, serif;
-    
+header{
+    background-color: white;
 }
 
-.navbar-brand img {
-    width: 100%; 
-    
-}
-
-.navbar-nav {
+.header{
     display: flex;
-    justify-content: flex-end; 
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
 
-    button{
-        background-color:#f14647;
+    ul{
+        list-style: none;
+        
+        li{
+            display: inline-block;
+
+            a{
+                text-decoration: none;
+            }
+        }
+    }
+
+    .img-header{
+        img{
+            height: 20%;
+            width: 20%;
+        }
+    }
+
+    .btn-work{
         margin-right: 20px;
-        padding: 10px 20px;
-        color: white;
-        font-weight: 600;
+        
+        a{
+            color: #1f272d;
+            font-weight: 600;
+
+            &:hover{
+                color: white;
+            }
+        }
+
+        &:hover{
+            background-color: #f14647;
+            color: white;
+        }
+    }
+
+    .btn-login{
+        background-color: #f14647;
+        a{
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+        }
     }
 }
 
-.nav-item {
-    margin-left: 10px;
-}
-
-
-a{
-    color: black;
-}
 
 
 
