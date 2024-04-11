@@ -80,7 +80,7 @@ export default {
             document.getElementById('customModal').style.display = 'none';
         },
         calculateTotalCost() {
-            let total = this.store.totalCostSave;
+            let total = 0;
 
             // Itera attraverso ogni elemento nel carrello
             for (let i = 0; i < this.store.cartItems.length; i++) {
@@ -95,8 +95,15 @@ export default {
 
             // Assegna il costo totale calcolato alla proprietà totalCost
             this.totalCost = total.toFixed(2);
+
+            this.store.totalCostSave = this.totalCost;
+
+            // Salvo il prezzo totale nel localStorage con key total_price
+            //prima lo converto in stringa e poi lo salvo
+            const totalCostString = this.store.totalCostSave.toString();
+            localStorage.setItem('total_price', totalCostString);
         },
-            // Incrementa la quantità di un elemento nel carrello
+        // Incrementa la quantità di un elemento nel carrello
         incrementQuantity(index) {
             this.store.cartItems[index].quantity++;
 
@@ -258,7 +265,9 @@ export default {
                         </div>
                         <div class="d-flex justify-content-between " v-if="this.store.cartItems.length > 0">
                             <div>
-                                <button class="btn btn-success ">Vai al pagamento</button>
+                                <router-link :to="{ name: 'payment' }" class="btn btn-success" @click="calculateTotalCost()">
+                                    Vai al pagamento
+                                </router-link>
                             </div>
                             <div >
                                 <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
