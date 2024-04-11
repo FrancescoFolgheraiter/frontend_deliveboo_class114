@@ -28,12 +28,17 @@
 <header class="sticky-top">
 
     <div class="container">
-        <div class="header">
+        <div class="header d-flex justify-content-between align-items-center">
             <div class="img-header">
                 <img :src="imglogo[0].img" alt="">
             </div>
 
-            <div>
+            <!-- Toggle button visibile solo da md e ms -->
+            <button class="navbar-toggler d-md-block d-sm-block d-lg-none nav-button-pers" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent">
+                <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+            </button>
+
+            <div class="d-md-none d-sm-none d-lg-block">
                 <ul>
                     <li>
                         <button class="btn btn-work">
@@ -52,37 +57,39 @@
 
 
     <!-- Collapse div -->
-    <div class="collapse bg-danger lg-none" id="navbarToggleExternalContent" data-bs-theme="black">
-        <div class="bg-white p-4 ">
-            <h5 class="text-body-emphasis h4">
-                Links
-            </h5>
-
-            <ul class="navbar-nav">
-                <!-- link collapse visbili solo in md ms -->
-                <li class="nav-item">
-                    <a class="nav-link" href="lavora con noi">Lavora con noi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-            </ul>
-
-            <!-- Aggiungi icone qui -->
-
-            <ul class="navbar-nav d-lg-none">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa-solid fa-utensils"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="carrello">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                    </a>
-                </li>
-            </ul>
-            
+    <div class="container">
+        <div class="collapse bg-danger lg-none" id="navbarToggleExternalContent" data-bs-theme="black">
+            <div class="bg-white p-4 ">
+                <h5 class="text-body-emphasis h4">
+                    Links
+                </h5>
+    
+                <ul class="navbar-nav">
+                    <!-- link collapse visbili solo in md ms -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="lavora con noi">Lavora con noi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
+    
+                <!-- Aggiungi icone qui -->
+    
+                <ul class="navbar-nav d-lg-none">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-utensils"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrello">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
         </div>
     </div>
 </header>
@@ -97,9 +104,9 @@ header{
 }
 
 .header{
-    display: flex;
+/*     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
     background-color: white;
 
     ul{
@@ -149,7 +156,17 @@ header{
     }
 }
 
-
+.nav-button-pers{
+    background-color: #f14647;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    i{
+        text-align: center;
+        margin-top: 3px;
+        cursor: pointer;
+    }
+}
 
 
 /* Stile per il link "Carrello" */

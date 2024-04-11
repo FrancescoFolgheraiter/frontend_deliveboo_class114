@@ -12,7 +12,8 @@ export default {
       allTypes:[],
       store,
       selectedCategories: [],
-      visibleRestaurant: false
+      visibleRestaurant: false,
+      showNoResultMessage: false
     };
   },
   methods:{
@@ -40,6 +41,7 @@ export default {
             })
             .then((response) =>{
                 this.restaurantList=response.data.data.types
+                this.showNoResultMessage = this.restaurantList.length === 0
           })
 
           this.visibleRestaurant = false
@@ -127,8 +129,17 @@ export default {
 
       <div class="cont-section" v-if="(restaurantList.length < 1 && selectedCategories.length < 1) || visibleRestaurant == true">
         <div class="text-center bg-logo-placeholder">
-          <img src="/public/img/logoremove.png" alt="">
-          <h4>Nessuna Categoria Selezionata</h4>
+          <div>
+            <img src="/public/img/NessunaCategoriaSelezionata.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="cont-section" v-if="showNoResultMessage">
+        <div class="text-center bg-logo-placeholder">
+          <div>
+            <img src="/public/img/NessunRistorante.png" alt="">
+          </div>
         </div>
       </div>
     </div>
@@ -158,18 +169,17 @@ a{
 }
 
 .bg-logo-placeholder{
-  position: relative;
   img{
-    opacity: 0.5;
+    width: 80%;
+    text-align: center;
   }
 
-  h4{
-    position: absolute;
-    top: 70%;
-    left: 37%;
-    color: #1f272d;
-    font-weight: 600;
+  @media(max-width: 767px){
+    img{
+      width:100%;
+    }
   }
+
 }
 
 
