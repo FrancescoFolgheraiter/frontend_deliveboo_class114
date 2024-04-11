@@ -1,8 +1,69 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+
+      workWithUs: [
+        {
+          title: "Lavora con noi",
+          text:"Benvenuto nella nostra sezione Lavora con noi. Siamo sempre alla ricerca di nuovi talenti per unirsi al nostro team e contribuire al nostro successo. Qui troverai una varietà di opportunità di carriera stimolanti e gratificanti che ti consentiranno di crescere professionalmente e personalmente.\
+                Che tu sia un esperto del settore o un giovane talento in cerca di opportunità, c'è spazio per te nel nostro team. Abbiamo a cuore la valorizzazione delle competenze e il sostegno al tuo sviluppo professionale.\
+                Esplora le posizioni aperte e scopri quale potrebbe essere il ruolo giusto per te. Siamo entusiasti di conoscere persone motivate e appassionate che condividano la nostra visione e i nostri valori.",
+          img: "https://www.donnamoderna.com/content/uploads/2018/06/Stretta-di-mano-1-1080x630.jpg"
+        }
+      ],
+
+      chooseServices: [
+        {
+          titleh4: "Vantaggi per i ristoranti",
+          text: "Iscrivendoti al nostro sito, il tuo ristorante ottiene una maggiore visibilità online. Attraverso la nostra piattaforma, potenziali clienti possono scoprire il tuo locale, il menu e le offerte speciali, aumentando così le possibilità di attirare nuovi clienti.",
+          img: "https://www.informazioneoggi.it/wp-content/uploads/2022/04/prenotazione.jpg",
+        },
+        {
+          titleh4: "Promozione gratuita",
+          text: "Offriamo ai ristoranti iscritti la possibilità di promuovere gratuitamente le loro offerte, sconti e eventi speciali. Questo ti permette di raggiungere un pubblico più vasto senza alcun costo aggiuntivo.",
+          img: "/img/lavora-con-noi-promo.png",
+        },
+        {
+          titleh4: "Gestione degli ordini",
+          text: "La nostra piattaforma offre strumenti intuitivi per gestire gli ordini in modo efficiente. Ricevi e gestisci gli ordini online in modo rapido e senza complicazioni, ottimizzando così il flusso di lavoro nel tuo ristorante.",
+          img: "https://www.ollyservices.com/wp-content/uploads/2022/04/Gestione-degli-ordini-helpdesk.jpg",
+        },
+        {
+          titleh4: "Feedback e recensioni",
+          text: "I nostri clienti hanno la possibilità di lasciare feedback e recensioni sulle loro esperienze presso il tuo ristorante. Questo ti offre preziose informazioni sulle preferenze dei clienti e ti aiuta a migliorare continuamente la qualità dei tuoi servizi.",
+          img: "/img/lavora-con-noi-feedback.png"
+        }
+      ],
+
+      opportunity:[
+        {
+          icon: "fas fa-user-tie",
+          list: "Responsabile delle vendite"
+        },
+        {
+          icon: "fas fa-suitcase",
+          list: "Ruoli aziendali"
+        },
+        {
+          icon: "fas fa-laptop",
+          list: "Ruoli tecnici"
+        },
+        {
+          icon: "fas fa-truck",
+          list: "Ruoli del delivery"
+        },
+      ],
+
+      application:[
+        {
+          titleh4: "Come candidarsi:",
+          text: "Se sei interessato a unirti al nostro team, invia il tuo curriculum vitae e una lettera di presentazione all'indirizzo email 'infoLavoraConNoi@deliveboo.com'. Assicurati di indicare la posizione desiderata nell'oggetto dell'email. Inoltre, descrivi brevemente le tue esperienze lavorative e le motivazioni per cui desideri lavorare con noi."
+        }
+      ]
+    };
   },
+
   methods: {}
 };
 </script>
@@ -10,53 +71,76 @@ export default {
 <template>
   <!-- Prima sezione: Informazioni generali -->
   <section class="info-section">
-    <div class="container d-flex justify-content-center flex-column">
-      <h2 class="text-center mb-4">Lavora con noi</h2>
-      <div class="row">
+    <div class="container d-flex justify-content-center flex-column" v-for="(elem, i) in workWithUs" :key="i">
+      <h2 class="text-center mb-4">{{ elem.title }}</h2>
+      <div class="row align-items-center">
         <div class="col-lg-6">
             <p>
-                Benvenuto nella nostra sezione "Lavora con noi". Siamo sempre alla ricerca di nuovi talenti per unirsi al nostro team e contribuire al nostro successo. Qui troverai una varietà di opportunità di carriera stimolanti e gratificanti che ti consentiranno di crescere professionalmente e personalmente. 
-                Che tu sia un esperto del settore o un giovane talento in cerca di opportunità, c'è spazio per te nel nostro team. Abbiamo a cuore la valorizzazione delle competenze e il sostegno al tuo sviluppo professionale.
-                Esplora le posizioni aperte e scopri quale potrebbe essere il ruolo giusto per te. Siamo entusiasti di conoscere persone motivate e appassionate che condividano la nostra visione e i nostri valori.
+                {{ elem.text }}
             </p>
         </div>
         <div class="box-img col-lg-6 ">
-          <img src="https://www.donnamoderna.com/content/uploads/2018/06/Stretta-di-mano-1-1080x630.jpg" alt="">
+          <img :src="elem.img" alt="">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Seconda sezione: Opportunità di lavoro -->
+
+  <!-- Seconda sezione: Perchè sceglierci -->
+  <section>
+    <div class="container-fluid">
+      <div class="container">
+        <h2 class="text-center mt-5">
+          Perchè scegliere i nostri servizi?
+        </h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-4">
+          <div class="col mb-4" v-for="(elem, i) in chooseServices" :key="i">
+            <div>
+              <img :src="elem.img" alt="">
+            </div>
+            <h4 class="mt-3">{{ elem.titleh4 }}</h4>
+            <p>{{ elem.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </section>
+
+
+
+  <!-- Terza sezione: Opportunità di lavoro -->
   <section class="job-opportunities">
-  <div class="container mt-3">
+  <div class="container mt-1 mb-5">
     <h3 class="text-start mb-5">Opportunità di lavoro</h3>
     <div class="row">
       <div class="col-lg-6">
         <h4>Posizioni aperte:</h4>
-        <ul class="position-list">
-          <li><i class="fas fa-user-tie"></i> Responsabile delle vendite</li>
-          <li><i class="fas fa-suitcase"></i> Ruoli aziendali</li>
-          <li><i class="fas fa-laptop"></i> Ruoli tecnici</li>
-          <li><i class="fas fa-truck"></i> Ruoli del delivery</li>
+        <ul class="position-list" v-for="(elem, i) in opportunity" :key="i">
+          <li class="mb-2">
+            <i :class="elem.icon"></i> 
+            {{ elem.list }}
+          </li>
         </ul>
       </div>
-      <div class="col-lg-6">
-        <h4>Come candidarsi:</h4>
+      <div class="col-lg-6" v-for="(elem, i) in application" :key="i">
+        <h4>{{ elem.titleh4 }}</h4>
         <p>
-          Se sei interessato a unirti al nostro team, invia il tuo curriculum vitae e una lettera di presentazione all'indirizzo email <a href="infoLavoraConNoi@deliveboo.com">infoLavoraConNoi@deliveboo.com</a>. Assicurati di indicare la posizione desiderata nell'oggetto dell'email. Inoltre, descrivi brevemente le tue esperienze lavorative e le motivazioni per cui desideri lavorare con noi.
+          {{ elem.text }}
         </p>
       </div>
     </div>
   </div>
+  <hr>
 </section>
 
 
-  <!-- Terza sezione: FAQ -->
+  <!-- Quarta sezione: FAQ -->
   <section class="faq-section">
     <div class="container">
       <h2 class="text-center mb-4">FAQ</h2>
-      <div class="row">
+      <div class="row align-items-center">
         <div class="col-lg-6">
           <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
             <div class="accordion-item">
@@ -118,9 +202,39 @@ img{
   padding: 50px 0;
 }
 
-.faq-section {
-  
-  padding: 50px 0;
+
+
+//CSS SEZIONE 2
+
+hr{
+  width: 80%;
+  margin: auto;
+  color: rgb(241, 70, 71);
+  margin-top: 10px;
+}
+
+.col img {
+      width: 100%;
+      height: 200px; 
+      object-fit: cover; 
+}
+
+h4:hover{
+      color: rgb(241, 70, 71);
+    }
+
+h1, h2, h3{
+  color: rgb(241, 70, 71);
+}
+
+//FINE CSS SEZIONE 2
+
+
+//CSS SEZIONE 3
+
+.position-list li:hover {
+  color: rgb(241, 70, 71);
+  cursor: pointer; 
 }
 
 

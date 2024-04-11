@@ -3,6 +3,8 @@ import IndexPage from './src/components/pages/indexPage.vue';
 import RestaurantPage from './src/components/pages/RestaurantPage.vue';
 import PaymentPage from './src/components/pages/PaymentPage.vue';
 import LavoraConNoiPage from './src/components/pages/LavoraConNoi.vue';
+import NotFoundPage from './src/components/pages/NotFound.vue'; 
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,6 +28,11 @@ const router = createRouter({
       path: '/lavora-con-noi',
       name: 'lavora-con-noi',
       component: LavoraConNoiPage
+    },
+    {
+      path: '/:catchAll(.*)', // Utilizza un percorso wildcard (*)
+      name: 'not-found',
+      component: NotFoundPage 
     }
   ]
 });
