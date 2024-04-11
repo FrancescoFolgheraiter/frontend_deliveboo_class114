@@ -11,7 +11,8 @@ export default {
       types: [],
       allTypes:[],
       store,
-      selectedCategories: []
+      selectedCategories: [],
+      visibleRestaurant: false
     };
   },
   methods:{
@@ -26,22 +27,28 @@ export default {
       }
       //Verifica se  types contiene almeno un elemento
       //e in caso effettuo la chiamata API
-      if (this.types.length > 0) {
-        this.getRestaurant();
-      }
       console.log('Tipologie selezionate: '+this.types)
     },
     //funzione per recupeare i ristoranti di quel tipo
     getRestaurant(){
-      axios
-      .get('http://127.0.0.1:8000/api/types/restaurant',{
-        params:{
-          types:this.types
+        if (this.types.length > 0) {
+            axios
+            .get('http://127.0.0.1:8000/api/types/restaurant',{
+              params:{
+                types:this.types
+              }
+            })
+            .then((response) =>{
+                this.restaurantList=response.data.data.types
+          })
+
+          this.visibleRestaurant = false
         }
-      })
-      .then((response) =>{
-          this.restaurantList=response.data.data.types
-    })
+        else{
+          this.visibleRestaurant = true
+          console.log(this.visibleRestaurant)
+        }
+
     },
     toggleButton(types){
       // Cerca l'indice della categoria nella lista delle categorie selezionate
@@ -85,12 +92,18 @@ export default {
         <div v-for="category in allTypes" class="">
           <button :class="{clicked: isSelected(category.name) , btn: true}" type="submit" @click="setValueType(category.name), toggleButton(category.name)">{{ category.name }}</button>
         </div> 
-      </div>  
+      </div>
+      
+      <div class="button-search text-center my-3">
+        <button class="btn text-center" @click="getRestaurant()">
+            CERCA
+        </button>
+      </div>
   </div>
 </section>
 
     <div class="container">
-      <div class="cont-section p-3" v-if="restaurantList.length > 1">
+      <div class="cont-section p-3" v-if="restaurantList.length > 0 && visibleRestaurant == false">
          <div class = "__area row " >
             <div class = "__card col-md-4 col-xl-6 col-12 justify-content-center justify-content-xl-start mx-xl-3 my-2" v-for="restaurant in restaurantList">
               <router-link :to="{ name: 'restaurant', params: {name: restaurant.resturant_name } }">
@@ -110,6 +123,13 @@ export default {
               </router-link>
             </div>          
           </div> 
+      </div>
+
+      <div class="cont-section" v-if="(restaurantList.length < 1 && selectedCategories.length < 1) || visibleRestaurant == true">
+        <div class="text-center bg-logo-placeholder">
+          <img src="/public/img/logoremove.png" alt="">
+          <h4>Nessuna Categoria Selezionata</h4>
+        </div>
       </div>
     </div>
 
@@ -136,6 +156,23 @@ a{
   box-shadow: 0px -4px 30px -5px rgba(0,0,0,0.35);
   
 }
+
+.bg-logo-placeholder{
+  position: relative;
+  img{
+    opacity: 0.5;
+  }
+
+  h4{
+    position: absolute;
+    top: 70%;
+    left: 37%;
+    color: #1f272d;
+    font-weight: 600;
+  }
+}
+
+
 
 
 .__card {
@@ -284,6 +321,14 @@ justify-content: space-between;
     
 }
 
-
+.button-search{
+  button{
+    background-color: #f14647;
+    color: white;
+    padding: 5px 30px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+}
 
 </style>
