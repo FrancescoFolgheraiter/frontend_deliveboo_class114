@@ -336,7 +336,7 @@ export default {
 
 
 .resturant-page{
-    background-color: #white;
+    background-color: white;
 }
 
 
