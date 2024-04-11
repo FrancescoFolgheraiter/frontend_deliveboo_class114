@@ -71,6 +71,8 @@ export default {
                 .catch((error) => {
                     console.log('Recupero paitti non riuscito errrore: '.error)
                 })
+            //reindirizzamento sulla home
+            this.$router.push({ name: 'home' });
         }
     },
     created(){
