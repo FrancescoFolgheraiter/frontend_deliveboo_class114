@@ -30,7 +30,9 @@
     <div class="container">
         <div class="header d-flex justify-content-between align-items-center">
             <div class="img-header">
-                <img :src="imglogo[0].img" alt="">
+                <router-link :to="{name:'home'}">
+                    <img :src="imglogo[0].img" alt="">
+                </router-link>
             </div>
 
             <!-- Toggle button visibile solo da md e ms -->
@@ -41,13 +43,15 @@
             <div class="d-md-none d-sm-none d-lg-block">
                 <ul>
                     <li>
-                        <button class="btn btn-work">
-                            <a href="/lavora-con-noi">Lavora Con Noi</a>
-                        </button>
+                        <router-link :to="{name:'lavora-con-noi'}">
+                            <button class="btn btn-work">
+                                Lavora Con Noi
+                            </button>
+                        </router-link>
                     </li>
                     <li>
                         <button class="btn btn-login">
-                            <a href="#">Login</a>
+                            <a href="http://127.0.0.1:8000/">Login</a>
                         </button>
                     </li>
                 </ul>
