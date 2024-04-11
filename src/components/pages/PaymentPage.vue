@@ -1,36 +1,80 @@
 <script>
-
+import axios from 'axios';
 
 export default {
-  data() {
-    return {
-      customer: {
-        firstName: '',
-        lastName: '',
-        address: '',
-        phoneNumber: ''
-      }
-    };
-  },
-  methods: {
-    setupBraintree() {
-      braintree.dropin.create({
-      authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-      selector: '#dropin-container'
-        }, function (err, instance) {
-          button.addEventListener('click', function () {
-            instance.requestPaymentMethod(function (err, payload) {
-              // Submit payload.nonce to your server
-            });
-          })
-      });
+    data() {
+        return {
+            //dati cliente
+            customer: {
+                firstName: '',
+                lastName: '',
+                address: '',
+                phoneNumber: '',
+                note:''
+            },
+            dataOrder: [],
+        };
     },
-    submitOrder() {
-      // Aggiungi qui la logica per inviare i dati del pagamento al tuo server
-    }
-  },
-  mounted() {
-    this.setupBraintree();
+    methods: {
+        //funzione per settappare il dropin di braintree
+        setupBraintree() {
+            const button = document.querySelector('#submit-button');
+            //mi salvo il this in refiermiento all pagina in vue
+            //per poi poterlo utilizzare all'interno delle function
+            const self = this;
+
+            braintree.dropin.create({
+            authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+            selector: '#dropin-container'
+            }, function (err, instance) {
+                //uscita anticipata nel caso avvenga un errore
+                if (err) {
+                console.error(err);
+                return;
+                }
+                button.addEventListener('click', function () {
+                    instance.requestPaymentMethod(function (err, payload) {
+                        alert('pagamento effettuato')
+                        console.log(self.customer)
+                    });
+                })
+            });
+        },
+        manipulateCartData(cart){
+            //funzione che mi permette di estrarre dal carrello
+            //l'id del piatto con la relativa quantità
+            //che successivamente verranno inviati al backend
+            //struttura dati [id, quantity]
+            cart.forEach(item => {
+                let order = [];
+                order.push(item['id'])
+                order.push(item['quantity'])
+                this.dataOrder.push(order) 
+            });
+        },
+        loadDataOrder(){
+            axios.post('http://127.0.0.1:8000/api/orders',{
+                    params:{
+                        name: resturantName
+                    }
+                })
+                .then((res) => {
+                    this.dishes = res.data.data.foods;
+                    this.user = res.data.data.user;
+                    console.log(this.user);
+                })
+                .catch((error) => {
+                    console.log('Recupero paitti non riuscito errrore: '.error)
+                })
+        }
+    },
+    created(){
+    },
+    mounted() {
+        const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        this.manipulateCartData(savedCartItems)
+        console.log(savedCartItems)
+        this.setupBraintree();
   },
 };
 </script>
@@ -54,8 +98,11 @@ export default {
                 <label for="phoneNumber" class="form-label">Numero di telefono</label>
                 <input type="tel" class="form-control" id="phoneNumber" v-model="customer.phoneNumber" required>
             </div>
-            <div id="dropin-container">
+            <div class="mb-3">
+                <label for="note" class="form-label">Note</label>
+                <textarea class="form-control" id="note" rows="3" v-model="customer.note"></textarea>
             </div>
+            <div id="dropin-container"></div>
             <button id="submit-button" class="button button--small button--green">Purchase</button>
         </form>
     </div>
