@@ -10,7 +10,7 @@ export default {
             address: '',
             phoneNumber: '',
             note:'',
-            total_price:10,
+            total_price:0,
             dataOrder: [],
         };
     },
@@ -52,7 +52,7 @@ export default {
             });
         },
         loadDataOrder(){
-
+            
             axios.post('http://127.0.0.1:8000/api/orders',{
                     params:{
                         note: this.note,
@@ -77,6 +77,7 @@ export default {
     },
     mounted() {
         const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        this.total_price = parseFloat(localStorage.getItem('total_price'));
         this.manipulateCartData(savedCartItems)
         this.setupBraintree();
   },

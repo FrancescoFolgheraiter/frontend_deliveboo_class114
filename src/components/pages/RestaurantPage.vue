@@ -99,8 +99,10 @@ export default {
             this.store.totalCostSave = this.totalCost;
 
             // Salvo il prezzo totale nel localStorage con key total_price
-            localStorage.setItem('total_price', JSON.stringify(this.store.totalCostSave));
-            console.log(this.store.totalCostSave);
+            //prima lo converto in stringa e poi lo salvo
+            const totalCostString = this.store.totalCostSave.toString();
+            localStorage.setItem('total_price', totalCostString);
+            console.log(totalCostString)
         },
         // Incrementa la quantità di un elemento nel carrello
         incrementQuantity(index) {
