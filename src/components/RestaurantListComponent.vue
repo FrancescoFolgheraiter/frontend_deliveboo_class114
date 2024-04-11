@@ -111,8 +111,8 @@ export default {
 
     <div class="container">
       <div class="cont-section p-3" v-if="restaurantList.length > 0 && visibleRestaurant == false">
-         <div class = "__area row " >
-            <div class = "__card col-md-4 col-xl-6 col-12 justify-content-center justify-content-xl-start mx-xl-3 my-2" v-for="restaurant in restaurantList">
+         <div class = "__area row justify-content-center justify-content-md-start" >
+            <div class = "__card col-md-6 col-xl-3 col-12 my-2" v-for="restaurant in restaurantList">
               <router-link :to="{ name: 'restaurant', params: {name: restaurant.resturant_name } }">
                 <img :src="'http://127.0.0.1:8000/storage/'+ restaurant.resturant_image" class="img-fluid __img"/>
                 <div class = "__card_detail text-left">
@@ -157,7 +157,6 @@ export default {
 .__area {
   font-family: 'Cairo', sans-serif;
   color: #7c7671;
-  /* margin-top: 100px */
 }
 
 a{
@@ -192,7 +191,6 @@ a{
 
 .__card {
   max-width: 350px;
-  margin: auto;
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -205,6 +203,9 @@ a{
 }
 .__img {
   border-radius: 10px;
+  width: 100%;
+  object-fit: contain;
+  overflow: hidden;
 }
 
 .__favorit {

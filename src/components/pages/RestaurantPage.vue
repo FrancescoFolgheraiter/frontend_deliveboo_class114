@@ -162,7 +162,7 @@ export default {
                     <div class="box-name-resturant">  
 
                         <div class="box-dx-description ">
-                            <h1>{{ user['resturant_name']}}</h1>
+                            <h1 class="fw-bold">{{ user['resturant_name']}}</h1>
                             <h5 class="address-font">{{ user['address']}}</h5>
                             <div class="img-restaurant">
                               <img  class="" :src="'http://127.0.0.1:8000/storage/'+ user['resturant_image']" :alt="user['resturant_name']">
@@ -341,7 +341,7 @@ export default {
 
 
 .box-name-resturant {
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "Poppins" ,sans-serif;
         border-radius: 20px;
         margin: auto;
         width: 100%;
