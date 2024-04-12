@@ -71,10 +71,10 @@ export default {
                     //pulisco il localstorage
                     localStorage.clear();
                     //pulisco il carrello in store
-                    this.store.cartItem = [];
-                    console.log(this.store.cartItem);
+                    this.store.cartItems = [];
+                    console.log(this.store.cartItems);
                     //reindirizzamento sulla home
-                    // this.$router.push({ name: 'home' });
+                    this.$router.push({ name: 'home' });
                 })
                 .catch((error) => {
                     console.log('Recupero paitti non riuscito errrore: '.error)
