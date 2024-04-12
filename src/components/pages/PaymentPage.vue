@@ -91,38 +91,62 @@ export default {
     },
     mounted() {
         const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        this.savedCartItems = savedCartItems;
+        console.log(savedCartItems)
         this.total_price = parseFloat(localStorage.getItem('total_price'));
         console.log(this.total_price)
         this.manipulateCartData(savedCartItems)
         this.setupBraintree();
-  },
+    },
 };
 </script>
 
 <template>
-    <div class="mt-5 pt-5">
+    <div class="pt-5">
         <form class="p-5 m-5 bg-success-subtle" @submit.prevent="submitOrder">
-            <div class="mb-3">
-                <label for="firstName" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="firstName" v-model="name" required>
+            <div class="row">
+                <div class="col-9">
+                    <div class="card p-2">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="firstName" v-model="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Cognome</label>
+                            <input type="text" class="form-control" id="lastName" v-model="surname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Indirizzo</label>
+                            <input type="text" class="form-control" id="address" v-model="address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Numero di telefono</label>
+                            <input type="text" class="form-control" id="phoneNumber" v-model="phoneNumber" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="note" class="form-label">Note</label>
+                            <textarea class="form-control" id="note" rows="3" v-model="note"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card p-2 mb-3 text-center">
+                        <div class="card-body">
+                            <h3>Riepilogo Carrello</h3>
+                            <div class="card p-2 mb-2" v-for="product in savedCartItems">
+                                x{{ product.quantity }} {{ product.name }}
+                            </div>
+                        </div>
+                        <h4>
+                            Totale: {{ total_price }}€
+                        </h4>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="lastName" class="form-label">Cognome</label>
-                <input type="text" class="form-control" id="lastName" v-model="surname" required>
-            </div>
-            <div class="mb-3">
-                <label for="address" class="form-label">Indirizzo</label>
-                <input type="text" class="form-control" id="address" v-model="address" required>
-            </div>
-            <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Numero di telefono</label>
-                <input type="text" class="form-control" id="phoneNumber" v-model="phoneNumber" required>
-            </div>
-            <div class="mb-3">
-                <label for="note" class="form-label">Note</label>
-                <textarea class="form-control" id="note" rows="3" v-model="note"></textarea>
-            </div>
+            
+            
             <div id="dropin-container"></div>
+            
             <button id="submit-button" class="button button--small button--green">Purchase</button>
         </form>
     </div>

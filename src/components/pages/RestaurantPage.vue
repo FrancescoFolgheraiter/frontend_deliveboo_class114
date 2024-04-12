@@ -126,6 +126,8 @@ export default {
             const itemPrice = this.store.cartItems[index].price * this.store.cartItems[index].quantity;
             this.store.cartItems.splice(index, 1);
             this.totalCost -= itemPrice.toFixed(2);
+            // aggiorno la quantità del carrello anche nel localstorage (cartItems)
+            localStorage.setItem('cartItems', JSON.stringify(this.store.cartItems));
         },
         emptyCart() {
         //svuoto il localStorage
