@@ -74,7 +74,7 @@
                         <a class="nav-link" href="lavora con noi">Lavora con noi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="http://127.0.0.1:8000/">Login</a>
                     </li>
                 </ul>
     
