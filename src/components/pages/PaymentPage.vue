@@ -35,8 +35,13 @@ export default {
                 }
                 button.addEventListener('click', function () {
                     instance.requestPaymentMethod(function (err, payload) {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
                         alert('pagamento effettuato')
-                        self.loadDataOrder()
+                        // Effettua la chiamata Axios solo se il pagamento è stato effettuato con successo
+                        self.loadDataOrder();
                     });
                 })
             });
