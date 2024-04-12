@@ -163,7 +163,7 @@ export default {
 
     <div class="resturant-page">
         <div class="container">
-            <div class="row">
+            <div class="row ">
                 <div class="center-block text-center col-lg-8 col-md-12">
                     <!-- blocco descrizione ristorante -->
                     <div class="box-name-resturant">  
@@ -240,9 +240,7 @@ export default {
                         <div class="cart-items">
                             <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item d-flex align-items-center justify-content-evenly">
                                 <div>
-                                    <button class="button-delete me-1" @click="removeFromCart(index)">
-                                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                    </button>
+                                    
                                 </div>
                                 <div class="width-cart-img">
                                     <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image">
@@ -251,6 +249,9 @@ export default {
                                     <p class="cart-p-width">{{cartItem.name }}</p>
                                     <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
                                     <div>
+                                        <button class="button-delete me-1" @click="removeFromCart(index)">
+                                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </button>
                                         <button class="btn" @click="decrementQuantity(index)">-</button>
                                         Tot: {{ cartItem.quantity }}
                                         <button class="btn me-1" @click="incrementQuantity(index)">+</button>
@@ -289,16 +290,14 @@ export default {
                     <h5 class="offcanvas-title" id="staticBackdropLabel">Carrello</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body  d-block d-lg-none">
+                <div class="offcanvas-body d-block d-lg-none">
 
                     <div class="carta text-center h-100 ">
-                        <h3>Il tuo ordine</h3>
+                        <h3 class="mb-5">Il tuo ordine</h3>
                         <div class="cart-items">
                             <div v-for="(cartItem, index) in this.store.cartItems" :key="index" class="cart-item">
                                 <div>
-                                    <button class="button-delete me-1" @click="removeFromCart(index)">
-                                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                    </button>
+                                    
                                 </div>
                                 <div class="width-cart-img">
                                     <img :src="cartItem.imageUrl" :alt="cartItem.name" class="cart-item-image ">
@@ -307,6 +306,9 @@ export default {
                                     <p class="cart-p-width">{{cartItem.name }}</p>
                                     <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
                                     <div>
+                                        <button class="button-delete " @click="removeFromCart(index)">
+                                           <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                        </button>
                                         <button class="btn" @click="decrementQuantity(index)">-</button>
                                         Tot: {{ cartItem.quantity }}
                                         <button class="btn me-1" @click="incrementQuantity(index)">+</button>
@@ -379,13 +381,12 @@ export default {
 
 
 
-
-
 .box-dx-description{
     text-align: end;
     display: flex;
     flex-direction:column ;
     justify-content: center;
+    align-items: flex-end
 
 }
 
@@ -402,16 +403,12 @@ export default {
     height: 100%; /* Imposta l'altezza dell'immagine al 100% del contenitore */
     object-fit: cover; /* Per mantenere l'aspect ratio e riempire completamente il contenitore */
     border-radius: 75px;
-    position: relative;
-    left: 100px;
-    margin: 0;
 }
 
 
 .center-block::-webkit-scrollbar {
     display: none; 
 }
-
 
 
 h1 {
@@ -430,8 +427,6 @@ h1 {
     width: 100%;
     background-color: white;
     transition: all 0.5s ease;
-    
-    
 }
 
 
@@ -601,11 +596,11 @@ h1 {
     margin-left: 0;
   }
 
-  .button-delete {
-    position: relative;
-    right: 100px;
-    top: 50px;
-  }
+//   .button-delete {
+//     position: relative;
+//     right: 100px;
+//     top: 50px;
+//   }
 
   .width-cart-img{
     margin-bottom: 5px;
@@ -618,6 +613,7 @@ h1 {
     .address-font{
         font-size: 15px;
     }
+    
     
 }
 
@@ -691,7 +687,7 @@ h1 {
 
         .button-delete{
             width: 24px;
-            height: auto;
+            
             border-radius: 50px;
             border: 1px solid red;
             background-color: rgb(242, 70, 70);
@@ -703,7 +699,7 @@ h1 {
         }
         .cart-item-image {
             width: 100%;
-            height: 200px;
+            height: 120px;
             object-fit: cover;
         }
         
