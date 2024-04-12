@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import {store} from '../../store.js';
 
 export default {
     data() {
@@ -12,6 +13,7 @@ export default {
             note:'',
             total_price:0,
             dataOrder: [],
+            store
         };
     },
     methods: {
@@ -66,13 +68,18 @@ export default {
                 })
                 .then((res) => {
                     console.log(res);
+                    //pulisco il localstorage
                     localStorage.clear();
+                    //pulisco il carrello in store
+                    this.store.cartItem = [];
+                    console.log(this.store.cartItem);
+                    //reindirizzamento sulla home
+                    // this.$router.push({ name: 'home' });
                 })
                 .catch((error) => {
                     console.log('Recupero paitti non riuscito errrore: '.error)
                 })
-            //reindirizzamento sulla home
-            this.$router.push({ name: 'home' });
+            
         }
     },
     created(){
