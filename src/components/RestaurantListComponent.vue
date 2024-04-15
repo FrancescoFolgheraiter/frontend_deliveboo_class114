@@ -40,18 +40,19 @@ export default {
               }
             })
             .then((response) =>{
-                this.restaurantList=response.data.data.types
+                this.restaurantList=response.data.data.users
+                console.log(this.restaurantList)                
                 this.showNoResultMessage = this.restaurantList.length === 0 && this.types.length !== this.allTypes.length;
           })
 
           this.visibleRestaurant = false
         }
         else{
-          this.showNoResultMessage = this.restaurantList.length === 0 && this.types.length === this.allTypes.length;
-          this.visibleRestaurant = true
+          // this.showNoResultMessage = this.restaurantList.length === 0 && this.types.length === this.allTypes.length;
+          // this.visibleRestaurant = true
           console.log(this.visibleRestaurant)
         }
-
+        
     },
     toggleButton(types){
       // Cerca l'indice della categoria nella lista delle categorie selezionate
@@ -109,7 +110,7 @@ export default {
   </div>
 </section>
 
-    <div class="container">
+    <div class="container">      
       <div class="cont-section p-3" v-if="restaurantList.length > 0 && visibleRestaurant == false">
          <div class = "__area row justify-content-center justify-content-md-start" >
             <div class = "__card col-md-6 col-xl-3 col-12 my-2" v-for="restaurant in restaurantList">
@@ -121,10 +122,7 @@ export default {
                       {{ restaurant.address }}
                   </p>
                   <div class = "__type">
-                      <span href = "#Italian">Italian</span>
-                      <span href = "#Vegetarian">Vegetarian</span>
-                      <span href = "#Pizza">Pizza</span>
-                      <span href = "#off">10%</span>
+                      <span  v-for="category in restaurant.types" >{{ category.name }}</span>
                   </div>
                 </div>              
               </router-link>
