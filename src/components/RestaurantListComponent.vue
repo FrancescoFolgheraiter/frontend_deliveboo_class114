@@ -190,6 +190,12 @@ a{
   max-width: 350px;
   max-height: 200px;
   overflow: hidden;
+  border-radius: 10px;
+  img{
+    object-fit: cover;
+    overflow: hidden;
+    border-radius:10px;
+  }
 }
 
 
