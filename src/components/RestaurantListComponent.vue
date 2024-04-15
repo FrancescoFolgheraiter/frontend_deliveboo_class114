@@ -48,8 +48,8 @@ export default {
           this.visibleRestaurant = false
         }
         else{
-          // this.showNoResultMessage = this.restaurantList.length === 0 && this.types.length === this.allTypes.length;
-          // this.visibleRestaurant = true
+          this.showNoResultMessage = this.restaurantList.length === 0 && this.types.length === this.allTypes.length;
+          this.visibleRestaurant = true
           console.log(this.visibleRestaurant)
         }
         
