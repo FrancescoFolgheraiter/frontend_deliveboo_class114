@@ -325,7 +325,9 @@ export default {
                         </div>
                         <div class="d-flex justify-content-between ">
                             <div>
-                                <button class="btn btn-success" @click="vaiAlPagamento()">Vai al pagamento</button>
+                                <router-link :to="{ name: 'payment' }" class="btn btn-success" @click="calculateTotalCost()">
+                                    Vai al pagamento
+                                </router-link>
                             </div>
                             <div v-if="this.store.cartItems.length > 0">
                                 <button class="btn btn-danger" @click="emptyCart()">Svuota carrello</button>
