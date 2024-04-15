@@ -285,8 +285,26 @@ h4{
         .carousel-color{
             background-color: #f14647;
         }
-    }
 
+
+
+    }
+    
+    @media (max-width:991px) {
+        text-align: center;
+        .img-why{
+            display: none;  
+        } 
+
+        >*{
+            width: 100%;
+        }
+
+        li{
+            display: inline-block;
+            margin-right: 10px;
+        }
+    }
 }
 
 .text-why{

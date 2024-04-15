@@ -54,8 +54,12 @@ export default {
               spaceBetween: 200,
             },
             '767':{
-              slidesPerView: 1,
+              slidesPerView: 2,
               spaceBetween: 100
+            },
+            '425':{
+              slidesPerView:1,
+              spaceBetween:100
             }
           }"
           class="mySwiper"
