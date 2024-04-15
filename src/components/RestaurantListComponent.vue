@@ -115,7 +115,9 @@ export default {
          <div class = "__area row justify-content-center justify-content-md-start" >
             <div class = "__card col-md-6 col-xl-3 col-12 my-2" v-for="restaurant in restaurantList">
               <router-link :to="{ name: 'restaurant', params: {name: restaurant.resturant_name } }">
-                <img :src="'http://127.0.0.1:8000/storage/'+ restaurant.resturant_image" class="img-fluid __img"/>
+                <div class="img-cont">
+                  <img :src="'http://127.0.0.1:8000/storage/'+ restaurant.resturant_image" class="img-fluid __img"/>
+                </div>
                 <div class = "__card_detail text-left">
                   <h4>{{ restaurant.resturant_name }}</h4>
                   <p>
@@ -184,7 +186,17 @@ a{
 
 }
 
-
+.img-cont{
+  max-width: 350px;
+  max-height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  img{
+    object-fit: cover;
+    overflow: hidden;
+    border-radius:10px;
+  }
+}
 
 
 .__card {
