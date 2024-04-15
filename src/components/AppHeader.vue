@@ -40,7 +40,7 @@
                 <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
             </button>
 
-            <div class="d-md-none d-sm-none d-lg-block">
+            <div class="d-md-none d-sm-none d-lg-block d-none">
                 <ul>
                     <li>
                         <router-link :to="{name:'lavora-con-noi'}">
