@@ -344,6 +344,15 @@ justify-content: space-between;
       margin: 10px 10px;
     }
   }
+
+  @media(max-width:1399px){
+    justify-content: center;
+    flex-wrap: wrap;
+    >*{
+      margin:10px;
+      flex-basis: 5%;
+    }
+  }
     
 }
 
