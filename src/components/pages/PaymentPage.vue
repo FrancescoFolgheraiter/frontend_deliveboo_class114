@@ -102,11 +102,11 @@ export default {
 </script>
 
 <template>
-    <div class="pt-5">
-        <form class="p-5 m-5 bg-success-subtle" @submit.prevent="submitOrder">
+    <div class="container container-md container-sm bg-payment my-4">
+        <form class="p-4" @submit.prevent="submitOrder">
             <div class="row">
-                <div class="col-9">
-                    <div class="card p-2">
+                <div class="col-12 col-sm-6 col-md-12 col-lg-8">
+                    <div class="card p-3">
                         <div class="mb-3">
                             <label for="firstName" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="firstName" v-model="name" required>
@@ -129,8 +129,8 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="card p-2 mb-3 text-center">
+                <div class="col-12 gy-3 gy-sm-0 gy-md-3 gy-lg-0 col-md-12 col-sm-6 col-lg-4 ">
+                    <div class="card p-2 mb-3 text-center h-100">
                         <div class="card-body">
                             <h3>Riepilogo Carrello</h3>
                             <div class="card p-2 mb-2" v-for="product in savedCartItems">
@@ -147,42 +147,42 @@ export default {
             
             <div id="dropin-container"></div>
             
-            <button id="submit-button" class="button button--small button--green">Purchase</button>
+            <button id="submit-button" class="btn btn-pers">Purchase</button>
         </form>
     </div>
 </template>
 
 <style lang="scss" scoped>
 
-.button {
-  cursor: pointer;
-  font-weight: 500;
-  left: 3px;
-  line-height: inherit;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  display: inline-block;
+.card-body{
+    h3{
+        color: #f14647;
+        font-weight: 600;
+        font-size: 25px;
+    }
 }
 
-.button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
+
+
+.bg-payment{
+    border: 1px solid rgba(128, 128, 128, 0.502);
+    border-radius: 10px;
+    background-color: #f7f7f7a8;
+    -webkit-box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.37); 
+    box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.37);  
 }
 
-.button--green {
-  outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
-  color: white;
-  transition: all 200ms ease;
+.btn-pers{
+    background-color: #f14647;
+    font-weight: 500;
+    color: white;
+    line-height: 30px;
+
+    &:hover{
+        background-color: #f14646b9;
+    }
 }
 
-.button--green:hover {
-  background-color: #8bdda8;
-  color: white;
-}
+
+
 </style>
