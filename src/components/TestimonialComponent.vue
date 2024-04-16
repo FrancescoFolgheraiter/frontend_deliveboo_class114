@@ -14,6 +14,48 @@ import { Navigation, Pagination,FreeMode, Autoplay } from 'swiper/modules';
 export default {
   data() {
     return {
+      nameUser: [
+
+            { user: "Giacomo Libani" },
+            { user: "Luca Formicola" },
+            { user: "Davide Matteotti" },
+            { user: "Alessio Palmieri" },
+            { user: "Lionel Perez" },
+            { user: "Lino Banfi" },
+            { user: "Giorgio Santos" },
+            { user: "Rafa Luiz" },
+            { user: "Santiago sileo JR" },
+            { user: "Ricardo Orta" }
+
+      ],
+      reviewsUser: [
+
+        { text: "Consegna rapida, cibo delizioso. Vasto menu, soddisfatto." },
+        { text: "Affidabile, fresco. Consigliato vivamente." },
+        { text: "Soddisfacente, tornerò sicuro." },
+        { text: "Cibo caldo, arrivo anticipato. Ottimo servizio." },
+        { text: "Preciso, puntuale. Eccellente esperienza." },
+        { text: "Gustoso, porzioni abbondanti. Consegna impeccabile." },
+        { text: "Varie opzioni, consegna veloce. Altamente raccomandato." },
+        { text: "Veloce, fresco. Cliente felice." },
+        { text: "Ordine facile, consegna rapida. Consigliatissimo." },
+        { text: "Servizio impeccabile, cibo delizioso. Assolutamente da provare." }
+
+      ],
+      ImagUser: [
+
+            { img: "https://images.squarespace-cdn.com/content/v1/5509cf13e4b053091c63d742/1662140414683-B2T3H5RH2LCOMCPK7S19/Bio+Portraits-02.png" },
+            { img: "https://kurtgrandis.com/images/profile.png" },
+            { img: "https://www.ekoyapidergisi.org/images/2022/LuketheAI_2_1645190222.jpg" },
+            { img: "https://th.bing.com/th/id/OIP.iXgesMZceVWCNx8oUehfMQHaHa?rs=1&pid=ImgDetMain" },
+            { img: "https://cdn.icon-icons.com/icons2/1879/PNG/512/iconfinder-7-avatar-2754582_120519.png" },
+            { img: "https://guild-way-accountants.com/wp-content/uploads/2021/07/Imran.png" },
+            { img: "https://iradaclinic.com/wp-content/uploads/2023/09/testmonial-dummy.png" },
+            { img: "https://lh3.googleusercontent.com/a-/AOh14GjXQFT7RusxmOjskyufX8BEnxF2jo9KcA40636T" },
+            { img: "https://cdn.icon-icons.com/icons2/1879/PNG/512/iconfinder-10-avatar-2754575_120521.png" },
+            { img: "https://img.genial.ly/578566421aa0220fb8a77c5e/016ada75-e076-434b-b2fd-a68fe57c7007.png" }
+
+      ],
       
     };
   },
@@ -60,32 +102,31 @@ export default {
           }"
           class="mySwiper"
         >
-        <swiper-slide v-for="Iteration in 10">
-          <div class="review-card">
-            <div class="header-content">
-              <div class="img-area">
-                <img alt="customer1" src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png">
+        <swiper-slide v-for="(review, index) in reviewsUser" :key="index">
+            <div class="review-card">
+              <div class="header-content">
+                <div class="img-area">
+                  <img :src="ImagUser[index].img" alt="Avatar">
+                </div>
+                <div>
+                  <h4>{{ nameUser[index].user }}</h4>
+                </div>
               </div>
-              <div class="info">
-                <h4>John Doe</h4>
-                <p>Maketing Manager</p>
+              <div class="col mb-4">
+                <p>{{ review.text }}</p>
+              </div>
+              <div class="review-footer">
+                <div class="rating">
+                  <span class="active">★</span> 
+                  <span class="active">★</span> 
+                  <span class="active">★</span> 
+                  <span>★</span> 
+                  <span>★</span>
+                </div>
+                <p>Reviewed on 01/01/2023</p>
               </div>
             </div>
-            <div class="single-review">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dolor eveniet deleniti repellendus! Minima, dolorum.</p>
-            </div>
-            <div class="review-footer">
-              <div class="rating">
-                <span class="active">★</span> 
-                <span class="active">★</span> 
-                <span class="active">★</span> 
-                <span class="">★</span> 
-                <span class="">★</span>
-              </div>
-              <p>Reviewed on 01/01/2023</p>
-            </div>
-          </div>
-        </swiper-slide>
+          </swiper-slide>
         </swiper>
       </div>
     </div> 
@@ -123,6 +164,7 @@ export default {
 	width: 400px;
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  height: 220px;
 
   @media(max-width:991px){
     width: 100%;

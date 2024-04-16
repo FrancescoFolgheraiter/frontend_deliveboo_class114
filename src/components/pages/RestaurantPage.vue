@@ -248,7 +248,7 @@ export default {
                                 <div>
                                     <p class="cart-p-width">{{cartItem.name }}</p>
                                     <p class="mt-1 mb-1">{{ cartItem.price }}€</p>
-                                    <div>
+                                    <div class="d-flex justify-content-around">
                                         <button class="button-delete me-1" @click="removeFromCart(index)">
                                         <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                         </button>
@@ -465,7 +465,7 @@ h1 {
 
 .block-cart{
     position: relative;
-
+    
     .cart-sticky{
         position: sticky;
         top: 20%;
@@ -476,6 +476,7 @@ h1 {
 
 .cart-p-width{
     width: 200px;
+    height: 50px;
 }
 
 .cart {
@@ -613,6 +614,11 @@ h1 {
     .address-font{
         font-size: 15px;
     }
+    
+    
+}
+@media (min-width: 300px) and (max-width: 520px) {
+    
     
     
 }

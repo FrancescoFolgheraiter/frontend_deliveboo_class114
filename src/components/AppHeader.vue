@@ -40,16 +40,16 @@
                 <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
             </button>
 
-            <div class="d-md-none d-sm-none d-lg-block">
+            <div class="d-md-none d-none d-sm-none d-lg-block p-3">
                 <ul>
-                    <li>
+                    <li class="">
                         <router-link :to="{name:'lavora-con-noi'}">
                             <button class="btn btn-work">
                                 Lavora Con Noi
                             </button>
                         </router-link>
                     </li>
-                    <li>
+                    <li class="">
                         <button class="btn btn-login">
                             <a href="http://127.0.0.1:8000/">Login</a>
                         </button>
@@ -64,34 +64,25 @@
     <div class="container">
         <div class="collapse bg-danger lg-none" id="navbarToggleExternalContent" data-bs-theme="black">
             <div class="bg-white p-4 ">
-                <h5 class="text-body-emphasis h4">
+                <h5>
                     Links
                 </h5>
     
                 <ul class="navbar-nav">
                     <!-- link collapse visbili solo in md ms -->
                     <li class="nav-item">
-                        <a class="nav-link" href="lavora con noi">Lavora con noi</a>
+                        <router-link :to="{name:'lavora-con-noi'}">
+                                Lavora Con Noi
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a href="http://127.0.0.1:8000/">Login</a>
                     </li>
                 </ul>
     
                 <!-- Aggiungi icone qui -->
     
-                <ul class="navbar-nav d-lg-none">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa-solid fa-utensils"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrello">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                        </a>
-                    </li>
-                </ul>
+                
                 
             </div>
         </div>
@@ -105,13 +96,13 @@
 <style lang="scss" scoped>
 header{
     background-color: white;
+    
 }
 
+
 .header{
-/*     display: flex;
-    justify-content: space-between;
-    align-items: center; */
-    background-color: white;
+    height: 110px;
+    background-color: #f7f7f7ea;
 
     ul{
         list-style: none;
@@ -126,9 +117,11 @@ header{
     }
 
     .img-header{
+        height: 110px;
         img{
-            height: 20%;
-            width: 20%;
+            height: 110px;
+            width: 100%;
+            object-fit: cover;
         }
     }
 
