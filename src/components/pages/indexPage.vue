@@ -53,11 +53,10 @@ import Slider1Component from '../Slider1Component.vue';
                    <div class="jumbotron">
                         <div class="text-jumbo">
                             <h2>
-                                Super Fast <span>Food Delivery</span> Service
+                                 Servizio <span>Food Delivery</span> super veloce
                             </h2>
-                            <p>We provide Super Fast-Delivery Service. Let's Use Our Services Right Now And Get Discounts Od Up To 50%</p>
+                            <p>Forniamo un servizio di consegna super veloce. Usiamo subito i nostri servizi e otteniamo sconti fino al 50% </p>
                             
-                            <button>DOWNLOAD APP</button>
                         </div>
 
                         <div class="img-jumbo">
@@ -91,8 +90,8 @@ import Slider1Component from '../Slider1Component.vue';
                         </div>
 
                         <div class="text-why">
-                            <h3><span>Stay</span> At Home, We Will Provide <span>Good Food</span></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, minus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, nobis! Lorem ipsum dolor sit amet.</p>
+                            <h3><span>Resta a casa,</span> alla cena ci pensiamo<span> noi.</span></h3>
+                            <p>Il meglio delle nostre cucine arriva direttamente da te,tutto il piacere del ristorante comodamente seduto sul tuo divano, adatte al weekend perfetto con gli amici, o alla serata perfetta con la tua metà,<br>DELIVEBOO il gusto di stare insieme.</p>
                             <ul>
                                 <li>
                                     <i class="fa-regular fa-clock fa-xl"></i>
