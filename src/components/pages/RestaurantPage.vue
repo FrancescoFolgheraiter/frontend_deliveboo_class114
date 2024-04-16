@@ -141,6 +141,7 @@ export default {
         toggleIngredient(dish) {
         dish.isOpen = !dish.isOpen; // Inverti lo stato quando apri il pannello 
         },
+        
     },
     created() {
         //recupero del carrello salvato nello storage
