@@ -98,15 +98,15 @@ export default {
 
       <div class="category-card">
         <div v-for="category in allTypes" class="">
-          <button :class="{clicked: isSelected(category.name) , btn: true}" type="submit" @click="setValueType(category.name), toggleButton(category.name)">{{ category.name }}</button>
+          <button :class="{clicked: isSelected(category.name) , btn: true}" type="submit" @click="setValueType(category.name), toggleButton(category.name), getRestaurant()">{{ category.name }}</button>
         </div> 
       </div>
       
-      <div class="button-search text-center my-3">
-        <button class="btn text-center" @click="getRestaurant()">
+      <!-- <div class="button-search text-center my-3">
+        <button class="btn text-center" @click="">
             CERCA
         </button>
-      </div>
+      </div> -->
   </div>
 </section>
 
