@@ -30,7 +30,7 @@ const router = createRouter({
       component: LavoraConNoiPage
     },
     {
-      path: '/:catchAll(.*)', // Utilizza un percorso wildcard (*)
+      path: '/not-found',
       name: 'not-found',
       component: NotFoundPage 
     }

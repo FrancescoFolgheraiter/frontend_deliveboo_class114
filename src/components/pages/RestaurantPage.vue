@@ -30,6 +30,9 @@ export default {
             })
             .catch((error) => {
                 console.log('Recupero paitti non riuscito errrore: '.error)
+                if (error.response.status === 404) {
+                   this.$router.push({ name: 'not-found' });
+                }
             })
         },
         //funzione che prende come argomento il piatto e lo aggiunge al carrello
