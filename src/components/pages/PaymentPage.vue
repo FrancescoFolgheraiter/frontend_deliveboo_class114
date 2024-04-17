@@ -39,7 +39,6 @@ export default {
                             console.error(err);
                             return;
                         }
-                        alert('pagamento effettuato')
                         // Effettua la chiamata Axios solo se il pagamento è stato effettuato con successo
                         self.loadDataOrder();
                     });
@@ -78,8 +77,10 @@ export default {
                     //pulisco il carrello in store
                     this.store.cartItems = [];
                     console.log(this.store.cartItems);
-                    //reindirizzamento sulla home
-                    this.$router.push({ name: 'home' });
+                    //reindirizzamento sull'order success
+                    setTimeout(() => {
+                        this.$router.push({ name: 'order-success' });
+                    }, 2000);
                 })
                 .catch((error) => {
                     console.log('Recupero paitti non riuscito errrore: '.error)
@@ -93,7 +94,7 @@ export default {
         const savedCartItems = JSON.parse(localStorage.getItem('cartItems'));
         this.savedCartItems = savedCartItems;
         console.log(savedCartItems)
-        this.total_price = parseFloat(localStorage.getItem('total_price'));
+        this.total_price = parseFloat(localStorage.getItem('total_price')).toFixed(2);
         console.log(this.total_price)
         this.manipulateCartData(savedCartItems)
         this.setupBraintree();
@@ -108,19 +109,19 @@ export default {
                 <div class="col-12 col-sm-6 col-md-12 col-lg-8">
                     <div class="card p-3">
                         <div class="mb-3">
-                            <label for="firstName" class="form-label">Nome</label>
+                            <label for="firstName" class="form-label">Nome <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="firstName" v-model="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="lastName" class="form-label">Cognome</label>
+                            <label for="lastName" class="form-label">Cognome <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="lastName" v-model="surname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">Indirizzo</label>
+                            <label for="address" class="form-label">Indirizzo <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="address" v-model="address" required>
                         </div>
                         <div class="mb-3">
-                            <label for="phoneNumber" class="form-label">Numero di telefono</label>
+                            <label for="phoneNumber" class="form-label">Numero di telefono <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="phoneNumber" v-model="phoneNumber" required>
                         </div>
                         <div class="mb-3">
