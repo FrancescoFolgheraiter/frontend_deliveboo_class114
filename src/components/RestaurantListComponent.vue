@@ -90,11 +90,7 @@ export default {
     });
     //chiamata per visualizzare inizialmente dei ristoranti
     axios
-      .get('http://127.0.0.1:8000/api/types/restaurant',{
-        params:{
-          types:['pizzeria']
-        }
-      })
+      .get('http://127.0.0.1:8000/api/types/restaurant')
       .then((response) =>{
           this.restaurantList=response.data.data.users
     })
