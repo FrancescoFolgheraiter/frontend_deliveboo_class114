@@ -39,6 +39,11 @@ const router = createRouter({
       path: '/not-found',
       name: 'not-found',
       component: NotFoundPage 
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: 'not-found-catch-all',
+      component: NotFoundPage 
     }
   ]
 });
