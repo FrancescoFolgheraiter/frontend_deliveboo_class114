@@ -1,24 +1,32 @@
 <script>
+
+
     export default{
         data(){
             return{
+                
 
             };
         },
         methods:{
+         
 
-        }
+        },
+        
     }
 </script>
 
 <template>
+    <main>
 
-        <main>
-            MAIN
-        </main>
+        <router-view></router-view>
 
-</template>
+    </main>
+  </template>
 
 <style lang="scss" scoped>
+
+
+
 
 </style>

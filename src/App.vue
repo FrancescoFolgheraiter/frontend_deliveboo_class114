@@ -19,24 +19,18 @@
             AppFooter
         },
         mounted(){
-            axios
-            .get()
-            .then((response) =>{
-                console,log(response)
-            })
         }
     }
 </script>
 
 <template>
 
-        <h1>
-            Mia App
-        </h1>
 
         <AppHeader/>
 
         <AppMain/>
+
+       
 
         <AppFooter/>
 
