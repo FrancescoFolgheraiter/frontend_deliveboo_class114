@@ -88,13 +88,13 @@ export default {
 
 
   <!-- Seconda sezione: Perchè sceglierci -->
-  <section>
+  <section  class="choose-services-section">
     <div class="container-fluid">
       <div class="container">
         <h2 class="text-center mt-5">
           Perchè scegliere i nostri servizi?
         </h2>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-4">
+        <div class="row row-cols-1 service-card row-cols-md-2 row-cols-lg-4 mt-4">
           <div class="col mb-4" v-for="(elem, i) in chooseServices" :key="i">
             <div>
               <img :src="elem.img" alt="">
@@ -118,7 +118,7 @@ export default {
       <div class="col-lg-6">
         <h4>Posizioni aperte:</h4>
         <ul class="position-list" v-for="(elem, i) in opportunity" :key="i">
-          <li class="mb-2">
+          <li class="position-item">
             <i :class="elem.icon"></i> 
             {{ elem.list }}
           </li>
@@ -176,7 +176,7 @@ export default {
           </div>
         </div>
         <div class="col-lg-6">
-          <img class="w-100" src="/img/foto5.png" alt="">
+          <img class="w-100" src="https://th.bing.com/th/id/OIP.7moanAy6Pfgex1obAd91NwHaD4?rs=1&pid=ImgDetMain" alt="">
         </div>
       </div>
     </div>
@@ -206,26 +206,43 @@ img{
 
 //CSS SEZIONE 2
 
-hr{
-  width: 80%;
-  margin: auto;
-  color: rgb(241, 70, 71);
-  margin-top: 10px;
+
+.choose-services-section {
+  padding: 50px 0;
 }
 
-.col img {
-      width: 100%;
-      height: 200px; 
-      object-fit: cover; 
+.service-card {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height:auto;
+  transition: all 0.3s ease;
 }
 
-h4:hover{
-      color: rgb(241, 70, 71);
-    }
-
-h1, h2, h3{
-  color: rgb(241, 70, 71);
+.service-card:hover {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
 }
+
+.service-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.service-card h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 1rem;
+}
+
+.service-card p {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}  
+
 
 //FINE CSS SEZIONE 2
 
@@ -236,6 +253,35 @@ h1, h2, h3{
   color: rgb(241, 70, 71);
   cursor: pointer; 
 }
+.job-opportunities {
+  padding: 50px 0;
+}
+
+.position-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.position-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+// sezione4
+.position-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+.background-h2-faq:hover {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+
+
 
 
 </style>
