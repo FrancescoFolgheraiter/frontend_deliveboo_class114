@@ -78,12 +78,23 @@ export default {
 
   },
   mounted(){
+    //chiamata per aggiungere tutti i tipi dal backend
     axios
       .get('http://127.0.0.1:8000/api/types')
       .then((response) =>{
           this.allTypes=response.data.data.types
           console.log(this.allTypes)
+      });
+    this.allTypes.forEach(elem => {
+      console.log(elem)
+    });
+    //chiamata per visualizzare inizialmente dei ristoranti
+    axios
+      .get('http://127.0.0.1:8000/api/types/restaurant')
+      .then((response) =>{
+          this.restaurantList=response.data.data.users
     })
+
 }
 };
 </script>

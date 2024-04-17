@@ -11,10 +11,43 @@ import 'swiper/css/free-mode';
 // import required modules
 import { Navigation, Pagination,FreeMode, Autoplay } from 'swiper/modules';
 
+import { RouterLink } from 'vue-router';
+
 export default {
   data() {
     return {
-      
+		restauratsData:[
+		{
+			name: 'Galloway',
+			image: 'img/user/galloway.jpg',
+			types: ['Fast food', 'Americano', 'BBQ'],
+			description: 'Ristorante fast food che offre cucina americana e BBQ.'
+		},
+		{
+			name: 'BurgerKong',
+			image: 'img/user/burgerkong.jpg',
+			types: ['Americano', 'Paninoteca'],
+			description: 'Ristorante americano specializzato in hamburger e panini.'
+		},
+		{
+			name: 'MucDonalds',
+			image: 'img/user/mucdonalds.jpg',
+			types: ['Americano', 'Fast food', 'Paninoteca'],
+			description: 'Catena di fast food popolare che serve hamburger e panini in stile americano.'
+		},
+		{
+			name: 'Da Albert',
+			image: 'img/user/da_albert.jpg',
+			types: ['Pizzeria', 'Mediterranea'],
+			description: 'Pizzeria tradizionale con cucina mediterranea.'
+		},
+		{
+			name: 'Korallo',
+			image: 'img/user/korallo.jpg',
+			types: ['Pesce', 'Mediterranea'],
+			description: 'Ristorante di pesce con cucina mediterranea.'
+		},
+		]
     };
   },
   components:{
@@ -34,7 +67,7 @@ export default {
   <section class="mt-5">
     <div class="container">
       <div class="title-section text-center">
-        <h4>Cosa Dicono <span>Di Noi</span></h4>
+        <h4>Alcuni dei nostri ristoranti<span> migliori</span></h4>
       </div>
       <div class="wrapper">
         <swiper
@@ -64,31 +97,27 @@ export default {
           }"
           class="mySwiper"
         >
-        <swiper-slide v-for="Iteration in 10">
-          <div class="review-card">
-            <div class="header-content">
-              <div class="img-area">
-                <img alt="customer1" src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png">
-              </div>
-              <div class="info">
-                <h4>John Doe</h4>
-                <p>Maketing Manager</p>
-              </div>
-            </div>
-            <div class="single-review">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dolor eveniet deleniti repellendus! Minima, dolorum.</p>
-            </div>
-            <div class="review-footer">
-              <div class="rating">
-                <span class="active">★</span> 
-                <span class="active">★</span> 
-                <span class="active">★</span> 
-                <span class="">★</span> 
-                <span class="">★</span>
-              </div>
-              <p>Reviewed on 01/01/2023</p>
-            </div>
-          </div>
+        <swiper-slide v-for="(restaurant,i) in restauratsData">
+			<router-link :to="{ name: 'restaurant', params: {name: restaurant['name'] } }" class="text-decoration-none ">
+				<div class="review-card">
+				  <div class="header-content">
+					  <div class="img-cont me-2">
+						<img :src="'http://127.0.0.1:8000/storage/'+ restaurant['image']" class="img-fluid __img"/>
+					  </div>
+					<div class="info">
+					  <h4 class="text-white">{{ restaurant['name'] }}</h4>
+					  <p>
+						  <span v-for="category in restaurant['types']" class="badge text-bg-light me-1">{{ category }}</span>
+					  </p>
+					</div>
+				  </div>
+				  <div class="single-review">
+					<p class="text-white ">
+					  {{ restaurant['description']  }}
+					</p>
+				  </div>
+				</div>
+			</router-link>
         </swiper-slide>
         </swiper>
       </div>
@@ -112,6 +141,19 @@ export default {
   
   span{
     color: #f14647;
+  }
+}
+
+.img-cont{
+  max-width: 100px;
+  max-height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  border:1px solid white;
+  img{
+    object-fit: cover;
+    overflow: hidden;
+    border-radius:10px;
   }
 }
 
